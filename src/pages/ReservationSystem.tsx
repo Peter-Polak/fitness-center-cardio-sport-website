@@ -31,7 +31,22 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
             emailAddress : ""
         }
     }
-
+    
+    handleNameChange(value : string)
+    {
+        this.setState({ name : value });
+    }
+    
+    handleSurnameChange(value : string)
+    {
+        this.setState({ surname : value });
+    }
+    
+    handleEmailAddressChange(value : string)
+    {
+        this.setState({ emailAddress : value });
+    }
+    
     submit()
     {
         // const { name, surname, emailAddress } = this.state;
@@ -40,7 +55,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     
     render() : JSX.Element
     {
-        // const { name, surname, emailAddress } = this.state;
+        const { name, surname, emailAddress } = this.state;
         
         return (
             <Container>
@@ -48,9 +63,9 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 
                 {/* <MaterialIcon icon="engineering" size="200px"/> */}
                 <Identity>
-                    <IdentityField name="Meno" type="text" handleChange={console.log} required={true}/>
-                    <IdentityField name="Priezvisko" type="text" handleChange={console.log} required={true}/>
-                    <Field name="E-mailová adresa" type="email" handleChange={console.log}/>
+                    <IdentityField name="Meno" type="text" value={name} handleChange={(event) => this.handleNameChange(event.target.value)} required={true}/>
+                    <IdentityField name="Priezvisko" type="text" value={surname} handleChange={(event) => this.handleSurnameChange(event.target.value)} required={true}/>
+                    <Field name="E-mailová adresa" type="email" value={emailAddress} handleChange={(event) => this.handleEmailAddressChange(event.target.value)}/>
                 </Identity>
                 
                 <div>

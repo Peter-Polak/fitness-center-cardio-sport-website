@@ -6,6 +6,7 @@ interface IFieldProps
 {
     name : string
     type : string
+    value : string
     handleChange : (event : any) => void
     required? : boolean
     className? : string
@@ -32,7 +33,7 @@ class Field extends Component<IFieldProps, IFieldState>
         return (
             <Label className={this.props.className}>
                 <Text>{this.props.name} {this.props.required && <Asterisk>*</Asterisk>}</Text>
-                <Input type={this.props.type} onChange={this.props.handleChange} required={this.props.required}></Input>
+                <Input type={this.props.type} onChange={this.props.handleChange} required={this.props.required} value={this.props.value} placeholder=" "></Input>
             </Label>
         );
     }
@@ -66,6 +67,11 @@ const Input = styled.input`
     
     border: none;
     border-radius: 3px;
+    
+    &:invalid:not(:placeholder-shown)
+    {
+        border: 2px solid red;
+    }
 `;
 
 export default Field;
