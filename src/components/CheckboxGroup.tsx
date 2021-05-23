@@ -7,7 +7,7 @@ import Checkbox from "./Checkbox";
 interface ICheckboxGroupProps
 {
     name : string 
-    values : Array<string>
+    options : Array<string>
     handleChange : (checkboxStates : Array<boolean>) => void
 }
 
@@ -23,7 +23,7 @@ class CheckboxGroup extends Component<ICheckboxGroupProps, ICheckboxGroupState>
         super(props);
         this.state = 
         {
-            checkboxStates : props.values.map(value => false)
+            checkboxStates : props.options.map(value => false)
         }
         
         this.handleChange = this.handleChange.bind(this);
@@ -33,7 +33,7 @@ class CheckboxGroup extends Component<ICheckboxGroupProps, ICheckboxGroupState>
     {
         this.setState(
             {
-                checkboxStates : this.props.values.map(
+                checkboxStates : this.props.options.map(
                 (value, index) => 
                 {
                     if(index === checkboxIndex) return true;
@@ -47,7 +47,7 @@ class CheckboxGroup extends Component<ICheckboxGroupProps, ICheckboxGroupState>
     render() : JSX.Element
     {
         const { checkboxStates } = this.state;
-        const { name, values } = this.props;
+        const { name, options: values } = this.props;
         
         const checkboxes = values.map((value, index) => <Checkbox name={value} checked={checkboxStates[index]} handleChange={() => this.handleChange(index)} key={name + index}/>)
         
