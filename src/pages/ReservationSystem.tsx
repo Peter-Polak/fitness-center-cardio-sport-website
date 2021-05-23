@@ -54,7 +54,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 </Identity>
                 
                 <div>
-                    <CheckboxGroup name="Test" values={["text1", "test2", "test3", "test4"]} handleChange={console.log}/>
+                    <CheckboxGroup name="Pondelok, 01.01.2021" values={["15:00 - 16:30", "16:30 - 18:30", "18:30 - 20:00", "20:00 - 22:00"]} handleChange={console.log}/>
                 </div>
             </Container>
         );
