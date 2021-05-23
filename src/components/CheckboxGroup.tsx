@@ -8,6 +8,7 @@ interface ICheckboxGroupProps
 {
     name : string 
     values : Array<string>
+    handleChange : (checkboxStates : Array<boolean>) => void
 }
 
 interface ICheckboxGroupState
@@ -38,7 +39,8 @@ class CheckboxGroup extends Component<ICheckboxGroupProps, ICheckboxGroupState>
                     if(index === checkboxIndex) return true;
                     return false;
                 })
-            }
+            },
+            () => { this.props.handleChange(this.state.checkboxStates); }
         );
     }
 
