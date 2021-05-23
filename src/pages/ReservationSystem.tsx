@@ -17,34 +17,49 @@ interface IReservationSystemState
     name : string
     surname : string
     emailAddress : string
+    checkboxStates : {[date : string] : Array<boolean>}
 }
 
 class ReservationSystem extends Component<IReservationSystemProps, IReservationSystemState>
 {
+    sessions : {[date : string] : Array<string>} = 
+    {
+        "Pondelok, 01.01.2021" : ["15:00 - 16:30", "16:30 - 18:30", "18:30 - 20:00", "20:00 - 22:00"]
+    };
+    
     constructor(props : IReservationSystemProps)
     {
         super(props);
+        
+        let checkboxStates : {[date : string] : Array<boolean>} = {};
+        
+        for(const key in this.sessions)
+        {
+            checkboxStates[key] = this.sessions[key].map(session => false);
+        }
+        
         this.state = 
         {
             name : "", 
             surname : "", 
-            emailAddress : ""
+            emailAddress : "",
+            checkboxStates : checkboxStates
         }
     }
     
-    handleNameChange(value : string)
+    handleFieldChange(key : "name" | "surname" | "emailAddress" , value : string)
     {
-        this.setState({ name : value });
+        const stateKey = key;
+        //@ts-ignore
+        this.setState({ [stateKey] : value });
     }
     
-    handleSurnameChange(value : string)
+    handleCheckboxGroupChange(key : string , values : Array<boolean>)
     {
-        this.setState({ surname : value });
-    }
-    
-    handleEmailAddressChange(value : string)
-    {
-        this.setState({ emailAddress : value });
+        let checkboxStates = this.state.checkboxStates;
+        checkboxStates[key] = values;
+        
+        this.setState({ checkboxStates : checkboxStates });
     }
     
     submit()
@@ -55,7 +70,14 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     
     render() : JSX.Element
     {
-        const { name, surname, emailAddress } = this.state;
+        const { name, surname, emailAddress, checkboxStates } = this.state;
+        
+        const checkboxGroups : Array<JSX.Element> = [];
+        for(const key in checkboxStates)
+        {
+            const options = this.sessions[key];
+            checkboxGroups.push(<CheckboxGroup name={key} options={options} handleChange={(checkboxStates) => this.handleCheckboxGroupChange(key, checkboxStates)}/>)
+        }
         
         return (
             <Container>
@@ -63,13 +85,14 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 
                 {/* <MaterialIcon icon="engineering" size="200px"/> */}
                 <Identity>
-                    <IdentityField name="Meno" type="text" value={name} handleChange={(event) => this.handleNameChange(event.target.value)} required={true}/>
-                    <IdentityField name="Priezvisko" type="text" value={surname} handleChange={(event) => this.handleSurnameChange(event.target.value)} required={true}/>
-                    <Field name="E-mailová adresa" type="email" value={emailAddress} handleChange={(event) => this.handleEmailAddressChange(event.target.value)}/>
+                    <IdentityField name="Meno" type="text" value={name} handleChange={(event) => this.handleFieldChange("name", event.target.value)} required={true}/>
+                    <IdentityField name="Priezvisko" type="text" value={surname} handleChange={(event) => this.handleFieldChange("surname", event.target.value)} required={true}/>
                 </Identity>
                 
+                <Field name="E-mailová adresa" type="email" value={emailAddress} handleChange={(event) => this.handleFieldChange("emailAddress", event.target.value)}/>
+                
                 <div>
-                    <CheckboxGroup name="Pondelok, 01.01.2021" options={["15:00 - 16:30", "16:30 - 18:30", "18:30 - 20:00", "20:00 - 22:00"]} handleChange={console.log}/>
+                    {checkboxGroups}
                 </div>
             </Container>
         );
@@ -84,6 +107,7 @@ const Identity = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    margin-bottom: 50px;
 `;
 
 const IdentityField = styled(Field)`
