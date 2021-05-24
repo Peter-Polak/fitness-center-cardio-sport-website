@@ -1,29 +1,3 @@
-export interface Session
-{ 
-    start : 
-    {
-        date : Date,
-        string : string
-    }
-    end : 
-    {
-        date : Date,
-        string : string
-    }
-    capacity : number
-    reserved : number
-}
-
-export interface Sessions
-{
-    [date: string]: 
-    { 
-        day: string, 
-        free : Array<Session>, 
-        full : Array<Session> 
-    } 
-}
-
 /**
  * Get a string representation of a number.
  * @param number Number to convert.

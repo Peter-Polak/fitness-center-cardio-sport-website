@@ -2,7 +2,8 @@ import { Component } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import styled from 'styled-components';
 
-import { Sessions, getTimestamp } from '../helpers';
+import { Reservation, Sessions, getSessions, postReservation } from "../restApi"
+import { getTimestamp } from '../helpers';
 
 import Heading from '../components/Heading';
 import MaterialIcon from '../components/MaterialIcon';
@@ -38,19 +39,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
             checkboxStates : {}
         }
         
-        this.getSessions().then(
-            (sessions : Sessions) =>
-            {
-                let checkboxStates : {[date : string] : Array<boolean>} = {};
-        
-                for(const date in sessions)
-                {
-                    checkboxStates[date] = sessions[date].free.map(session => false);
-                }
-                
-                this.setState({sessions : sessions, checkboxStates : checkboxStates});
-            }
-        );
+        this.updateSessions();
         
         this.submit = this.submit.bind(this);
     }
@@ -74,7 +63,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     {
         const { name, surname, emailAddress, checkboxStates } = this.state;
         
-        let reservation = 
+        let reservation : Reservation = 
         {
             timestamp : getTimestamp(),
             name : name, 
@@ -102,34 +91,24 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         
         console.log(reservation);
         
-        // const webAppUrl = "https://script.google.com/macros/s/AKfycbzlOl57hBNV5fF8g_waOrjOscdaQm4oisdXID2n0hPI7-yjYBrEKZGQ333zZpYUyskIBw/exec";
-        const webAppUrl = "https://script.google.com/macros/s/AKfycbxpAWLK9K4q22SEUAa3Ei45AsEE3zAtnH_b8B2W-dDDbP5kbPOwO_oTeoyHqt9YaWVzpw/exec";
-        const query = `?timestamp=${reservation.timestamp}&name=${reservation.name}&surname=${reservation.surname}&emailAddress=${reservation.emailAddress}&sessions=${reservation.sessions}`;
-        const url = webAppUrl + query;
-        fetch(
-            url,
-            {
-                method: 'POST',
-            }
-        )
-        .then(async response => console.log(await response.json()));
+        postReservation(reservation);
     }
     
-    async getSessions() : Promise<Sessions>
+    updateSessions()
     {
-        // const webAppUrl = "https://script.google.com/macros/s/AKfycbzlOl57hBNV5fF8g_waOrjOscdaQm4oisdXID2n0hPI7-yjYBrEKZGQ333zZpYUyskIBw/exec";
-        const webAppUrl = "https://script.google.com/macros/s/AKfycbxpAWLK9K4q22SEUAa3Ei45AsEE3zAtnH_b8B2W-dDDbP5kbPOwO_oTeoyHqt9YaWVzpw/exec";
-        
-        const response = await fetch(
-            webAppUrl,
+        getSessions().then(
+            (sessions : Sessions) =>
             {
-                method: 'GET',
+                let checkboxStates : {[date : string] : Array<boolean>} = {};
+        
+                for(const date in sessions)
+                {
+                    checkboxStates[date] = sessions[date].free.map(session => false);
+                }
+                
+                this.setState({sessions : sessions, checkboxStates : checkboxStates});
             }
         );
-        
-        const sessions = response.json();
-        
-        return sessions;
     }
     
     render() : JSX.Element
