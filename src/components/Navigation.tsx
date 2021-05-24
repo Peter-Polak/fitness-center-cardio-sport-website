@@ -172,8 +172,8 @@ const InstagramIcon = styled(Instagram)`
 `;
 
 const opacityAnimation = keyframes`
-    0% { opacity: 0%; }
-    100% { opacity: 100%; }
+    from { opacity: 0%; }
+    to { opacity: 100%; }
 `;
 
 const Background = styled.div<{isVisible : boolean}>`
