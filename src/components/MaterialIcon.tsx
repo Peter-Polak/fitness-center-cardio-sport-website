@@ -5,7 +5,8 @@ interface IMaterialIconProps
 {
     icon : string,
     color? : "ligth" | "dark" | "theme",
-    size? : string
+    size? : string,
+    className? : string
 }
 
 class MaterialIcon extends Component<IMaterialIconProps>
@@ -13,7 +14,7 @@ class MaterialIcon extends Component<IMaterialIconProps>
     render() : JSX.Element
     {
         return (
-            <Icon color={this.props.color} size={this.props.size} className="material-icons">{this.props.icon}</Icon>
+            <Icon color={this.props.color} size={this.props.size} className={`material-icons ${this.props.className}`}>{this.props.icon}</Icon>
         );
     }
 }
