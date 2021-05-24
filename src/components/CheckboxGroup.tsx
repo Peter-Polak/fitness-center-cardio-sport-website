@@ -1,5 +1,5 @@
 import { Component } from "react";
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 import Heading from '../components/Heading';
 import Checkbox from "./Checkbox";
@@ -9,6 +9,7 @@ interface ICheckboxGroupProps
     name : string 
     options : Array<string>
     handleChange : (checkboxStates : Array<boolean>) => void
+    className? : string
 }
 
 interface ICheckboxGroupState
@@ -52,7 +53,7 @@ class CheckboxGroup extends Component<ICheckboxGroupProps, ICheckboxGroupState>
         const checkboxes = values.map((value, index) => <Checkbox name={value} checked={checkboxStates[index]} handleChange={() => this.handleChange(index)} key={name + index}/>)
         
         return (
-            <div>
+            <div className={this.props.className}>
                 <Heading heading="H2">{name}</Heading>
                 {checkboxes}
             </div>
