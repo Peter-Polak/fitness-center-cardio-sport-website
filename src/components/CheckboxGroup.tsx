@@ -37,7 +37,15 @@ class CheckboxGroup extends Component<ICheckboxGroupProps, ICheckboxGroupState>
                 checkboxStates : this.props.options.map(
                 (value, index) => 
                 {
-                    if(index === checkboxIndex) return true;
+                    if(index === checkboxIndex) 
+                    {
+                        if(this.state.checkboxStates[checkboxIndex] === true)
+                        {
+                            return false;
+                        }
+                        
+                        return true;
+                    }
                     return false;
                 })
             },
