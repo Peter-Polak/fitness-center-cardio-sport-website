@@ -2,6 +2,8 @@ import { Component } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import styled from 'styled-components';
 
+import { Sessions, getTimestamp } from '../helpers';
+
 import Heading from '../components/Heading';
 import MaterialIcon from '../components/MaterialIcon';
 import Field from '../components/Field';
@@ -14,6 +16,7 @@ interface IReservationSystemProps
 
 interface IReservationSystemState
 {
+    sessions : Sessions
     name : string
     surname : string
     emailAddress : string
@@ -22,82 +25,32 @@ interface IReservationSystemState
 
 class ReservationSystem extends Component<IReservationSystemProps, IReservationSystemState>
 {
-    days : {[date : string] : { day : string, sessions : Array<{time : string, capacity : number, reserved : number}>} } = 
-    {
-        "01.01.2021" : 
-        {
-            day: "Pondelok",
-            sessions : 
-            [
-                {
-                    time : "15:00 - 16:30", 
-                    capacity: 6, 
-                    reserved : 4
-                }, 
-                {
-                    time : "16:30 - 18:30", 
-                    capacity: 6, 
-                    reserved : 0
-                },
-                {
-                    time : "18:30 - 20:00", 
-                    capacity: 6, 
-                    reserved : 2
-                },
-                {
-                    time : "20:00 - 22:00", 
-                    capacity: 6, 
-                    reserved : 1
-                }
-            ]
-        },
-        "02.01.2021" : 
-        {
-            day: "Utorok",
-            sessions : 
-            [
-                {
-                    time : "15:00 - 16:30", 
-                    capacity: 6, 
-                    reserved : 6
-                }, 
-                {
-                    time : "16:30 - 18:30", 
-                    capacity: 6, 
-                    reserved : 4
-                },
-                {
-                    time : "18:30 - 20:00", 
-                    capacity: 6, 
-                    reserved : 5
-                },
-                {
-                    time : "20:00 - 22:00", 
-                    capacity: 6, 
-                    reserved : 0
-                }
-            ]
-        }
-    };
-    
     constructor(props : IReservationSystemProps)
     {
         super(props);
         
-        let checkboxStates : {[date : string] : Array<boolean>} = {};
-        
-        for(const date in this.days)
-        {
-            checkboxStates[date] = this.days[date].sessions.map(session => false);
-        }
-        
         this.state = 
         {
+            sessions : {},
             name : "", 
             surname : "", 
             emailAddress : "",
-            checkboxStates : checkboxStates
+            checkboxStates : {}
         }
+        
+        this.getSessions().then(
+            (sessions : Sessions) =>
+            {
+                let checkboxStates : {[date : string] : Array<boolean>} = {};
+        
+                for(const date in sessions)
+                {
+                    checkboxStates[date] = sessions[date].free.map(session => false);
+                }
+                
+                this.setState({sessions : sessions, checkboxStates : checkboxStates});
+            }
+        );
         
         this.submit = this.submit.bind(this);
     }
@@ -121,8 +74,9 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     {
         const { name, surname, emailAddress, checkboxStates } = this.state;
         
-        let response = 
+        let reservation = 
         {
+            timestamp : getTimestamp(),
             name : name, 
             surname : surname,
             emailAddress : emailAddress,
@@ -138,14 +92,44 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 {
                     if(isChecked) 
                     {
-                        if(response.sessions !== "") response.sessions += ", ";
-                        response.sessions += `${key} ${this.days[key].sessions[index].time}`;
+                        let session = this.state.sessions[key].free[index];
+                        if(reservation.sessions !== "") reservation.sessions += ", ";
+                        reservation.sessions += `${key} ${session.start.string} - ${session.end.string}`;
                     }
                 }
             );
         }
         
-        console.log(response);
+        console.log(reservation);
+        
+        // const webAppUrl = "https://script.google.com/macros/s/AKfycbzlOl57hBNV5fF8g_waOrjOscdaQm4oisdXID2n0hPI7-yjYBrEKZGQ333zZpYUyskIBw/exec";
+        const webAppUrl = "https://script.google.com/macros/s/AKfycbxpAWLK9K4q22SEUAa3Ei45AsEE3zAtnH_b8B2W-dDDbP5kbPOwO_oTeoyHqt9YaWVzpw/exec";
+        const query = `?timestamp=${reservation.timestamp}&name=${reservation.name}&surname=${reservation.surname}&emailAddress=${reservation.emailAddress}&sessions=${reservation.sessions}`;
+        const url = webAppUrl + query;
+        fetch(
+            url,
+            {
+                method: 'POST',
+            }
+        )
+        .then(async response => console.log(await response.json()));
+    }
+    
+    async getSessions() : Promise<Sessions>
+    {
+        // const webAppUrl = "https://script.google.com/macros/s/AKfycbzlOl57hBNV5fF8g_waOrjOscdaQm4oisdXID2n0hPI7-yjYBrEKZGQ333zZpYUyskIBw/exec";
+        const webAppUrl = "https://script.google.com/macros/s/AKfycbxpAWLK9K4q22SEUAa3Ei45AsEE3zAtnH_b8B2W-dDDbP5kbPOwO_oTeoyHqt9YaWVzpw/exec";
+        
+        const response = await fetch(
+            webAppUrl,
+            {
+                method: 'GET',
+            }
+        );
+        
+        const sessions = response.json();
+        
+        return sessions;
     }
     
     render() : JSX.Element
@@ -155,10 +139,12 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         const checkboxGroups : Array<JSX.Element> = [];
         for(const key in checkboxStates)
         {
+            const options = this.state.sessions[key].free.map(
+                session => 
+                `${session.start.string} - ${session.end.string} (${session.capacity - session.reserved}/${session.capacity})`
+            );
             
-            const options = this.days[key].sessions.map(session => `${session.time} (${session.capacity - session.reserved}/${session.capacity})`);
-            
-            checkboxGroups.push(<CheckboxGroup name={key} options={options} handleChange={(checkboxStates) => this.handleCheckboxGroupChange(key, checkboxStates)}/>)
+            checkboxGroups.push(<StyledCheckboxGroup name={`${this.state.sessions[key].day}, ${key}`} options={options} handleChange={(checkboxStates) => this.handleCheckboxGroupChange(key, checkboxStates)} key={key}/>)
         }
         
         return (
@@ -173,11 +159,11 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 
                 <Field name="E-mailová adresa" type="email" value={emailAddress} handleChange={(event) => this.handleFieldChange("emailAddress", event.target.value)}/>
                 
-                <div>
+                <SessionsContainer>
                     {checkboxGroups}
-                </div>
+                </SessionsContainer>
                 
-                <button onClick={this.submit}>Submit</button>
+                <SubmitButton onClick={this.submit}>Odoslať</SubmitButton>
             </Container>
         );
     }
@@ -191,11 +177,38 @@ const Identity = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 50px;
+    
+    margin: 10px 0;
 `;
 
 const IdentityField = styled(Field)`
     flex: 1;
+`;
+
+const SessionsContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    
+    margin: 10px 0;
+`;
+
+const SubmitButton = styled.button`
+    padding: 10px 20px;
+    
+    color: ${props => props.theme.color.text};
+    font-family: "Bebas Neue";
+    font-size: 24px;
+    letter-spacing: 1px;
+    background-color: ${props => props.theme.color.succes.normal};;
+`;
+
+const StyledCheckboxGroup = styled(CheckboxGroup)`
+    margin-right: 30px; 
+    
+    &:last-of-type
+    {
+        margin: 0;
+    }
 `;
 
 export default ReservationSystem;
