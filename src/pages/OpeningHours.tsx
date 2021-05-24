@@ -68,7 +68,7 @@ const Hours = styled.div`
 `;
 
 const Warning = styled.span`
-    color: #ff4141;
+    color: ${props => props.theme.color.warning.normal};
     font-size: 1.2em;
 `;
 

@@ -14,7 +14,9 @@ declare module "styled-components"
         color : 
         {
             primary : Color,
-            secondary: Color,
+            secondary : Color,
+            succes : Color,
+            warning : Color,
             background : string,
             text : string
             

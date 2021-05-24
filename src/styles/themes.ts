@@ -16,6 +16,18 @@ export const lightTheme : DefaultTheme =
             normal : "",
             dark: ""
         },
+        succes : 
+        {
+            light: "",
+            normal : "",
+            dark: ""
+        },
+        warning : 
+        {
+            light: "",
+            normal : "",
+            dark: ""
+        },
         background: "#ffffff",
         text : "#000000"
     }
@@ -35,6 +47,18 @@ export const darkTheme : DefaultTheme =
         {
             light: "",
             normal : "",
+            dark: ""
+        },
+        succes : 
+        {
+            light: "",
+            normal : "#13be4c",
+            dark: ""
+        },
+        warning : 
+        {
+            light: "",
+            normal : "#ff4141",
             dark: ""
         },
         background: "#1a1a1a",
