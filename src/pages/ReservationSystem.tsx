@@ -22,9 +22,62 @@ interface IReservationSystemState
 
 class ReservationSystem extends Component<IReservationSystemProps, IReservationSystemState>
 {
-    sessions : {[date : string] : Array<string>} = 
+    days : {[date : string] : { day : string, sessions : Array<{time : string, capacity : number, reserved : number}>} } = 
     {
-        "Pondelok, 01.01.2021" : ["15:00 - 16:30", "16:30 - 18:30", "18:30 - 20:00", "20:00 - 22:00"]
+        "01.01.2021" : 
+        {
+            day: "Pondelok",
+            sessions : 
+            [
+                {
+                    time : "15:00 - 16:30", 
+                    capacity: 6, 
+                    reserved : 4
+                }, 
+                {
+                    time : "16:30 - 18:30", 
+                    capacity: 6, 
+                    reserved : 0
+                },
+                {
+                    time : "18:30 - 20:00", 
+                    capacity: 6, 
+                    reserved : 2
+                },
+                {
+                    time : "20:00 - 22:00", 
+                    capacity: 6, 
+                    reserved : 1
+                }
+            ]
+        },
+        "02.01.2021" : 
+        {
+            day: "Utorok",
+            sessions : 
+            [
+                {
+                    time : "15:00 - 16:30", 
+                    capacity: 6, 
+                    reserved : 6
+                }, 
+                {
+                    time : "16:30 - 18:30", 
+                    capacity: 6, 
+                    reserved : 4
+                },
+                {
+                    time : "18:30 - 20:00", 
+                    capacity: 6, 
+                    reserved : 5
+                },
+                {
+                    time : "20:00 - 22:00", 
+                    capacity: 6, 
+                    reserved : 0
+                }
+            ]
+        }
     };
     
     constructor(props : IReservationSystemProps)
@@ -33,9 +86,9 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         
         let checkboxStates : {[date : string] : Array<boolean>} = {};
         
-        for(const key in this.sessions)
+        for(const date in this.days)
         {
-            checkboxStates[key] = this.sessions[key].map(session => false);
+            checkboxStates[date] = this.days[date].sessions.map(session => false);
         }
         
         this.state = 
@@ -45,6 +98,8 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
             emailAddress : "",
             checkboxStates : checkboxStates
         }
+        
+        this.submit = this.submit.bind(this);
     }
     
     handleFieldChange(key : "name" | "surname" | "emailAddress" , value : string)
@@ -64,8 +119,33 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     
     submit()
     {
-        // const { name, surname, emailAddress } = this.state;
+        const { name, surname, emailAddress, checkboxStates } = this.state;
         
+        let response = 
+        {
+            name : name, 
+            surname : surname,
+            emailAddress : emailAddress,
+            sessions : ""
+        };
+        
+        for(const key in checkboxStates)
+        {
+            let sessions = checkboxStates[key];
+            
+            sessions.forEach(
+                (isChecked, index) =>
+                {
+                    if(isChecked) 
+                    {
+                        if(response.sessions !== "") response.sessions += ", ";
+                        response.sessions += `${key} ${this.days[key].sessions[index].time}`;
+                    }
+                }
+            );
+        }
+        
+        console.log(response);
     }
     
     render() : JSX.Element
@@ -75,7 +155,9 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         const checkboxGroups : Array<JSX.Element> = [];
         for(const key in checkboxStates)
         {
-            const options = this.sessions[key];
+            
+            const options = this.days[key].sessions.map(session => `${session.time} (${session.capacity - session.reserved}/${session.capacity})`);
+            
             checkboxGroups.push(<CheckboxGroup name={key} options={options} handleChange={(checkboxStates) => this.handleCheckboxGroupChange(key, checkboxStates)}/>)
         }
         
@@ -94,6 +176,8 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 <div>
                     {checkboxGroups}
                 </div>
+                
+                <button onClick={this.submit}>Submit</button>
             </Container>
         );
     }
