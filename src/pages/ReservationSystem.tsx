@@ -122,17 +122,17 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     
     render() : JSX.Element
     {
-        const { name, surname, emailAddress, checkboxStates } = this.state;
+        const { name, surname, emailAddress, checkboxStates, sessions } = this.state;
         
         const checkboxGroups : Array<JSX.Element> = [];
-        for(const key in checkboxStates)
+        for(const key in sessions)
         {
-            const options = this.state.sessions[key].free.map(
+            const options = sessions[key].free.map(
                 session => 
                 `${session.start.string} - ${session.end.string} (${session.capacity - session.reserved}/${session.capacity})`
             );
             
-            checkboxGroups.push(<StyledCheckboxGroup name={`${this.state.sessions[key].day}, ${key}`} options={options} checkboxStates={this.state.checkboxStates[key]} handleChange={(checkboxStates) => this.handleCheckboxGroupChange(key, checkboxStates)} key={key}/>)
+            checkboxGroups.push(<StyledCheckboxGroup name={`${this.state.sessions[key].day}, ${key}`} options={options} checkboxStates={checkboxStates[key]} handleChange={(checkboxStates) => this.handleCheckboxGroupChange(key, checkboxStates)} key={key}/>)
         }
         
         return (
