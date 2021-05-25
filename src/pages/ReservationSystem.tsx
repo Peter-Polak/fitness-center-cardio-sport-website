@@ -191,7 +191,7 @@ const SessionsContainer = styled.div`
 `;
 
 const SubmitButton = styled.button`
-    padding: 10px 20px;
+    padding: 10px 40px;
     
     color: ${props => props.theme.color.text};
     font-family: "Bebas Neue";
