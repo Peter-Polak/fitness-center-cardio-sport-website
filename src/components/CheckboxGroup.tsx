@@ -8,13 +8,14 @@ interface ICheckboxGroupProps
 {
     name : string 
     options : Array<string>
+    checkboxStates : Array<boolean>
     handleChange : (checkboxStates : Array<boolean>) => void
     className? : string
 }
 
 interface ICheckboxGroupState
 {
-    checkboxStates : Array<boolean>
+    
 }
 
 class CheckboxGroup extends Component<ICheckboxGroupProps, ICheckboxGroupState>
@@ -24,7 +25,7 @@ class CheckboxGroup extends Component<ICheckboxGroupProps, ICheckboxGroupState>
         super(props);
         this.state = 
         {
-            checkboxStates : props.options.map(value => false)
+            
         }
         
         this.handleChange = this.handleChange.bind(this);
@@ -32,31 +33,28 @@ class CheckboxGroup extends Component<ICheckboxGroupProps, ICheckboxGroupState>
     
     handleChange(checkboxIndex : number)
     {
-        this.setState(
+        let checkboxStates = this.props.checkboxStates.map(
+            (value, index) => 
             {
-                checkboxStates : this.props.options.map(
-                (value, index) => 
+                if(index === checkboxIndex) 
                 {
-                    if(index === checkboxIndex) 
+                    if(this.props.checkboxStates[checkboxIndex] === true)
                     {
-                        if(this.state.checkboxStates[checkboxIndex] === true)
-                        {
-                            return false;
-                        }
-                        
-                        return true;
+                        return false;
                     }
-                    return false;
-                })
-            },
-            () => { this.props.handleChange(this.state.checkboxStates); }
+                    
+                    return true;
+                }
+                return false;
+            }
         );
+        
+        this.props.handleChange(checkboxStates);
     }
 
     render() : JSX.Element
     {
-        const { checkboxStates } = this.state;
-        const { name, options: values } = this.props;
+        const { name, options: values, checkboxStates } = this.props;
         
         const checkboxes = values.map((value, index) => <Checkbox name={value} checked={checkboxStates[index]} handleChange={() => this.handleChange(index)} key={name + index}/>)
         
