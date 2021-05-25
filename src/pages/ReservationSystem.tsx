@@ -178,7 +178,7 @@ const SessionsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     
-    margin: 10px 0;
+    margin: 30px 0;
 `;
 
 const SubmitButton = styled.button`
