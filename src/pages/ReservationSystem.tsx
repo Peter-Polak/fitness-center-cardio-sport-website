@@ -96,9 +96,9 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         
         this.setState({showLoadingScreen : true});
         await postReservation(reservation);
+        this.setState({ name: "", surname: "", emailAddress: "", showLoadingScreen : false});
         
         this.updateSessions();
-        this.setState({showLoadingScreen : false});
     }
     
     updateSessions()
