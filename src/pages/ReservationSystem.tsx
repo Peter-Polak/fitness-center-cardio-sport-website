@@ -150,16 +150,15 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 
                 <Field name="E-mailová adresa" type="email" value={emailAddress} handleChange={(event) => this.handleFieldChange("emailAddress", event.target.value)}/>
                 
-                <FreeSessions>
-                    <Heading heading="H2"><MaterialIcon icon="date_range"/> Voľné termíny</Heading>
-                    <SessionsContainer>
-                        {checkboxGroups.length > 0 ? checkboxGroups : <p>Nie sú žiadne voľné termíny.</p>}
-                    </SessionsContainer>
-                </FreeSessions>
+                <Heading heading="H2"><MaterialIcon icon="date_range"/> Voľné termíny</Heading>
+                <Details><MaterialIcon icon="info"/>Tip: Viete si spraviť rezerváciu na viacero termínov naraz vyplnením jedného formulára. Stačí zaškrtnúť všetky políčka/termíny, o ktoré máte záujem.</Details>
+                <SessionsContainer>
+                    {checkboxGroups.length > 0 ? checkboxGroups : <p>Nie sú žiadne voľné termíny.</p>}
+                </SessionsContainer>
                 
                 
                 <SubmitButton onClick={this.submit} disabled={checkboxGroups.length === 0}>Odoslať</SubmitButton>
-                {this.state.showLoadingScreen && <LoadingSceen/>}
+                {/* {this.state.showLoadingScreen && <LoadingSceen/>} */}
             </Container>
         );
     }
@@ -181,13 +180,11 @@ const IdentityField = styled(Field)`
     flex: 1;
 `;
 
-const FreeSessions = styled.div`
-    margin: 30px 0;
-`;
-
 const SessionsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
+    
+    margin: 30px 0;
 `;
 
 const SubmitButton = styled.button`
@@ -213,6 +210,14 @@ const StyledCheckboxGroup = styled(CheckboxGroup)`
     {
         margin: 0;
     }
+`;
+
+const Details = styled.div`
+    font-size: 12px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 export default ReservationSystem;
