@@ -5,7 +5,7 @@ export const backendServerUrls =
     dev : "https://script.google.com/macros/s/AKfycbxpAWLK9K4q22SEUAa3Ei45AsEE3zAtnH_b8B2W-dDDbP5kbPOwO_oTeoyHqt9YaWVzpw/exec"
 }
 
-export const currentServer = backendServerUrls.dev;
+export const currentServer = backendServerUrls.release;
 
 export async function getSessions() : Promise<Sessions>
 {
