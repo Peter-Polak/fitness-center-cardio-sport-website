@@ -142,7 +142,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
             <Container>
                 <Heading heading="H1"><MaterialIcon icon="book_online" color="dark"/> Rezervačný systém</Heading>
                 
-                {/* <MaterialIcon icon="engineering" size="200px"/> */}
+                <Heading heading="H2"><MaterialIcon icon="person"/> Osobné údaje</Heading>
                 <Identity>
                     <IdentityField name="Meno" type="text" value={name} handleChange={(event) => this.handleFieldChange("name", event.target.value)} required={true}/>
                     <IdentityField name="Priezvisko" type="text" value={surname} handleChange={(event) => this.handleFieldChange("surname", event.target.value)} required={true}/>
@@ -150,11 +150,15 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 
                 <Field name="E-mailová adresa" type="email" value={emailAddress} handleChange={(event) => this.handleFieldChange("emailAddress", event.target.value)}/>
                 
-                <SessionsContainer>
-                    {checkboxGroups}
-                </SessionsContainer>
+                <FreeSessions>
+                    <Heading heading="H2"><MaterialIcon icon="date_range"/> Voľné termíny</Heading>
+                    <SessionsContainer>
+                        {checkboxGroups.length > 0 ? checkboxGroups : <p>Nie sú žiadne voľné termíny.</p>}
+                    </SessionsContainer>
+                </FreeSessions>
                 
-                <SubmitButton onClick={this.submit}>Odoslať</SubmitButton>
+                
+                <SubmitButton onClick={this.submit} disabled={checkboxGroups.length === 0}>Odoslať</SubmitButton>
                 {this.state.showLoadingScreen && <LoadingSceen/>}
             </Container>
         );
@@ -177,11 +181,13 @@ const IdentityField = styled(Field)`
     flex: 1;
 `;
 
+const FreeSessions = styled.div`
+    margin: 30px 0;
+`;
+
 const SessionsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    
-    margin: 30px 0;
 `;
 
 const SubmitButton = styled.button`
@@ -191,7 +197,13 @@ const SubmitButton = styled.button`
     font-family: "Bebas Neue";
     font-size: 24px;
     letter-spacing: 1px;
-    background-color: ${props => props.theme.color.succes.normal};;
+    background-color: ${props => props.theme.color.succes.normal};
+    
+    &:disabled
+    {
+        opacity: 25%;
+        cursor: not-allowed;
+    }
 `;
 
 const StyledCheckboxGroup = styled(CheckboxGroup)`
