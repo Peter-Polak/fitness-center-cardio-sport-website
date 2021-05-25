@@ -9,6 +9,7 @@ import Heading from '../components/Heading';
 import MaterialIcon from '../components/MaterialIcon';
 import Field from '../components/Field';
 import CheckboxGroup from "../components/CheckboxGroup";
+import LoadingSceen from "../components/LoadingSceen";
 
 interface IReservationSystemProps
 {
@@ -22,6 +23,7 @@ interface IReservationSystemState
     surname : string
     emailAddress : string
     checkboxStates : {[date : string] : Array<boolean>}
+    showLoadingScreen : boolean
 }
 
 class ReservationSystem extends Component<IReservationSystemProps, IReservationSystemState>
@@ -36,7 +38,8 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
             name : "", 
             surname : "", 
             emailAddress : "",
-            checkboxStates : {}
+            checkboxStates : {},
+            showLoadingScreen : true
         }
         
         this.updateSessions();
@@ -59,7 +62,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         this.setState({ checkboxStates : checkboxStates });
     }
     
-    submit()
+    async submit()
     {
         const { name, surname, emailAddress, checkboxStates } = this.state;
         
@@ -91,11 +94,17 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         
         console.log(reservation);
         
-        postReservation(reservation);
+        this.setState({showLoadingScreen : true});
+        await postReservation(reservation);
+        
+        this.updateSessions();
+        this.setState({showLoadingScreen : false});
     }
     
     updateSessions()
     {
+        this.setState({showLoadingScreen : true});
+        
         getSessions().then(
             (sessions : Sessions) =>
             {
@@ -106,7 +115,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                     checkboxStates[date] = sessions[date].free.map(session => false);
                 }
                 
-                this.setState({sessions : sessions, checkboxStates : checkboxStates});
+                this.setState({sessions : sessions, checkboxStates : checkboxStates, showLoadingScreen : false});
             }
         );
     }
@@ -143,6 +152,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 </SessionsContainer>
                 
                 <SubmitButton onClick={this.submit}>Odoslať</SubmitButton>
+                {this.state.showLoadingScreen && <LoadingSceen/>}
             </Container>
         );
     }
