@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import styled from 'styled-components';
+import MediaQuery from 'react-responsive'
 
 import MaterialIcon from './MaterialIcon';
 
@@ -30,7 +31,7 @@ class AppHeader extends Component<IAppHeaderProps, IAppHeaderState>
     {
         return (
             <Header>
-                <OpenNavButton onClick={this.props.openNav}><MaterialIcon icon="menu" size="34px"/> Menu</OpenNavButton>
+                <OpenNavButton onClick={this.props.openNav}><MaterialIcon icon="menu" size="34px"/> <MediaQuery minDeviceWidth={500}>Menu</MediaQuery></OpenNavButton>
                 <HeaderImage src={this.props.src} alt={this.props.alt} onClick={this.props.openNav}></HeaderImage>
             </Header>
         );
