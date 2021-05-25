@@ -42,9 +42,12 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
             showLoadingScreen : true
         }
         
-        this.updateSessions();
-        
         this.submit = this.submit.bind(this);
+    }
+    
+    componentDidMount()
+    {
+        this.updateSessions();
     }
     
     handleFieldChange(key : "name" | "surname" | "emailAddress" , value : string)
