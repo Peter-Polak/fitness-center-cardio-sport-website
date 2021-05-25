@@ -43,10 +43,6 @@ const Label = styled.label`
     display: flex;
     flex-direction: column;
     align-items: start;
-    
-    margin-right: 50px;
-    
-    width: 100%;
 `;
 
 const Text = styled.span`
