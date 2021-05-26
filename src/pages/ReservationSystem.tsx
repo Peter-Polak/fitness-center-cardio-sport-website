@@ -249,7 +249,11 @@ const SessionsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     
-    margin: 30px 0;
+    padding: 20px;
+    margin: 15px 0 30px 0;
+    
+    background-color: #202020;
+    border-radius: 5px;
 `;
 
 const SubmitButton = styled.button`
