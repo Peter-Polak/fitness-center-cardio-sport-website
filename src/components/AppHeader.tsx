@@ -6,6 +6,7 @@ interface IAppHeaderProps
     src : string;
     alt : string;
     openNav : (event : any) => void
+    className? : string
 }
 
 interface IAppHeaderState
@@ -26,9 +27,11 @@ class AppHeader extends Component<IAppHeaderProps, IAppHeaderState>
 
     render() : JSX.Element
     {
+        const { src, alt, openNav, className } = this.props;
+        
         return (
             <Header>
-                <HeaderImage src={this.props.src} alt={this.props.alt} onClick={this.props.openNav}></HeaderImage>
+                <HeaderImage className={className} src={src} alt={alt} onClick={openNav}></HeaderImage>
             </Header>
         );
     }

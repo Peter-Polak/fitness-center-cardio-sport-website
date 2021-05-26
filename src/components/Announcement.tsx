@@ -4,8 +4,9 @@ import MaterialIcon from "./MaterialIcon";
 
 interface IAnnouncementProps
 {
-    title : string,
+    title : string
     date : string
+    className? : string
 }
 
 interface IAnnouncementState
@@ -26,10 +27,10 @@ class Announcement extends Component<IAnnouncementProps, IAnnouncementState>
 
     render() : JSX.Element
     {
-        const {title, date, children} = this.props;
+        const {title, date, children, className} = this.props;
         
         return (
-            <Container>
+            <Container className={className}>
                 <h2>
                     <MaterialIcon icon="campaign"/>
                     {title}

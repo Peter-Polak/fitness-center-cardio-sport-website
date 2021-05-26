@@ -6,6 +6,7 @@ import MaterialIcon from '../components/MaterialIcon';
 interface IOverlayProps
 {
     closeOverlay : (event : any) => void
+    className? : string
 }
 
 interface IOverlayState
@@ -26,11 +27,13 @@ class Overlay extends Component<IOverlayProps, IOverlayState>
 
     render() : JSX.Element
     {
+        const { closeOverlay, className, children } = this.props;
+        
         return (
-            <Container>
-                <CloseButton onClick={this.props.closeOverlay}><MaterialIcon icon="close"/></CloseButton>
+            <Container className={className}>
+                <CloseButton onClick={closeOverlay}><MaterialIcon icon="close"/></CloseButton>
                 <Content>
-                    {this.props.children}
+                    {children}
                 </Content>
             </Container>
         );

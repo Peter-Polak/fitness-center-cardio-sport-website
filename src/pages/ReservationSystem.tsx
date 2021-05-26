@@ -143,7 +143,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 <Heading heading="H1"><MaterialIcon icon="book_online" color="dark"/> Rezervačný systém</Heading>
                 
                 <Content>
-                    {this.state.showLoadingScreen && <LoadingSceen fullscreen={false}/>}
+                    {this.state.showLoadingScreen && <StyledLoadingSceen fullscreen={false}/>}
                     
                     <Heading heading="H2"><MaterialIcon icon="person"/> Osobné údaje</Heading>
                     <Identity>
@@ -172,6 +172,10 @@ const Container = styled.div`
 
 const Content = styled.div`
     position: relative;
+`;
+
+const StyledLoadingSceen = styled(LoadingSceen)`
+    left: -1px;
 `;
 
 const Identity = styled.div`

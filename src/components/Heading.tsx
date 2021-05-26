@@ -4,6 +4,7 @@ import styled from 'styled-components';
 interface IHeadingProps
 {
     heading : "H1" | "H2" | "H3" | "H4" | "H5" | "H6"
+    className? : string
 }
 
 interface IHeadingState
@@ -24,10 +25,10 @@ class Heading extends Component<IHeadingProps, IHeadingState>
 
     render() : JSX.Element
     {
-        const {heading : Heading, children} = this.props;
+        const { heading : Heading, className, children } = this.props;
         
         return (
-            Heading === "H1" ? <H1>{children}</H1> : <H2>{children}</H2>
+            Heading === "H1" ? <H1 className={className}>{children}</H1> : <H2 className={className}>{children}</H2>
         );
     }
 }

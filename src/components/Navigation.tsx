@@ -12,6 +12,7 @@ interface INavigationProps
     isVisible : boolean
     closeNav : (event : any) => void
     pages : {[page : string] : Page}
+    className? : string
 }
 
 interface INavigationState
@@ -33,7 +34,7 @@ class Navigation extends Component<INavigationProps, INavigationState>
     
     render() : JSX.Element
     {
-        const {isVisible, closeNav, pages} = this.props;
+        const { isVisible, closeNav, pages, className } = this.props;
         const buttons : Array<JSX.Element> = [];
         
         for(const key in pages)
@@ -46,7 +47,7 @@ class Navigation extends Component<INavigationProps, INavigationState>
         }
             
         return (
-            <div>
+            <div className={className}>
                 <Nav isVisible={isVisible}>
                     <Header>
                         <span>Menu</span>

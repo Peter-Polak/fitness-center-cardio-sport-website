@@ -6,6 +6,7 @@ interface IImageBrowserProps
 {
     imageUrls : Array<string>
     startingImage : number
+    className? : string
 }
 
 interface IImageBrowserState
@@ -61,10 +62,13 @@ class ImageBrowser extends Component<IImageBrowserProps, IImageBrowserState>
     
     render() : JSX.Element
     {   
+        const {  imageUrls, className, } = this.props;
+        const {  currentImage } = this.state;
+        
         return (
-            <Container>
+            <Container className={className}>
                 <Button onClick={this.previousImage} disabled={!this.canShowPreviousImage()}><MaterialIcon icon="arrow_left" size="60px"/></Button>
-                <Image src={this.props.imageUrls[this.state.currentImage]} key={"image" + 0}/>
+                <Image src={imageUrls[currentImage]} key={"image" + 0}/>
                 <Button onClick={this.nextImage} disabled={!this.canShowNextImage()}><MaterialIcon icon="arrow_right" size="60px"/></Button>
             </Container>
         );

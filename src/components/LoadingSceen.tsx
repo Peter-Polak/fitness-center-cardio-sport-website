@@ -6,6 +6,7 @@ import MaterialIcon from "./MaterialIcon";
 interface ILoadingSceenProps
 {
     fullscreen : boolean
+    className? : string
 }
 
 interface ILoadingSceenState
@@ -26,8 +27,10 @@ class LoadingSceen extends Component<ILoadingSceenProps, ILoadingSceenState>
 
     render() : JSX.Element
     {
+        const { fullscreen, className } = this.props;
+        
         return (
-        <Container fullscreen={this.props.fullscreen}>
+        <Container className={className} fullscreen={fullscreen}>
             <Icon icon="hourglass_empty" size="150px"/>
         </Container>
         );

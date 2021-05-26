@@ -6,6 +6,7 @@ interface IGalleryImageProps
     src : string
     index : number
     onClick : (event : any) => void
+    className? : string
 }
 
 interface IGalleryImageState
@@ -26,8 +27,10 @@ class GalleryImage extends Component<IGalleryImageProps, IGalleryImageState>
 
     render() : JSX.Element
     {
+        const { src, index, onClick, className } = this.props;
+        
         return (
-            <Image src={this.props.src} loading="lazy" onClick={() => this.props.onClick(this.props.index)}/>
+            <Image className={className} src={src} loading="lazy" onClick={() => onClick(index)}/>
         );
     }
 }

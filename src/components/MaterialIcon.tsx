@@ -13,8 +13,10 @@ class MaterialIcon extends Component<IMaterialIconProps>
 {
     render() : JSX.Element
     {
+        const { icon, color, size, className } = this.props;
+        
         return (
-            <Icon color={this.props.color} size={this.props.size} className={`material-icons ${this.props.className}`}>{this.props.icon}</Icon>
+            <Icon color={color} size={size} className={`material-icons ${className}`}>{icon}</Icon>
         );
     }
 }
