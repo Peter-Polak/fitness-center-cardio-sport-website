@@ -282,11 +282,11 @@ const StyledCheckboxGroup = styled(CheckboxGroup)`
 `;
 
 const Details = styled.div`
-    font-size: 12px;
-    
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    font-size: 12px;
 `;
 
 export default ReservationSystem;
