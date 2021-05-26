@@ -142,30 +142,37 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
             <Container>
                 <Heading heading="H1"><MaterialIcon icon="book_online" color="dark"/> Rezervačný systém</Heading>
                 
-                <Heading heading="H2"><MaterialIcon icon="person"/> Osobné údaje</Heading>
-                <Identity>
-                    <IdentityField name="Meno" type="text" value={name} handleChange={(event) => this.handleFieldChange("name", event.target.value)} required={true}/>
-                    <IdentityField name="Priezvisko" type="text" value={surname} handleChange={(event) => this.handleFieldChange("surname", event.target.value)} required={true}/>
-                </Identity>
-                
-                <Field name="E-mailová adresa" type="email" value={emailAddress} handleChange={(event) => this.handleFieldChange("emailAddress", event.target.value)}/>
-                
-                <Heading heading="H2"><MaterialIcon icon="date_range"/> Voľné termíny</Heading>
-                <Details><MaterialIcon icon="info"/>Tip: Viete si spraviť rezerváciu na viacero termínov naraz vyplnením jedného formulára. Stačí zaškrtnúť všetky políčka/termíny, o ktoré máte záujem.</Details>
-                <SessionsContainer>
-                    {checkboxGroups.length > 0 ? checkboxGroups : <p>Nie sú žiadne voľné termíny.</p>}
-                </SessionsContainer>
-                
-                
-                <SubmitButton onClick={this.submit} disabled={checkboxGroups.length === 0}>Odoslať</SubmitButton>
-                {/* {this.state.showLoadingScreen && <LoadingSceen/>} */}
+                <Content>
+                    {this.state.showLoadingScreen && <LoadingSceen fullscreen={false}/>}
+                    
+                    <Heading heading="H2"><MaterialIcon icon="person"/> Osobné údaje</Heading>
+                    <Identity>
+                        <IdentityField name="Meno" type="text" value={name} handleChange={(event) => this.handleFieldChange("name", event.target.value)} required={true}/>
+                        <IdentityField name="Priezvisko" type="text" value={surname} handleChange={(event) => this.handleFieldChange("surname", event.target.value)} required={true}/>
+                    </Identity>
+                    
+                    <Field name="E-mailová adresa" type="email" value={emailAddress} handleChange={(event) => this.handleFieldChange("emailAddress", event.target.value)}/>
+                    
+                    <Heading heading="H2"><MaterialIcon icon="date_range"/> Voľné termíny</Heading>
+                    <Details><MaterialIcon icon="info"/>Tip: Viete si spraviť rezerváciu na viacero termínov naraz vyplnením jedného formulára. Stačí zaškrtnúť všetky políčka/termíny, o ktoré máte záujem.</Details>
+                    <SessionsContainer>
+                        {checkboxGroups.length > 0 ? checkboxGroups : <p>Nie sú žiadne voľné termíny.</p>}
+                    </SessionsContainer>
+                    
+                    <SubmitButton onClick={this.submit} disabled={checkboxGroups.length === 0}>Odoslať</SubmitButton>
+                </Content>
             </Container>
         );
     }
 }
 
 const Container = styled.div`
+    position: relative;
     text-align: center;
+`;
+
+const Content = styled.div`
+    position: relative;
 `;
 
 const Identity = styled.div`

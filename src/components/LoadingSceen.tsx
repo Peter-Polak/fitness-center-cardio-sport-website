@@ -5,7 +5,7 @@ import MaterialIcon from "./MaterialIcon";
 
 interface ILoadingSceenProps
 {
-    
+    fullscreen : boolean
 }
 
 interface ILoadingSceenState
@@ -27,18 +27,18 @@ class LoadingSceen extends Component<ILoadingSceenProps, ILoadingSceenState>
     render() : JSX.Element
     {
         return (
-        <Container>
+        <Container fullscreen={this.props.fullscreen}>
             <Icon icon="hourglass_empty" size="150px"/>
         </Container>
         );
     }
 }
 
-const Container = styled.div`
-    position: fixed;
+const Container = styled.div<{ fullscreen : boolean }>`
+    position: ${props => props.fullscreen ? "fixed" : "absolute"};
     top: 0;
     left: 0;
-    z-index: 9999;
+    z-index: 998;
     
     display: flex;
     flex-direction: column;
