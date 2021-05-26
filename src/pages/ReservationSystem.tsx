@@ -10,6 +10,7 @@ import MaterialIcon from '../components/MaterialIcon';
 import Field from '../components/Field';
 import CheckboxGroup from "../components/CheckboxGroup";
 import LoadingSceen from "../components/LoadingSceen";
+import Checkbox from "../components/Checkbox";
 
 interface IReservationSystemProps
 {
@@ -23,6 +24,7 @@ interface IReservationSystemState
     surname : string
     emailAddress : string
     checkboxStates : {[date : string] : Array<boolean>}
+    rememberUser : boolean
     showLoadingScreen : boolean
 }
 
@@ -35,14 +37,13 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         this.state = 
         {
             sessions : {},
-            name : "", 
-            surname : "", 
-            emailAddress : "",
+            ...this.getUserInfo(),
             checkboxStates : {},
             showLoadingScreen : true
         }
         
         this.submit = this.submit.bind(this);
+        this.rememberUserhandler = this.rememberUserhandler.bind(this);
     }
     
     componentDidMount()
@@ -67,7 +68,9 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     
     async submit()
     {
-        const { name, surname, emailAddress, checkboxStates } = this.state;
+        const { name, surname, emailAddress, checkboxStates, rememberUser } = this.state;
+        
+        rememberUser ? this.setUserInfo(name, surname, emailAddress) : this.deleteUserInfo();
         
         let reservation : Reservation = 
         {
@@ -99,9 +102,8 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         
         this.setState({showLoadingScreen : true});
         await postReservation(reservation);
-        this.setState({ name: "", surname: "", emailAddress: "", showLoadingScreen : false});
         
-        this.updateSessions();
+        this.resetForm();
     }
     
     updateSessions()
@@ -123,9 +125,59 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         );
     }
     
+    rememberUserhandler(event : any)
+    {
+        const newValue = event.target.checked;
+        this.setState({ rememberUser : newValue });
+    }
+    
+    resetForm()
+    {
+        this.setState({ ...this.getUserInfo(), showLoadingScreen : false});
+        
+        this.updateSessions();
+    }
+    
+    getUserInfo()
+    {
+        let user = 
+        {
+            name : this.getLocalStorageItem("name"),
+            surname : this.getLocalStorageItem("surname"),
+            emailAddress : this.getLocalStorageItem("emailAddres"),
+            rememberUser : false
+        }
+        
+        if(user.name !== "" && user.surname !== "") user.rememberUser = true;
+        
+        return user;
+    }
+    
+    getLocalStorageItem(key : string)
+    {
+        let item = window.localStorage.getItem(key);
+        return item === null ? "" : item;
+    }
+    
+    deleteUserInfo()
+    {
+        window.localStorage.removeItem("name");
+        window.localStorage.removeItem("surname");
+        window.localStorage.removeItem("emailAddres");
+        window.localStorage.removeItem("remeberUser");
+    }
+    
+    setUserInfo(name : string, surname : string, emailAddress : string)
+    {
+        window.localStorage.setItem("name", name);
+        window.localStorage.setItem("surname", surname);
+        window.localStorage.setItem("emailAddres", emailAddress);
+        window.localStorage.setItem("remeberUser", "true");
+    }
+    
     render() : JSX.Element
     {
-        const { name, surname, emailAddress, checkboxStates, sessions } = this.state;
+        const { name, surname, emailAddress, checkboxStates, rememberUser, sessions } = this.state;
         
         const checkboxGroups : Array<JSX.Element> = [];
         for(const key in sessions)
@@ -152,6 +204,8 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                     </Identity>
                     
                     <Field name="E-mailová adresa" type="email" value={emailAddress} handleChange={(event) => this.handleFieldChange("emailAddress", event.target.value)}/>
+                    
+                    <Checkbox name="Zapamätať si údaje" checked={rememberUser} handleChange={this.rememberUserhandler}/>
                     
                     <Heading heading="H2"><MaterialIcon icon="date_range"/> Voľné termíny</Heading>
                     <Details><MaterialIcon icon="info"/>Tip: Viete si spraviť rezerváciu na viacero termínov naraz vyplnením jedného formulára. Stačí zaškrtnúť všetky políčka/termíny, o ktoré máte záujem.</Details>
