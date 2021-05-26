@@ -180,7 +180,8 @@ const Background = styled.div<{isVisible : boolean}>`
     position: fixed;
     top: 0;
     left: 0;
-
+    z-index: 998;
+    
     display: ${props => props.isVisible ? "block" : "none"};
 
     width: 100vw;
