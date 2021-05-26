@@ -242,6 +242,7 @@ const Identity = styled.div`
 
 const IdentityField = styled(Field)`
     flex: 1;
+    min-width: 180px;
 `;
 
 const SessionsContainer = styled.div`
