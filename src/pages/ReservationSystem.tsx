@@ -167,7 +167,6 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
 }
 
 const Container = styled.div`
-    position: relative;
     text-align: center;
 `;
 
