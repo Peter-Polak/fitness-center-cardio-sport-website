@@ -175,7 +175,7 @@ const Content = styled.div`
 `;
 
 const StyledLoadingSceen = styled(LoadingSceen)`
-    left: -1px;
+    left: -1px; // Neccessary because fields are poking out on the lft a little bit on smaller screens for unknown reason.
 `;
 
 const Identity = styled.div`
