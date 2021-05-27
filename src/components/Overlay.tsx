@@ -2,6 +2,7 @@ import { Component } from "react";
 import styled from 'styled-components';
 
 import MaterialIcon from '../components/MaterialIcon';
+import KeyboardInput from "./KeyboardInput";
 
 interface IOverlayProps
 {
@@ -23,6 +24,22 @@ class Overlay extends Component<IOverlayProps, IOverlayState>
         {
             
         }
+        
+        this.handleKeyDown = this.handleKeyDown.bind(this);
+    }
+    
+    handleKeyDown(event : any)
+    {
+        event.preventDefault();
+        
+        const { closeOverlay } = this.props;
+        
+        switch (event.keyCode)
+        {
+            case 27:
+                closeOverlay(event);
+                break;
+        }
     }
 
     render() : JSX.Element
@@ -30,11 +47,12 @@ class Overlay extends Component<IOverlayProps, IOverlayState>
         const { closeOverlay, className, children } = this.props;
         
         return (
-            <Container className={className} onClick={closeOverlay}>
+            <Container className={className}>
                 <CloseButton onClick={closeOverlay}><MaterialIcon icon="close"/></CloseButton>
                 <Content>
                     {children}
                 </Content>
+                <KeyboardInput handleKeyDown={this.handleKeyDown}/>
             </Container>
         );
     }
