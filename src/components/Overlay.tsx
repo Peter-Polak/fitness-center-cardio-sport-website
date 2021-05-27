@@ -30,7 +30,7 @@ class Overlay extends Component<IOverlayProps, IOverlayState>
         const { closeOverlay, className, children } = this.props;
         
         return (
-            <Container className={className}>
+            <Container className={className} onClick={closeOverlay}>
                 <CloseButton onClick={closeOverlay}><MaterialIcon icon="close"/></CloseButton>
                 <Content>
                     {children}
