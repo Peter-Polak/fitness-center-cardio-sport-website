@@ -205,7 +205,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                     
                     <Field name="E-mailová adresa" type="email" value={emailAddress} handleChange={(event) => this.handleFieldChange("emailAddress", event.target.value)}/>
                     
-                    <Checkbox name="Zapamätať si údaje" checked={rememberUser} handleChange={this.rememberUserhandler}/>
+                    <RemmeberUserCheckbox name="Zapamätať si údaje" checked={rememberUser} handleChange={this.rememberUserhandler}/>
                     
                     <Heading heading="H2"><MaterialIcon icon="date_range"/> Voľné termíny</Heading>
                     <Details><MaterialIcon icon="info"/>Tip: Viete si spraviť rezerváciu na viacero termínov naraz vyplnením jedného formulára. Stačí zaškrtnúť všetky políčka/termíny, o ktoré máte záujem.</Details>
@@ -243,6 +243,10 @@ const Identity = styled.div`
 const IdentityField = styled(Field)`
     flex: 1;
     min-width: 180px;
+`;
+
+const RemmeberUserCheckbox = styled(Checkbox)`
+    margin: 10px 0;
 `;
 
 const SessionsContainer = styled.div`
