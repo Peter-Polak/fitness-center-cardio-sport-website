@@ -78,9 +78,17 @@ const Images = styled.div`
 
 const ImageUrls = 
 [
-    "https://i.imgur.com/3tg7Afx.jpg", 
-    "https://i.imgur.com/lXGnm5g.jpg", 
-    "https://i.imgur.com/p7a8WCv.jpg"
+    "https://i.imgur.com/iIF9oOv.jpg",
+    "https://i.imgur.com/VmtsbVN.jpg",
+    "https://i.imgur.com/swXd0JC.jpg",
+    "https://i.imgur.com/EBbeEiP.jpg",
+    "https://i.imgur.com/MnIlUCq.jpg",
+    "https://i.imgur.com/xfjmG8D.jpg",
+    "https://i.imgur.com/FafLNEJ.jpg",
+    "https://i.imgur.com/qZa7kjA.jpg",
+    "https://i.imgur.com/x0r0wTO.jpg",
+    "https://i.imgur.com/hZiP9m1.jpg",
+    "https://i.imgur.com/PK2ZneE.jpg"
 ];
 
 
