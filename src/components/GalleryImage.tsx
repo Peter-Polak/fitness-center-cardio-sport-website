@@ -43,7 +43,7 @@ const Image = styled.img`
     
     object-fit: cover;
     transition: transform 0.5s;
-    cursor: pointer;
+    cursor: zoom-in;
     
     &:hover
     {
