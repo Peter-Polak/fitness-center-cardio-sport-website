@@ -67,9 +67,14 @@ class ImageBrowser extends Component<IImageBrowserProps, IImageBrowserState>
         
         return (
             <Container className={className}>
-                <Button onClick={this.previousImage} disabled={!this.canShowPreviousImage()}><MaterialIcon icon="arrow_left" size="60px"/></Button>
-                <Image src={imageUrls[currentImage]} key={"image" + 0}/>
-                <Button onClick={this.nextImage} disabled={!this.canShowNextImage()}><MaterialIcon icon="arrow_right" size="60px"/></Button>
+                <ImageContainer>
+                    <Button onClick={this.previousImage} disabled={!this.canShowPreviousImage()}><MaterialIcon icon="arrow_left" size="60px"/></Button>
+                    <Image src={imageUrls[currentImage]} onClick={() => window.open(imageUrls[currentImage], "_blank")} key={"image" + 0}/>
+                    <Button onClick={this.nextImage} disabled={!this.canShowNextImage()}><MaterialIcon icon="arrow_right" size="60px"/></Button>
+                </ImageContainer>
+                <ImageDetails>
+                    {`${currentImage + 1}/${imageUrls.length}`}
+                </ImageDetails>
             </Container>
         );
     }
@@ -77,6 +82,7 @@ class ImageBrowser extends Component<IImageBrowserProps, IImageBrowserState>
 
 const Container = styled.div`
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     
@@ -84,11 +90,22 @@ const Container = styled.div`
     height: 100%;
 `;
 
+const ImageContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 const Image = styled.img`
-    width: 75%;
+    width: 80%;
     max-width: 100%;
     height: 100%;
     object-fit: contain;
+    cursor: zoom-in;
+`;
+
+const ImageDetails = styled.div`
+    margin: 20px;
 `;
 
 const Button = styled.button`
