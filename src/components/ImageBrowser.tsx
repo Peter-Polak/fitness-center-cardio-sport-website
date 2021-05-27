@@ -1,5 +1,6 @@
 import { Component } from "react";
 import styled from 'styled-components';
+import KeyboardInput from "./KeyboardInput";
 import MaterialIcon from "./MaterialIcon";
 
 interface IImageBrowserProps
@@ -27,16 +28,6 @@ class ImageBrowser extends Component<IImageBrowserProps, IImageBrowserState>
         this.previousImage = this.previousImage.bind(this);
         this.nextImage = this.nextImage.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
-    }
-    
-    componentDidMount()
-    {
-        document.addEventListener("keydown", this.handleKeyDown);
-    }
-    
-    componentWillUnmount()
-    {
-        document.removeEventListener("keydown", this.handleKeyDown);
     }
     
     canShowNextImage()
@@ -109,6 +100,7 @@ class ImageBrowser extends Component<IImageBrowserProps, IImageBrowserState>
                 <ImageDetails>
                     {`${currentImage + 1}/${imageUrls.length}`}
                 </ImageDetails>
+                <KeyboardInput handleKeyDown={this.handleKeyDown}/>
             </Container>
         );
     }
