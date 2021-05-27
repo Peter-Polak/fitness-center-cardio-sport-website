@@ -26,6 +26,17 @@ class ImageBrowser extends Component<IImageBrowserProps, IImageBrowserState>
         
         this.previousImage = this.previousImage.bind(this);
         this.nextImage = this.nextImage.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
+    }
+    
+    componentDidMount()
+    {
+        document.addEventListener("keydown", this.handleKeyDown);
+    }
+    
+    componentWillUnmount()
+    {
+        document.removeEventListener("keydown", this.handleKeyDown);
     }
     
     canShowNextImage()
@@ -58,6 +69,29 @@ class ImageBrowser extends Component<IImageBrowserProps, IImageBrowserState>
         if(!this.canShowNextImage()) return;
         
         this.setState({currentImage : nextImage});
+    }
+    
+    handleKeyDown(event : any)
+    {
+        event.preventDefault();
+        
+        const { imageUrls } = this.props;
+        
+        switch (event.keyCode)
+        {
+            case 37:
+                this.previousImage();
+                break;
+            case 38:
+                this.setState({currentImage : imageUrls.length - 1});
+                break;
+            case 39:
+                this.nextImage();
+                break;
+            case 40:
+                this.setState({currentImage : 0});
+                break;
+        }
     }
     
     render() : JSX.Element
