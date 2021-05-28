@@ -36,3 +36,40 @@ export function getTimestamp()
     
     return timestamp;
 }
+
+export function getUserInfo()
+{
+    let user = 
+    {
+        name : getLocalStorageItem("name"),
+        surname : getLocalStorageItem("surname"),
+        emailAddress : getLocalStorageItem("emailAddres"),
+        rememberUser : false
+    }
+    
+    if(user.name !== "" && user.surname !== "") user.rememberUser = true;
+    
+    return user;
+}
+
+export function getLocalStorageItem(key : string)
+{
+    let item = window.localStorage.getItem(key);
+    return item === null ? "" : item;
+}
+
+export function deleteUserInfo()
+{
+    window.localStorage.removeItem("name");
+    window.localStorage.removeItem("surname");
+    window.localStorage.removeItem("emailAddres");
+    window.localStorage.removeItem("remeberUser");
+}
+
+export function setUserInfo(name : string, surname : string, emailAddress : string)
+{
+    window.localStorage.setItem("name", name);
+    window.localStorage.setItem("surname", surname);
+    window.localStorage.setItem("emailAddres", emailAddress);
+    window.localStorage.setItem("remeberUser", "true");
+}

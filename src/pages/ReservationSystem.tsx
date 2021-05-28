@@ -3,7 +3,7 @@ import { RouteComponentProps } from "react-router-dom";
 import styled from 'styled-components';
 
 import { Reservation, Sessions, getSessions, postReservation } from "../restApi"
-import { getTimestamp } from '../helpers';
+import { getTimestamp , getUserInfo, setUserInfo, deleteUserInfo } from '../helpers';
 
 import Heading from '../components/Heading';
 import MaterialIcon from '../components/MaterialIcon';
@@ -38,7 +38,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         this.state = 
         {
             sessions : {},
-            ...this.getUserInfo(),
+            ...getUserInfo(),
             checkboxStates : {},
             showLoadingScreen : true
         }
@@ -71,7 +71,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     {
         const { name, surname, emailAddress, checkboxStates, rememberUser } = this.state;
         
-        rememberUser ? this.setUserInfo(name, surname, emailAddress) : this.deleteUserInfo();
+        rememberUser ? setUserInfo(name, surname, emailAddress) : deleteUserInfo();
         
         let reservation : Reservation = 
         {
@@ -134,47 +134,12 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     
     resetForm()
     {
-        this.setState({ ...this.getUserInfo(), showLoadingScreen : false});
+        this.setState({ ...getUserInfo(), showLoadingScreen : false});
         
         this.updateSessions();
     }
     
-    getUserInfo()
-    {
-        let user = 
-        {
-            name : this.getLocalStorageItem("name"),
-            surname : this.getLocalStorageItem("surname"),
-            emailAddress : this.getLocalStorageItem("emailAddres"),
-            rememberUser : false
-        }
-        
-        if(user.name !== "" && user.surname !== "") user.rememberUser = true;
-        
-        return user;
-    }
     
-    getLocalStorageItem(key : string)
-    {
-        let item = window.localStorage.getItem(key);
-        return item === null ? "" : item;
-    }
-    
-    deleteUserInfo()
-    {
-        window.localStorage.removeItem("name");
-        window.localStorage.removeItem("surname");
-        window.localStorage.removeItem("emailAddres");
-        window.localStorage.removeItem("remeberUser");
-    }
-    
-    setUserInfo(name : string, surname : string, emailAddress : string)
-    {
-        window.localStorage.setItem("name", name);
-        window.localStorage.setItem("surname", surname);
-        window.localStorage.setItem("emailAddres", emailAddress);
-        window.localStorage.setItem("remeberUser", "true");
-    }
     
     getCheckBoxGroups()
     {
