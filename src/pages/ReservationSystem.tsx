@@ -10,6 +10,7 @@ import MaterialIcon from '../components/MaterialIcon';
 import Field from '../components/Field';
 import CheckboxGroup from "../components/CheckboxGroup";
 import LoadingSceen from "../components/LoadingSceen";
+import StatusScreen, { StatusType } from "../components/StatusScreen";
 import Checkbox from "../components/Checkbox";
 import Button, { ButtonType } from "../components/Button";
 
@@ -121,7 +122,13 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                     checkboxStates[date] = sessions[date].free.map(session => false);
                 }
                 
-                this.setState({sessions : sessions, checkboxStates : checkboxStates, showLoadingScreen : false});
+                this.setState(
+                    {
+                        sessions : sessions, 
+                        checkboxStates : checkboxStates, 
+                        showLoadingScreen : false
+                    }
+                );
             }
         );
     }
@@ -167,7 +174,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     
     render() : JSX.Element
     {
-        const { name, surname, emailAddress, checkboxStates, rememberUser, sessions } = this.state;
+        const { name, surname, emailAddress, rememberUser } = this.state;
         
         const checkboxGroups : Array<JSX.Element> = this.getCheckBoxGroups();
         
@@ -177,6 +184,11 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 
                 <Content>
                     {this.state.showLoadingScreen && <StyledLoadingSceen fullscreen={false}/>}
+                    {/* {this.state.showLoadingScreen && 
+                    <StatusScreen icon={"warning"} type={StatusType.ERROR} fullscreen={false}>
+                        Error
+                    </StatusScreen>
+                    } */}
                     
                     <Heading heading="H2"><MaterialIcon icon="person"/> Osobné údaje</Heading>
                     <Identity>
