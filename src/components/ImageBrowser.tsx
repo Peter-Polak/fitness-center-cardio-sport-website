@@ -1,7 +1,9 @@
 import { Component } from "react";
 import styled from 'styled-components';
+
 import KeyboardInput from "./KeyboardInput";
 import MaterialIcon from "./MaterialIcon";
+import Button from "./Button";
 
 interface IImageBrowserProps
 {
@@ -132,14 +134,6 @@ const Image = styled.img`
 
 const ImageDetails = styled.div`
     margin: 20px;
-`;
-
-const Button = styled.button`
-    &:disabled
-    {
-        opacity: 25%;
-        cursor: not-allowed;
-    }
 `;
 
 export default ImageBrowser;
