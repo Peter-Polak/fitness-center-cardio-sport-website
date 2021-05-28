@@ -28,6 +28,7 @@ interface IReservationSystemState
     checkboxStates : {[date : string] : Array<boolean>}
     rememberUser : boolean
     showLoadingScreen : boolean
+    showStatusScreen : boolean
 }
 
 class ReservationSystem extends Component<IReservationSystemProps, IReservationSystemState>
@@ -41,7 +42,8 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
             sessions : {},
             ...getUserInfo(),
             checkboxStates : {},
-            showLoadingScreen : true
+            showLoadingScreen : true,
+            showStatusScreen : false
         }
         
         this.submit = this.submit.bind(this);
@@ -130,6 +132,11 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                     }
                 );
             }
+        ).catch(
+            () =>
+            {
+                this.setState({ showLoadingScreen : false, showStatusScreen : true });
+            }
         );
     }
     
@@ -172,9 +179,18 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         return checkboxGroups;
     }
     
+    getStatusScreen()
+    {
+        return (
+            <StyledStatusSceen type={StatusType.ERROR} fullscreen={false} close={() => this.setState({showStatusScreen: false})}>
+                Nastala chyba!
+            </StyledStatusSceen>
+        );
+    }
+    
     render() : JSX.Element
     {
-        const { name, surname, emailAddress, rememberUser } = this.state;
+        const { name, surname, emailAddress, rememberUser, showLoadingScreen, showStatusScreen } = this.state;
         
         const checkboxGroups : Array<JSX.Element> = this.getCheckBoxGroups();
         
@@ -183,12 +199,8 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 <Heading heading="H1"><MaterialIcon icon="book_online" color="dark"/> Rezervačný systém</Heading>
                 
                 <Content>
-                    {this.state.showLoadingScreen && <StyledLoadingSceen fullscreen={false}/>}
-                    {/* {this.state.showLoadingScreen && 
-                    <StatusScreen icon={"warning"} type={StatusType.ERROR} fullscreen={false}>
-                        Error
-                    </StatusScreen>
-                    } */}
+                    {showLoadingScreen && <StyledLoadingSceen fullscreen={false}/>}
+                    {showStatusScreen && this.getStatusScreen()}
                     
                     <Heading heading="H2"><MaterialIcon icon="person"/> Osobné údaje</Heading>
                     <Identity>
@@ -226,6 +238,10 @@ const Content = styled.div`
 `;
 
 const StyledLoadingSceen = styled(LoadingSceen)`
+    left: -1px; // Neccessary because fields are poking out on the left a little bit on smaller screens for unknown reason.
+`;
+
+const StyledStatusSceen = styled(StatusScreen)`
     left: -1px; // Neccessary because fields are poking out on the left a little bit on smaller screens for unknown reason.
 `;
 
