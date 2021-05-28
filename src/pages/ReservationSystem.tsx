@@ -10,9 +10,9 @@ import MaterialIcon from '../components/MaterialIcon';
 import Field from '../components/Field';
 import CheckboxGroup from "../components/CheckboxGroup";
 import LoadingSceen from "../components/LoadingSceen";
-import StatusScreen, { StatusType } from "../components/StatusScreen";
 import Checkbox from "../components/Checkbox";
 import Button, { ButtonType } from "../components/Button";
+import { getReservationResponseComponent, ReservationValidity } from "../Reservation";
 
 interface IReservationSystemProps
 {
@@ -33,6 +33,8 @@ interface IReservationSystemState
 
 class ReservationSystem extends Component<IReservationSystemProps, IReservationSystemState>
 {
+    reservationResponse : ReservationValidity | undefined = undefined;
+    
     constructor(props : IReservationSystemProps)
     {
         super(props);
@@ -48,6 +50,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         
         this.submit = this.submit.bind(this);
         this.rememberUserhandler = this.rememberUserhandler.bind(this);
+        this.resetForm = this.resetForm.bind(this);
     }
     
     componentDidMount()
@@ -105,9 +108,8 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         console.log(reservation);
         
         this.setState({showLoadingScreen : true});
-        await postReservation(reservation);
-        
-        this.resetForm();
+        this.reservationResponse = await postReservation(reservation);
+        this.setState({showLoadingScreen : false, showStatusScreen: true});
     }
     
     updateSessions()
@@ -148,7 +150,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     
     resetForm()
     {
-        this.setState({ ...getUserInfo(), showLoadingScreen : false});
+        this.setState({ ...getUserInfo(), showStatusScreen : false, showLoadingScreen : false});
         
         this.updateSessions();
     }
@@ -179,15 +181,6 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         return checkboxGroups;
     }
     
-    getStatusScreen()
-    {
-        return (
-            <StyledStatusSceen type={StatusType.ERROR} fullscreen={false} close={() => this.setState({showStatusScreen: false})}>
-                Nastala chyba!
-            </StyledStatusSceen>
-        );
-    }
-    
     render() : JSX.Element
     {
         const { name, surname, emailAddress, rememberUser, showLoadingScreen, showStatusScreen } = this.state;
@@ -200,7 +193,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 
                 <Content>
                     {showLoadingScreen && <StyledLoadingSceen fullscreen={false}/>}
-                    {showStatusScreen && this.getStatusScreen()}
+                    {showStatusScreen && this.reservationResponse && getReservationResponseComponent(this.reservationResponse, this.resetForm)}
                     
                     <Heading heading="H2"><MaterialIcon icon="person"/> Osobné údaje</Heading>
                     <Identity>
@@ -238,10 +231,6 @@ const Content = styled.div`
 `;
 
 const StyledLoadingSceen = styled(LoadingSceen)`
-    left: -1px; // Neccessary because fields are poking out on the left a little bit on smaller screens for unknown reason.
-`;
-
-const StyledStatusSceen = styled(StatusScreen)`
     left: -1px; // Neccessary because fields are poking out on the left a little bit on smaller screens for unknown reason.
 `;
 
