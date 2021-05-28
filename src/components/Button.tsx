@@ -8,8 +8,8 @@ export enum ButtonType
 
 interface IButtonProps
 {
-    type : ButtonType
     onClick : (event : any) => void
+    type? : ButtonType
     disabled? : boolean
     className? : string
 }
@@ -30,18 +30,19 @@ class Button extends Component<IButtonProps, IButtonState>
         }
     }
     
-    getButtonComponent(type : ButtonType)
+    getButtonComponent(type : ButtonType | undefined)
     {
         switch(type)
         {
-            case ButtonType.TRANSPARENT:
-                return TransparentButton;
             case ButtonType.NORMAL:
                 return TextButton;
             case ButtonType.CONFIRM:
                 return ConfirmButton;
             case ButtonType.CANCEL:
                 return CancelButton;
+            default:
+            case ButtonType.TRANSPARENT:
+                return TransparentButton;
         }
     }
 
