@@ -11,6 +11,7 @@ import Field from '../components/Field';
 import CheckboxGroup from "../components/CheckboxGroup";
 import LoadingSceen from "../components/LoadingSceen";
 import Checkbox from "../components/Checkbox";
+import Button, { ButtonType } from "../components/Button";
 
 interface IReservationSystemProps
 {
@@ -175,20 +176,37 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         window.localStorage.setItem("remeberUser", "true");
     }
     
-    render() : JSX.Element
+    getCheckBoxGroups()
     {
-        const { name, surname, emailAddress, checkboxStates, rememberUser, sessions } = this.state;
-        
+        const { checkboxStates, sessions } = this.state;
         const checkboxGroups : Array<JSX.Element> = [];
+        
         for(const key in sessions)
         {
             const options = sessions[key].free.map(
                 session => 
                 `${session.start.string} - ${session.end.string} (${session.capacity - session.reserved}/${session.capacity})`
             );
+            const checkboxGroupName = `${this.state.sessions[key].day}, ${key}`;
             
-            checkboxGroups.push(<StyledCheckboxGroup name={`${this.state.sessions[key].day}, ${key}`} options={options} checkboxStates={checkboxStates[key]} handleChange={(checkboxStates) => this.handleCheckboxGroupChange(key, checkboxStates)} key={key}/>)
+            checkboxGroups.push(
+                <StyledCheckboxGroup 
+                name={checkboxGroupName} 
+                options={options} 
+                checkboxStates={checkboxStates[key]} 
+                handleChange={(checkboxStates) => this.handleCheckboxGroupChange(key, checkboxStates)} 
+                key={key}/>
+            )
         }
+        
+        return checkboxGroups;
+    }
+    
+    render() : JSX.Element
+    {
+        const { name, surname, emailAddress, checkboxStates, rememberUser, sessions } = this.state;
+        
+        const checkboxGroups : Array<JSX.Element> = this.getCheckBoxGroups();
         
         return (
             <Container>
@@ -213,12 +231,16 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                         {checkboxGroups.length > 0 ? checkboxGroups : <p>Nie sú žiadne voľné termíny.</p>}
                     </SessionsContainer>
                     
-                    <SubmitButton onClick={this.submit} disabled={checkboxGroups.length === 0}>Odoslať</SubmitButton>
+                    <Button type={ButtonType.CONFIRM} onClick={this.submit} disabled={checkboxGroups.length === 0}>Odoslať</Button>
                 </Content>
             </Container>
         );
     }
 }
+
+export default ReservationSystem;
+
+//#region Styles
 
 const Container = styled.div`
     text-align: center;
@@ -229,7 +251,7 @@ const Content = styled.div`
 `;
 
 const StyledLoadingSceen = styled(LoadingSceen)`
-    left: -1px; // Neccessary because fields are poking out on the lft a little bit on smaller screens for unknown reason.
+    left: -1px; // Neccessary because fields are poking out on the left a little bit on smaller screens for unknown reason.
 `;
 
 const Identity = styled.div`
@@ -260,22 +282,6 @@ const SessionsContainer = styled.div`
     border-radius: 5px;
 `;
 
-const SubmitButton = styled.button`
-    padding: 10px 40px;
-    
-    color: ${props => props.theme.color.text};
-    font-family: "Bebas Neue";
-    font-size: 24px;
-    letter-spacing: 1px;
-    background-color: ${props => props.theme.color.succes.normal};
-    
-    &:disabled
-    {
-        opacity: 25%;
-        cursor: not-allowed;
-    }
-`;
-
 const StyledCheckboxGroup = styled(CheckboxGroup)`
     margin-right: 30px; 
     
@@ -293,4 +299,4 @@ const Details = styled.div`
     font-size: 12px;
 `;
 
-export default ReservationSystem;
+//#endregion
