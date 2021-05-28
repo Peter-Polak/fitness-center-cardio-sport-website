@@ -82,11 +82,11 @@ const StyledMaterialIcon = styled(MaterialIcon)<{ type : StatusType }>`
             switch(props.type)
             {
                 case StatusType.ERROR:
-                    return `${props.theme.color.warning}`;
+                    return `${props.theme.color.warning.normal}`;
                     
                 default:
                 case StatusType.SUCCES:
-                    return `${props.theme.color.succes}`;
+                    return `${props.theme.color.succes.normal}`;
             }
         }
     };
