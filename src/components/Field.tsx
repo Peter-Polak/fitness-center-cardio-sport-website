@@ -1,5 +1,6 @@
 import { Component } from "react";
 import styled from 'styled-components';
+import MaterialIcon from "./MaterialIcon";
 
 
 interface IFieldProps
@@ -8,6 +9,7 @@ interface IFieldProps
     type : string
     value : string
     handleChange : (event : any) => void
+    icon? : string
     required? : boolean
     className? : string
 }
@@ -30,10 +32,12 @@ class Field extends Component<IFieldProps, IFieldState>
 
     render() : JSX.Element
     {
+        const { name, type, value, handleChange, icon, required, className } = this.props;
+        
         return (
-            <Label className={this.props.className}>
-                <Text>{this.props.name} {this.props.required && <Asterisk>*</Asterisk>}</Text>
-                <Input type={this.props.type} onChange={this.props.handleChange} required={this.props.required} value={this.props.value} placeholder=" "></Input>
+            <Label className={className}>
+                <Text>{icon && <MaterialIcon icon={icon}/>}{name} {required && <Asterisk>*</Asterisk>}</Text>
+                <Input type={type} onChange={handleChange} required={required} value={value} placeholder=" "></Input>
             </Label>
         );
     }
