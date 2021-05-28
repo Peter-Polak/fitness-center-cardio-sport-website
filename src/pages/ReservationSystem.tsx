@@ -150,6 +150,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     
     resetForm()
     {
+        this.reservationResponse = undefined;
         this.setState({ ...getUserInfo(), showStatusScreen : false, showLoadingScreen : false});
         
         this.updateSessions();
@@ -193,7 +194,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 
                 <Content>
                     {showLoadingScreen && <StyledLoadingSceen fullscreen={false}/>}
-                    {showStatusScreen && this.reservationResponse && getReservationResponseComponent(this.reservationResponse, this.resetForm)}
+                    {showStatusScreen && getReservationResponseComponent(this.reservationResponse, this.resetForm)}
                     
                     <Heading heading="H2"><MaterialIcon icon="person"/> Osobné údaje</Heading>
                     <Identity>

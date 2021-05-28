@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import Button from "./components/Button";
+import MaterialIcon from "./components/MaterialIcon";
 import StatusScreen, { StatusType } from "./components/StatusScreen";
 
 export enum SessionError
@@ -42,9 +44,19 @@ export interface ReservationValidity
     }
 }
 
-export function getReservationResponseComponent(reservationResponse : ReservationValidity, close : () => void)
+export function getReservationResponseComponent(reservationResponse : ReservationValidity | undefined, close : () => void)
 {
     console.log(reservationResponse);
+    
+    if(reservationResponse === undefined)
+    {
+        return (
+            <StyledStatusSceen type={StatusType.ERROR} fullscreen={false}>
+                <p>Nepodarilo sa pripojiť na servér! Skontrulujte vaše pripojenie na internet.</p>
+                <Button onClick={() =>window.location.reload()}><MaterialIcon icon="refresh" size="50px"/></Button>
+            </StyledStatusSceen>
+        );
+    }
     
     const statusType = reservationResponse.isValid ? StatusType.SUCCES : StatusType.ERROR;
     let content : JSX.Element = <></>;
