@@ -13,7 +13,7 @@ interface IStatusScreenProps
 {
     type : StatusType
     fullscreen : boolean
-    close : () => void
+    close? : () => void
     icon? : string
     className? : string
 }
@@ -45,7 +45,7 @@ class StatusScreen extends Component<IStatusScreenProps, IStatusScreenState>
         
         return (
             <Container className={className} fullscreen={fullscreen}>
-                <CloseButton onClick={close}><MaterialIcon icon="close" size="35px"/></CloseButton>
+                { close && <CloseButton onClick={close}><MaterialIcon icon="close" size="35px"/></CloseButton> }
                 <StyledMaterialIcon icon={icon} type={type} size="100px"/>
                 <Content>
                     {children}
