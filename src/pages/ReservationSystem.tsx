@@ -139,8 +139,6 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         this.updateSessions();
     }
     
-    
-    
     getCheckBoxGroups()
     {
         const { checkboxStates, sessions } = this.state;
