@@ -137,6 +137,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         ).catch(
             () =>
             {
+                this.reservationResponse = undefined;
                 this.setState({ showLoadingScreen : false, showStatusScreen : true });
             }
         );
@@ -144,8 +145,12 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     
     rememberUserhandler(event : any)
     {
+        const { name, surname, emailAddress } = this.state;
+        
         const newValue = event.target.checked;
         this.setState({ rememberUser : newValue });
+        
+        newValue ? setUserInfo(name, surname, emailAddress) : deleteUserInfo();
     }
     
     resetForm()
