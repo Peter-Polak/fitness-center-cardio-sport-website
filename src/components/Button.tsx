@@ -66,10 +66,17 @@ const TransparentButton = styled.button`
     color: ${props => props.theme.color.primary.normal};
     background-color: transparent;
     
+    transition: all 0.5s;
+    
     &:disabled
     {
         opacity: 25%;
         cursor: not-allowed;
+    }
+    
+    &:hover
+    {
+        transform: scale(1.1);
     }
 `;
 
@@ -81,16 +88,31 @@ const TextButton = styled(TransparentButton)`
     font-size: 24px;
     letter-spacing: 1px;
     background-color: ${props => props.theme.color.primary.normal};
+    
+    &:hover
+    {
+        background-color: ${props => props.theme.color.primary.ligth};
+    }
 `;
 
 const ConfirmButton = styled(TextButton)`
     color: ${props => props.theme.color.text};
     background-color: ${props => props.theme.color.succes.normal};
+    
+    &:hover
+    {
+        background-color: ${props => props.theme.color.succes.ligth};
+    }
 `;
 
 const CancelButton = styled(TextButton)`
     color: ${props => props.theme.color.text};
     background-color: ${props => props.theme.color.warning.normal};
+    
+    &:hover
+    {
+        background-color: ${props => props.theme.color.warning.ligth};
+    }
 `;
 
 export default Button;
