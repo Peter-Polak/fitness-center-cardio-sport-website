@@ -127,6 +127,7 @@ export function getReservationResponseComponent(reservationResponse : Reservatio
     return (
         <StyledStatusSceen type={statusType} fullscreen={false} close={close}>
             {content}
+            <Button type={ButtonType.CONFIRM} onClick={close}>Spraviť novú rezerváciu</Button>
         </StyledStatusSceen>
     );
 }
