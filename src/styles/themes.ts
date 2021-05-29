@@ -6,25 +6,25 @@ export const lightTheme : DefaultTheme =
     {
         primary:
         {
-            light: "",
+            ligth: "",
             normal : "",
             dark: ""
         },
         secondary : 
         {
-            light: "",
+            ligth: "",
             normal : "",
             dark: ""
         },
         succes : 
         {
-            light: "",
+            ligth: "",
             normal : "",
             dark: ""
         },
         warning : 
         {
-            light: "",
+            ligth: "",
             normal : "",
             dark: ""
         },
@@ -39,25 +39,25 @@ export const darkTheme : DefaultTheme =
     {
         primary:
         {
-            light: "",
+            ligth: "",
             normal : "#f4d800",
             dark: "#bea800"
         },
         secondary : 
         {
-            light: "",
+            ligth: "",
             normal : "",
             dark: ""
         },
         succes : 
         {
-            light: "",
+            ligth: "#16f25f",
             normal : "#13be4c",
-            dark: ""
+            dark: "#0f943b"
         },
         warning : 
         {
-            light: "",
+            ligth: "",
             normal : "#ff4141",
             dark: ""
         },
