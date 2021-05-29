@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Button from "./components/Button";
+import Button, { ButtonType } from "./components/Button";
 import MaterialIcon from "./components/MaterialIcon";
 import StatusScreen, { StatusType } from "./components/StatusScreen";
 
@@ -52,7 +52,7 @@ export function getReservationResponseComponent(reservationResponse : Reservatio
     {
         return (
             <StyledStatusSceen type={StatusType.ERROR} fullscreen={false}>
-                <p>Nepodarilo sa pripojiť na servér! Skontrulujte vaše pripojenie na internet.</p>
+                <p>Nepodarilo sa pripojiť na servér! Skontrolujte vaše pripojenie na internet.</p>
                 <Button onClick={() =>window.location.reload()}><MaterialIcon icon="refresh" size="50px"/></Button>
             </StyledStatusSceen>
         );
