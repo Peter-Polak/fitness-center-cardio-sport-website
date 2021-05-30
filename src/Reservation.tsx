@@ -22,7 +22,7 @@ export function getReservationResponseComponent(reservationFormValidity : Reserv
     {
         return (
             <StyledStatusSceen type={StatusType.ERROR} fullscreen={false}>
-                <p>Nie su vypísané žiadné termíny.</p>
+                <p>Nie sú vypísané žiadné termíny.</p>
                 <Button onClick={() =>window.location.reload()}><MaterialIcon icon="refresh" size="50px"/></Button>
             </StyledStatusSceen>
         );
