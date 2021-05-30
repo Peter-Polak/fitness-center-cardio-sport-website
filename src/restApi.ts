@@ -26,7 +26,7 @@ export async function getSessions() : Promise<OrganizedSessions | Reason<Organiz
 
 export async function postReservation(reservation : IReservationForm) : Promise<ReservationFormValidity>
 {
-    const query = `?timestamp=${reservation.timestamp}&name=${reservation.name}&surname=${reservation.surname}&emailAddress=${reservation.emailAddress}&sessions=${reservation.sessionsString}`;
+    const query = `?timestamp=${reservation.timestamp}&name=${reservation.name}&surname=${reservation.surname}&emailAddress=${reservation.emailAddress}&sessionsString=${reservation.sessionsString}`;
     const url = currentServer + query;
     
     const response = await fetch(
