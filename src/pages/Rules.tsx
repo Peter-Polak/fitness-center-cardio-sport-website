@@ -39,7 +39,9 @@ class Rules extends Component<IRulesProps, IRulesState>
                         <li>vykonávať športové aktivity vo vhodnej športovej obuvi a odeve ( pozostávajúcom zo športových nohavíc a trička )</li>
                         <li>udržiavať čistotu ( pri cvičení na posilňovacích lavičkách používať uterák na prikrytie plochy s ktorou cvičiaci prichádza do priameho kontaktu)</li>
                         <li>po cvičení uviesť stroje a náradie do pôvodného stavu ( odložiť posilňovacie kotúče na stojany k tomu určené, zložiť závažia z posilňovacích strojov)</li>
-                        <li>pri odchode odovzdať kľúče od šatne a skrinky - nechávať poháre s nápojmi na barovom pulte - rešpektovať pokyny zamestnancov fitnescentra</li>
+                        <li>pri odchode odovzdať kľúče od šatne a skrinky</li>
+                        <li>nechávať poháre s nápojmi na barovom pulte</li>
+                        <li>rešpektovať pokyny zamestnancov fitnescentra</li>
                         <li>nahlásiť zamestnancom každý úraz, ktorý sa stal počas cvičenia vo fitnescentre</li>
                         <li>všímať si stav športového naradia a náčinia a v prípade poškodenia to bezodkladne nahlásiť obsluhujúcemu personálu</li>
                     </ul>
