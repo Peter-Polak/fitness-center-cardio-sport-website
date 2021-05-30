@@ -2,7 +2,7 @@ import { Component } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import styled from 'styled-components';
 
-import { Reservation, Sessions, getSessions, postReservation } from "../restApi"
+import { getSessions, postReservation } from "../restApi"
 import { getTimestamp , getUserInfo, setUserInfo, deleteUserInfo } from '../helpers';
 
 import Heading from '../components/Heading';
@@ -12,7 +12,8 @@ import CheckboxGroup from "../components/CheckboxGroup";
 import LoadingSceen from "../components/LoadingSceen";
 import Checkbox from "../components/Checkbox";
 import Button, { ButtonType } from "../components/Button";
-import { getReservationResponseComponent, ReservationValidity } from "../Reservation";
+import { getReservationResponseComponent } from "../Reservation";
+import { IReservationForm, OrganizedSessions, ReservationFormValidity } from "../types";
 
 interface IReservationSystemProps
 {
@@ -21,7 +22,7 @@ interface IReservationSystemProps
 
 interface IReservationSystemState
 {
-    sessions : Sessions
+    sessions : OrganizedSessions
     name : string
     surname : string
     emailAddress : string
@@ -33,7 +34,7 @@ interface IReservationSystemState
 
 class ReservationSystem extends Component<IReservationSystemProps, IReservationSystemState>
 {
-    reservationResponse : ReservationValidity | undefined = undefined;
+    reservationResponse : ReservationFormValidity | undefined = undefined;
     
     constructor(props : IReservationSystemProps)
     {
@@ -79,13 +80,13 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         
         rememberUser ? setUserInfo(name, surname, emailAddress) : deleteUserInfo();
         
-        let reservation : Reservation = 
+        let reservationForm : IReservationForm = 
         {
             timestamp : getTimestamp(),
             name : name, 
             surname : surname,
             emailAddress : emailAddress,
-            sessions : ""
+            sessionsString : ""
         };
         
         for(const key in checkboxStates)
@@ -98,17 +99,17 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                     if(isChecked) 
                     {
                         let session = this.state.sessions[key].free[index];
-                        if(reservation.sessions !== "") reservation.sessions += ", ";
-                        reservation.sessions += `${key} ${session.start.string} - ${session.end.string}`;
+                        if(reservationForm.sessionsString !== "") reservationForm.sessionsString += ", ";
+                        reservationForm.sessionsString += `${key} ${session.time}`;
                     }
                 }
             );
         }
         
-        console.log(reservation);
+        console.log(reservationForm);
         
         this.setState({showLoadingScreen : true});
-        this.reservationResponse = await postReservation(reservation);
+        this.reservationResponse = await postReservation(reservationForm);
         this.setState({showLoadingScreen : false, showStatusScreen: true});
     }
     
@@ -117,7 +118,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         this.setState({showLoadingScreen : true});
         
         getSessions().then(
-            (sessions : Sessions) =>
+            (sessions : OrganizedSessions) =>
             {
                 let checkboxStates : {[date : string] : Array<boolean>} = {};
         
@@ -170,7 +171,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         {
             const options = sessions[key].free.map(
                 session => 
-                `${session.start.string} - ${session.end.string} (${session.capacity - session.reserved}/${session.capacity})`
+                `${session.time} (${session.capacity - session.reserved}/${session.capacity})`
             );
             const checkboxGroupName = `${this.state.sessions[key].day}, ${key}`;
             

@@ -2,53 +2,13 @@ import styled from "styled-components";
 import Button, { ButtonType } from "./components/Button";
 import MaterialIcon from "./components/MaterialIcon";
 import StatusScreen, { StatusType } from "./components/StatusScreen";
+import { ReservationError, ReservationFormValidity } from "./types";
 
-export enum SessionError
+export function getReservationResponseComponent(reservationFormValidity : ReservationFormValidity | undefined, close : () => void)
 {
-    DOES_NOT_EXIST = "DOESNT_EXIST",
-    IS_FULL = "FULL",
-    RESERVATION_EXISTS = "RESERVATION_EXISTS"
-}
-
-export interface Session
-{
-    startDate : Date
-    endDate : Date
-    capacity : number
-    reserved : number
-}
-
-export interface Reservation
-{
-    timestamp : string;
-     name : string;
-     surname: string;
-     sessions : Array<Session>;
-     emailAddress : string;
-     wasCancelled : boolean;
-     wasntPresent : boolean;
-     sessionStrings : Array<string>
-}
-
-export interface ReservationValidity
-{
-    reservation : Reservation
-    isValid : boolean
-    reasons? : 
-    {
-        [dateTime : string] : 
-        {
-            session : Session
-            error : SessionError
-        }
-    }
-}
-
-export function getReservationResponseComponent(reservationResponse : ReservationValidity | undefined, close : () => void)
-{
-    console.log(reservationResponse);
+    console.log(reservationFormValidity);
     
-    if(reservationResponse === undefined)
+    if(reservationFormValidity === undefined)
     {
         return (
             <StyledStatusSceen type={StatusType.ERROR} fullscreen={false}>
@@ -58,57 +18,59 @@ export function getReservationResponseComponent(reservationResponse : Reservatio
         );
     }
     
-    const statusType = reservationResponse.isValid ? StatusType.SUCCES : StatusType.ERROR;
+    const statusType = reservationFormValidity.isValid ? StatusType.SUCCES : StatusType.ERROR;
     let content : JSX.Element = <></>;
     
-    if(reservationResponse.isValid)
+    if(reservationFormValidity.isValid)
     {
-        const reservation = reservationResponse.reservation;
+        const { name, surname, emailAddress, sessionsString } = reservationFormValidity.object;
         
         content = (
             <div>
                 <p>Vašu rezerváciu sme úspešne prijali!</p>
                 <div>
-                    <p>Meno: {reservation.name}</p>
-                    <p>Priezvisko: {reservation.surname}</p>
-                    <p>E-mailova adresa: {reservation.emailAddress}</p>
-                    <p>Terminy: {reservation.sessionStrings.join(", ")}</p>
+                    <p>Meno: {name}</p>
+                    <p>Priezvisko: {surname}</p>
+                    <p>E-mailova adresa: {emailAddress}</p>
+                    <p>Terminy: {sessionsString}</p>
                 </div>
             </div>
         );
     }
     else
     {
-        const reservation = reservationResponse.reservation;
-        const reasons = reservationResponse.reasons;
+        const reservationForm = reservationFormValidity.object;
+        const reasons = reservationFormValidity.reasons;
         
-        if(reasons)
+        if(reasons.length > 0)
         {
             let reasonItems : Array<JSX.Element> = [];
             
-            for(const session in reasons)
+            for(const validity of reasons)
             {
-                const reason = reasons[session];
                 let reasonText = "";
                 
-                switch(reason.error)
+                for (const reason of validity.reasons)
                 {
-                    case SessionError.DOES_NOT_EXIST:
-                        reasonText = `Termín ${session} už skončil/neexistuje.`;
-                        break;
-                    case SessionError.IS_FULL:
-                        reasonText = `Termín ${session} je už plný.`;
-                        break;
-                    case SessionError.RESERVATION_EXISTS:
-                        reasonText = `Rezervácia na termín ${session} na meno '${reservation.name} ${reservation.surname}' už existuje.`;
-                        break;
-                    default:
-                        reasonText = `Nastala neočakávaná chyba pri spracovavaní terminú ${session}.`;
-                        break;
+                    switch(reason.error)
+                    {
+                        case ReservationError.DOES_NOT_EXIST:
+                            reasonText = `Termín ${reason.value.date} ${reason.value.time} už skončil/neexistuje.`;
+                            break;
+                        case ReservationError.IS_FULL:
+                            reasonText = `Termín ${reason.value.date} ${reason.value.time} je už plný.`;
+                            break;
+                        case ReservationError.RESERVATION_EXISTS:
+                            reasonText = `Rezervácia na termín ${reason.value.date} ${reason.value.time} na meno '${reservationForm.name} ${reservationForm.surname}' už existuje.`;
+                            break;
+                        default:
+                            reasonText = `Nastala neočakávaná chyba pri spracovavaní formulára.`;
+                            break;
+                    }
+                    
+                    const reasonItem = <li key={JSON.stringify(reason.value)}>{reasonText}</li>;
+                    reasonItems.push(reasonItem);
                 }
-                
-                const reasonItem = <li key={session}>{reasonText}</li>;
-                reasonItems.push(reasonItem);
             }
             
             content = (

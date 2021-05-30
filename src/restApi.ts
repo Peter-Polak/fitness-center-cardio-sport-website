@@ -1,3 +1,4 @@
+import { ReservationFormValidity, OrganizedSessions, IReservationForm } from "./types";
 
 export const backendServerUrls = 
 {
@@ -5,14 +6,14 @@ export const backendServerUrls =
     dev : "https://script.google.com/macros/s/AKfycbxpAWLK9K4q22SEUAa3Ei45AsEE3zAtnH_b8B2W-dDDbP5kbPOwO_oTeoyHqt9YaWVzpw/exec"
 }
 
-export const currentServer = backendServerUrls.release;
+export const currentServer = backendServerUrls.dev;
 
-export async function getSessions() : Promise<Sessions>
+export async function getSessions() : Promise<OrganizedSessions>
 {
     const response = await fetch(
         currentServer,
         {
-            method: 'GET',
+            method: 'GET'
         }
     );
     
@@ -23,15 +24,15 @@ export async function getSessions() : Promise<Sessions>
     return sessions;
 }
 
-export async function postReservation(reservation : Reservation)
+export async function postReservation(reservation : IReservationForm) : Promise<ReservationFormValidity>
 {
-    const query = `?timestamp=${reservation.timestamp}&name=${reservation.name}&surname=${reservation.surname}&emailAddress=${reservation.emailAddress}&sessions=${reservation.sessions}`;
+    const query = `?timestamp=${reservation.timestamp}&name=${reservation.name}&surname=${reservation.surname}&emailAddress=${reservation.emailAddress}&sessions=${reservation.sessionsString}`;
     const url = currentServer + query;
     
     const response = await fetch(
         url,
         {
-            method: 'POST',
+            method: 'POST'
         }
     );
     
@@ -41,38 +42,3 @@ export async function postReservation(reservation : Reservation)
     
     return result;
 }
-
-export interface Session
-{ 
-    start : 
-    {
-        date : Date,
-        string : string
-    }
-    end : 
-    {
-        date : Date,
-        string : string
-    }
-    capacity : number
-    reserved : number
-}
-
-export interface Sessions
-{
-    [date: string]: 
-    { 
-        day: string, 
-        free : Array<Session>, 
-        full : Array<Session> 
-    } 
-}
-
-export interface Reservation
-{
-    timestamp : string,
-    name : string, 
-    surname : string,
-    emailAddress : string,
-    sessions : string
-};
