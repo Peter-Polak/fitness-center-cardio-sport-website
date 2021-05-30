@@ -1,4 +1,4 @@
-import { ReservationFormValidity, OrganizedSessions, IReservationForm, SessionsError } from "./types";
+import { ReservationFormValidity, OrganizedSessions, IReservationForm, SessionsError, Reason } from "./types";
 
 export const backendServerUrls = 
 {
@@ -8,7 +8,7 @@ export const backendServerUrls =
 
 export const currentServer = backendServerUrls.dev;
 
-export async function getSessions() : Promise<OrganizedSessions | SessionsError>
+export async function getSessions() : Promise<OrganizedSessions | Reason<OrganizedSessions, SessionsError>>
 {
     const response = await fetch(
         currentServer,

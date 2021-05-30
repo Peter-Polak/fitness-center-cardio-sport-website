@@ -2,9 +2,9 @@ import styled from "styled-components";
 import Button, { ButtonType } from "./components/Button";
 import MaterialIcon from "./components/MaterialIcon";
 import StatusScreen, { StatusType } from "./components/StatusScreen";
-import { ReservationError, ReservationFormValidity, SessionError } from "./types";
+import { OrganizedSessions, Reason, ReservationError, ReservationFormValidity, SessionError, SessionsError } from "./types";
 
-export function getReservationResponseComponent(reservationFormValidity : ReservationFormValidity | undefined, close : () => void)
+export function getReservationResponseComponent(reservationFormValidity : ReservationFormValidity | Reason<OrganizedSessions, SessionsError> | undefined, close : () => void)
 {
     console.log(reservationFormValidity);
     
@@ -13,6 +13,16 @@ export function getReservationResponseComponent(reservationFormValidity : Reserv
         return (
             <StyledStatusSceen type={StatusType.ERROR} fullscreen={false}>
                 <p>Nepodarilo sa pripojiť na servér! Skontrolujte vaše pripojenie na internet.</p>
+                <Button onClick={() =>window.location.reload()}><MaterialIcon icon="refresh" size="50px"/></Button>
+            </StyledStatusSceen>
+        );
+    }
+    
+    if("error" in reservationFormValidity)
+    {
+        return (
+            <StyledStatusSceen type={StatusType.ERROR} fullscreen={false}>
+                <p>Nie su vypísané žiadné termíny.</p>
                 <Button onClick={() =>window.location.reload()}><MaterialIcon icon="refresh" size="50px"/></Button>
             </StyledStatusSceen>
         );

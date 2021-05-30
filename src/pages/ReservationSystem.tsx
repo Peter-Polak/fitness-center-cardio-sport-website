@@ -13,7 +13,7 @@ import LoadingSceen from "../components/LoadingSceen";
 import Checkbox from "../components/Checkbox";
 import Button, { ButtonType } from "../components/Button";
 import { getReservationResponseComponent } from "../Reservation";
-import { IReservationForm, OrganizedSessions, ReservationFormValidity } from "../types";
+import { IReservationForm, OrganizedSessions, Reason, ReservationFormValidity, SessionsError } from "../types";
 
 interface IReservationSystemProps
 {
@@ -34,7 +34,7 @@ interface IReservationSystemState
 
 class ReservationSystem extends Component<IReservationSystemProps, IReservationSystemState>
 {
-    reservationResponse : ReservationFormValidity | undefined = undefined;
+    reservationResponse : ReservationFormValidity | Reason<OrganizedSessions, SessionsError> | undefined = undefined;
     
     constructor(props : IReservationSystemProps)
     {
@@ -120,7 +120,13 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         getSessions().then(
             (response) =>
             {
-                if(typeof response === "string") return;
+                if("error" in response)
+                {
+                    let error = response as Reason<OrganizedSessions, SessionsError>;
+                    this.reservationResponse = error;
+                    this.setState({ showLoadingScreen : false, showStatusScreen : true});
+                    return;
+                }
                 
                 let checkboxStates : {[date : string] : Array<boolean>} = {};
         
