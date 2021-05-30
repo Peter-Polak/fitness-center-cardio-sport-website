@@ -118,18 +118,20 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         this.setState({showLoadingScreen : true});
         
         getSessions().then(
-            (sessions : OrganizedSessions) =>
+            (response) =>
             {
+                if(typeof response === "string") return;
+                
                 let checkboxStates : {[date : string] : Array<boolean>} = {};
         
-                for(const date in sessions)
+                for(const date in response)
                 {
-                    checkboxStates[date] = sessions[date].free.map(session => false);
+                    checkboxStates[date] = response[date].free.map(session => false);
                 }
                 
                 this.setState(
                     {
-                        sessions : sessions, 
+                        sessions : response, 
                         checkboxStates : checkboxStates, 
                         showLoadingScreen : false
                     }

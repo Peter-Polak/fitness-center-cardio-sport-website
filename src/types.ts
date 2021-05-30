@@ -8,9 +8,20 @@ export enum TextFieldError
 
 export enum ReservationError
 {
-    DOES_NOT_EXIST = "DOESNT_EXIST",
-    IS_FULL = "FULL",
+    
     RESERVATION_EXISTS = "RESERVATION_EXISTS"
+}
+
+export enum SessionError
+{
+    DOES_NOT_EXIST = "DOESNT_EXIST",
+    IS_FULL = "FULL"
+}
+
+export enum SessionsError
+{
+    NO_SESSIONS = "NO_SESSIONS",
+    NEW_RESERVATIONS_NOT_ALOWED = "NEW_RESERVATIONS_NOT_ALOWED"
 }
 
 //#endregion
@@ -37,7 +48,7 @@ export interface Reason<Value, Error>
     error : Error
 }
 export interface TextFieldReason extends Reason<string, TextFieldError>{}
-export interface ReservationReason extends Reason<SessionJson, ReservationError>{}
+export interface ReservationReason extends Reason<SessionJson, ReservationError | SessionError>{}
 
 //#endregion
 

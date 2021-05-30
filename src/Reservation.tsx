@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button, { ButtonType } from "./components/Button";
 import MaterialIcon from "./components/MaterialIcon";
 import StatusScreen, { StatusType } from "./components/StatusScreen";
-import { ReservationError, ReservationFormValidity } from "./types";
+import { ReservationError, ReservationFormValidity, SessionError } from "./types";
 
 export function getReservationResponseComponent(reservationFormValidity : ReservationFormValidity | undefined, close : () => void)
 {
@@ -54,10 +54,10 @@ export function getReservationResponseComponent(reservationFormValidity : Reserv
                 {
                     switch(reason.error)
                     {
-                        case ReservationError.DOES_NOT_EXIST:
+                        case SessionError.DOES_NOT_EXIST:
                             reasonText = `Termín ${reason.value.date} ${reason.value.time} už skončil/neexistuje.`;
                             break;
-                        case ReservationError.IS_FULL:
+                        case SessionError.IS_FULL:
                             reasonText = `Termín ${reason.value.date} ${reason.value.time} je už plný.`;
                             break;
                         case ReservationError.RESERVATION_EXISTS:
