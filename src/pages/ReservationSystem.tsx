@@ -108,9 +108,9 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         
         console.log(reservationForm);
         
-        this.setState({showLoadingScreen : true});
-        this.reservationResponse = await postReservation(reservationForm);
-        this.setState({showLoadingScreen : false, showStatusScreen: true});
+        this.setState({ showLoadingScreen : true });
+        this.showStatusScreen(await postReservation(reservationForm));
+        this.setState({ showLoadingScreen : false });
     }
     
     updateSessions()
@@ -123,8 +123,8 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                 if("error" in response)
                 {
                     let error = response as Reason<OrganizedSessions, SessionsError>;
-                    this.reservationResponse = error;
-                    this.setState({ showLoadingScreen : false, showStatusScreen : true});
+                    this.showStatusScreen(error);
+                    this.setState({ showLoadingScreen : false });
                     return;
                 }
                 
@@ -146,8 +146,8 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         ).catch(
             () =>
             {
-                this.reservationResponse = undefined;
-                this.setState({ showLoadingScreen : false, showStatusScreen : true });
+                this.showStatusScreen(undefined);
+                this.setState({ showLoadingScreen : false });
             }
         );
     }
@@ -194,6 +194,12 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         }
         
         return checkboxGroups;
+    }
+    
+    showStatusScreen(content : ReservationFormValidity | Reason<OrganizedSessions, SessionsError> | undefined)
+    {
+        this.reservationResponse = content;
+        this.setState({ showStatusScreen : true });
     }
     
     render() : JSX.Element
