@@ -36,7 +36,7 @@ export const Pages : {[page : string] : Page} =
     },
     openingHours : 
     {
-        name: "Otvaracie hodiny",
+        name: "Otváracie hodiny",
         path: "/otvaracie-hodiny",
         page : OpeningHours
     },
