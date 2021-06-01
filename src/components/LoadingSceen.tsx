@@ -1,7 +1,8 @@
 import { Component } from "react";
-import styled, { keyframes } from 'styled-components';
-import MaterialIcon from "./MaterialIcon";
+import styled from 'styled-components';
 
+import { Spin } from "../styles/animations";
+import MaterialIcon from "./MaterialIcon";
 
 interface ILoadingSceenProps
 {
@@ -54,13 +55,8 @@ const Container = styled.div<{ fullscreen : boolean }>`
     background-color: ${props => props.theme.color.background};
 `;
 
-const rotateAnimation = keyframes`
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-`;
-
 const Icon = styled(MaterialIcon)`
-    animation: ${rotateAnimation} 1.5s infinite ease;
+    animation: ${Spin} 1.5s infinite ease;
 `;
 
 export default LoadingSceen;
