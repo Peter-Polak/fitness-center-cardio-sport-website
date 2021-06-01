@@ -73,3 +73,17 @@ export function setUserInfo(name : string, surname : string, emailAddress : stri
     window.localStorage.setItem("emailAddres", emailAddress);
     window.localStorage.setItem("remeberUser", "true");
 }
+
+export function getUniqueIdentifier(length : number = 6, validCharacters : string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+{
+    let uniqueIdentifier = "";
+    
+    for (let index = 0; index < length; index++)
+    {
+        let randomNumber = Math.random();
+        let charPos = Math.floor(randomNumber * validCharacters.length);
+        uniqueIdentifier += validCharacters.charAt(charPos);
+    }
+    
+    return uniqueIdentifier;
+}
