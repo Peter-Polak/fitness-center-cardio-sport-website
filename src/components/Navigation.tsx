@@ -47,8 +47,8 @@ class Navigation extends Component<INavigationProps, INavigationState>
         }
             
         return (
-            <div className={className}>
-                <Nav isVisible={isVisible}>
+            <div>
+                <Nav isVisible={isVisible} className={className}>
                     <Header>
                         <span>Menu</span>
                         <CloseButton onClick={closeNav}><MaterialIcon icon="close" color="ligth"/></CloseButton>
