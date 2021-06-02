@@ -37,7 +37,6 @@ class Notifications extends Component<INotificationsProps, INotificationsState>
     updateNotifications(action : NotificationAction, notification : INotificationProps, notifications : Array<INotificationProps>)
     {
         this.setState({ notifications : notifications });
-        console.log(action, notification, notifications);
     }
 
     render() : JSX.Element
