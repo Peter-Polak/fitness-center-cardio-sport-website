@@ -6,6 +6,6 @@ export const Spin = keyframes`
 `;
 
 export const Appear = keyframes`
-    from { opacity: 0%; }
-    to { opacity: 100%; }
+    from { opacity: 0%; top: -20px; }
+    to { opacity: 100%; top: 0px; }
 `;
