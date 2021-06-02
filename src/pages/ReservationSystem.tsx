@@ -14,6 +14,9 @@ import Checkbox from "../components/Checkbox";
 import Button, { ButtonType } from "../components/Button";
 import { getReservationResponseComponent } from "../Reservation";
 import { IReservationForm, OrganizedSessions, Reason, ReservationFormValidity, SessionsError } from "../types";
+import { NotificationType } from "../components/Notification";
+import NotificationManager from "../NotificationManager";
+import React from "react";
 
 interface IReservationSystemProps
 {
@@ -35,6 +38,7 @@ interface IReservationSystemState
 class ReservationSystem extends Component<IReservationSystemProps, IReservationSystemState>
 {
     reservationResponse : ReservationFormValidity | Reason<OrganizedSessions, SessionsError> | undefined = undefined;
+    test : React.RefObject<HTMLDivElement>;
     
     constructor(props : IReservationSystemProps)
     {
@@ -48,6 +52,8 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
             showLoadingScreen : true,
             showStatusScreen : false
         }
+        
+        this.test = React.createRef();
         
         this.submit = this.submit.bind(this);
         this.rememberUserhandler = this.rememberUserhandler.bind(this);
@@ -78,20 +84,23 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     {
         const { name, surname, emailAddress, checkboxStates, rememberUser } = this.state;
         
-        rememberUser ? setUserInfo(name, surname, emailAddress) : deleteUserInfo();
-        
-        let reservationForm : IReservationForm = 
+        if(name === "")
         {
-            timestamp : getTimestamp(),
-            name : name, 
-            surname : surname,
-            emailAddress : emailAddress,
-            sessionsString : ""
-        };
+            NotificationManager.createNotification("error", "Prosím, vyplnťe položku 'Meno'.", 3000, NotificationType.ERROR);
+            return;
+        }
+        
+        if(surname === "")
+        {
+            NotificationManager.createNotification("error", "Prosím, vyplnťe položku 'Priezvisko'.", 3000, NotificationType.ERROR);
+            return;
+        }
+        
+        let sesionReservations : Array<string> = [];
         
         for(const key in checkboxStates)
         {
-            let sessions = checkboxStates[key];
+            const sessions = checkboxStates[key];
             
             sessions.forEach(
                 (isChecked, index) =>
@@ -99,12 +108,28 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                     if(isChecked) 
                     {
                         let session = this.state.sessions[key].free[index];
-                        if(reservationForm.sessionsString !== "") reservationForm.sessionsString += ", ";
-                        reservationForm.sessionsString += `${key} ${session.time}`;
+                        sesionReservations.push(`${key} ${session.time}`);
                     }
                 }
             );
         }
+        
+        if(sesionReservations.length === 0)
+        {
+            NotificationManager.createNotification("error", "Prosím, vyberte si aspoň jeden voľný termín.", 3000, NotificationType.ERROR);
+            return;
+        }
+        
+        rememberUser ? setUserInfo(name, surname, emailAddress) : deleteUserInfo();
+                
+        let reservationForm : IReservationForm = 
+        {
+            timestamp : getTimestamp(),
+            name : name, 
+            surname : surname,
+            emailAddress : emailAddress,
+            sessionsString : sesionReservations.join(", ")
+        };
         
         console.log(reservationForm);
         
@@ -225,7 +250,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
                     <Field name="E-mailová adresa" type="email" value={emailAddress} handleChange={(event) => this.handleFieldChange("emailAddress", event.target.value)}/>
                     
                     <RemmeberUserCheckbox name="Zapamätať si údaje" checked={rememberUser} handleChange={this.rememberUserhandler}/>
-                    
+                    <div ref={ this.test }></div>
                     <Heading heading="H2"><MaterialIcon icon="date_range"/> Voľné termíny</Heading>
                     <Details><MaterialIcon icon="info"/>Tip: Viete si spraviť rezerváciu na viacero termínov naraz vyplnením jedného formulára. Stačí zaškrtnúť všetky políčka/termíny, o ktoré máte záujem.</Details>
                     <SessionsContainer>

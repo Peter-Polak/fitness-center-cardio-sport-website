@@ -13,6 +13,7 @@ import AppHeader from './components/AppHeader';
 import MaterialIcon from './components/MaterialIcon';
 import Navigation from './components/Navigation';
 import Routes, { Pages } from './components/Routes';
+import Notifications from './components/Notifications';
 
 function App()
 {
@@ -31,11 +32,14 @@ function App()
     return (
         <ThemeProvider theme={darkTheme}>
             <GlobalStyle/>
+                  
             <OpenNavButton onClick={openNav}>
                 <MaterialIcon icon="menu" size="34px"/>
                 <MediaQuery minDeviceWidth={500}>Menu</MediaQuery>
             </OpenNavButton>
+            
             <Navigation isVisible={isVisible} closeNav={closeNav} pages={Pages}/>
+            
             <AppContainer>
                 <AppHeader src={headerImage} alt="Fitness centrum Cardio Sport" openNav={openNav}/>
                 
@@ -43,6 +47,8 @@ function App()
                     <Routes/>
                 </Switch>
             </AppContainer>
+            
+            <Notifications/>
         </ThemeProvider>
   );
 }
