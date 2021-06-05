@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button, { ButtonType } from "./components/Button";
 import MaterialIcon from "./components/MaterialIcon";
 import StatusScreen, { StatusType } from "./components/StatusScreen";
-import { OrganizedSessions, Reason, ReservationError, ReservationFormValidity, SessionError, SessionsError } from "./types";
+import { OrganizedSessions, Reason, ReservationError, ReservationFormValidity, SessionError, SessionsError } from "./utilities/types";
 
 export function getReservationResponseComponent(reservationFormValidity : ReservationFormValidity | Reason<OrganizedSessions, SessionsError> | undefined, close : () => void)
 {
