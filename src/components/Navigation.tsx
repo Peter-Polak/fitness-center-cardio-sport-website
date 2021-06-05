@@ -1,11 +1,11 @@
 import { Component } from "react";
 import styled, { keyframes  } from 'styled-components';
-import { Link } from 'react-router-dom';
 
 import { ReactComponent as Instagram } from '../img/instagram-logo.svg';
 
 import { Page } from '../components/Routes';
 import MaterialIcon from "./MaterialIcon";
+import NavButton from "./NavButton";
 
 interface INavigationProps
 {
@@ -40,9 +40,7 @@ class Navigation extends Component<INavigationProps, INavigationState>
         for(const key in pages)
         {
             let page = pages[key];
-            let className = window.location.pathname === page.path ? "selected" : "";
-            
-            const button = <NavButton to={page.path} key={page.name} onClick={closeNav} className={className}>{page.name}</NavButton>;
+            const button = <NavButton page={page} key={key} closeNav={closeNav}/>;
             buttons.push(button);
         }
             
@@ -124,33 +122,6 @@ const Buttons = styled.div`
     flex-direction: column;
     
     overflow-y: auto;
-`;
-
-const NavButton = styled(Link)`
-    padding: 20px 0 20px 25px;
-    
-    text-align: unset;
-    color: ${props => props.theme.color.text};
-    font-size: 1.2em;
-    font-weight: 700;
-    text-decoration: none;
-    
-    border-bottom: 1px solid rgba(128, 128, 128, 0.425);
-    
-    transition: all 0.5s;
-    
-    &:hover
-    {
-        color: ${props => props.theme.color.primary.normal};
-        background-color: rgb(53, 53, 53);
-        padding-left: 50px;
-    }
-    
-    &.selected
-    {
-        color: #202020;
-        background-color: ${props => props.theme.color.primary.normal};
-    }
 `;
 
 const Footer = styled.footer`
