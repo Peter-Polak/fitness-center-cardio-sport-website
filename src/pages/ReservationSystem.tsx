@@ -2,8 +2,8 @@ import { Component } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import styled from 'styled-components';
 
-import { getSessions, postReservation } from "../restApi"
-import { getTimestamp , getUserInfo, setUserInfo, deleteUserInfo } from '../helpers';
+import { getSessions, postReservation } from "../utilities/restApi"
+import { getTimestamp , getUserInfo, setUserInfo, deleteUserInfo } from '../utilities/helpers';
 
 import Heading from '../components/Heading';
 import MaterialIcon from '../components/MaterialIcon';
@@ -13,7 +13,7 @@ import LoadingSceen from "../components/LoadingSceen";
 import Checkbox from "../components/Checkbox";
 import Button, { ButtonType } from "../components/Button";
 import { getReservationResponseComponent } from "../Reservation";
-import { IReservationForm, OrganizedSessions, Reason, ReservationFormValidity, SessionsError } from "../types";
+import { IReservationForm, OrganizedSessions, Reason, ReservationFormValidity, SessionsError } from "../utilities/types";
 import { NotificationType } from "../components/Notification";
 import NotificationManager from "../NotificationManager";
 import React from "react";

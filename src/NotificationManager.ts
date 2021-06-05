@@ -1,5 +1,5 @@
 import { INotificationProps, NotificationType } from "./components/Notification";
-import { getUniqueIdentifier } from "./helpers";
+import { getUniqueIdentifier } from "./utilities/helpers";
 
 export enum NotificationAction
 {
