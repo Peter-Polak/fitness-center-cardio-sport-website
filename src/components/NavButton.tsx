@@ -1,18 +1,18 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { Page } from "./Routes";
+import { IRoute } from "./Routes";
 
 interface INavButtonProps
 {
-    page : Page
-    closeNav : (event : any) => void
+    route : IRoute
+    closeNav : () => void
     className? : string
 }
 
 interface INavButtonState
 {
-    
+    isSubMenuVisible : boolean
 }
 
 class NavButton extends Component<INavButtonProps, INavButtonState>
@@ -22,24 +22,66 @@ class NavButton extends Component<INavButtonProps, INavButtonState>
         super(props);
         this.state = 
         {
-            
+            isSubMenuVisible : false
+        }
+        
+        this.toggleSubMenu = this.toggleSubMenu.bind(this);
+    }
+    
+    toggleSubMenu()
+    {
+        const { isSubMenuVisible } = this.state;
+        this.setState({ isSubMenuVisible : !isSubMenuVisible });
+    }
+    
+    getContent()
+    {
+        const { route, closeNav, className } = this.props;
+        const { isSubMenuVisible } = this.state;
+        
+        if(route.routes.length === 0)
+        {
+            return (
+                <Link className={className} onClick={closeNav} to={route.path} activeClassName="selected" exact>
+                    {route.name}
+                </Link>
+            );
+        }
+        else
+        {
+            const links = route.routes.map(
+                (route) =>
+                {
+                    return(
+                        <SubLink className={className} onClick={closeNav} to={route.path} activeClassName="selected" exact key={route.path}>
+                            {route.name}
+                        </SubLink>
+                    );
+                }
+            );
+            return <>
+                <Link as="button" className={className} onClick={this.toggleSubMenu}>
+                    {route.name}
+                </Link>
+                
+                <Subcategories isVisible={isSubMenuVisible}>
+                    {links}
+                </Subcategories>
+            </>
         }
     }
 
     render() : JSX.Element
     {
-        const { page, closeNav, className } = this.props;
-        let isSelected = window.location.pathname === page.path ? "selected" : "";
-        
         return (
-            <Container to={page.path} key={page.name} onClick={closeNav} className={`${className} ${isSelected}`}>
-                {page.name}
-            </Container>
+            <>
+                {this.getContent()}
+            </>
         );
     }
 }
 
-const Container = styled(Link)`
+const Link = styled(NavLink)`
     padding: 20px 0 20px 25px;
     
     text-align: unset;
@@ -64,6 +106,17 @@ const Container = styled(Link)`
         color: #202020;
         background-color: ${props => props.theme.color.primary.normal};
     }
+`;
+
+const SubLink = styled(Link)`
+    padding: 10px 0 10px 25px;
+    font-size: 1.1em;
+    background-color: rgb(29, 29, 29);
+`;
+
+const Subcategories = styled.div<{ isVisible : boolean }>`
+    display : ${props => props.isVisible ? "flex" : "none"};
+    flex-direction: column;
 `;
 
 export default NavButton;

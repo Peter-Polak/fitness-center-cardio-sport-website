@@ -12,7 +12,7 @@ import headerImage from "./img/header.png";
 import AppHeader from './components/AppHeader';
 import MaterialIcon from './components/MaterialIcon';
 import Navigation from './components/Navigation';
-import Routes, { Pages } from './components/Routes';
+import Routes, { Sitemap } from './components/Routes';
 import Notifications from './components/Notifications';
 
 function App()
@@ -38,7 +38,7 @@ function App()
                 <MediaQuery minDeviceWidth={500}>Menu</MediaQuery>
             </OpenNavButton>
             
-            <Navigation isVisible={isVisible} closeNav={closeNav} pages={Pages}/>
+            <Navigation isVisible={isVisible} closeNav={closeNav} sitemap={Sitemap}/>
             
             <AppContainer>
                 <AppHeader src={headerImage} alt="Fitness centrum Cardio Sport" openNav={openNav}/>

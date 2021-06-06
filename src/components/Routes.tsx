@@ -19,57 +19,78 @@ interface IRoutesState
     
 }
 
-export interface Page
+export interface ISitemap
+{
+    [route : string] : IRoute
+}
+
+export interface IRoute
 {
     name: string,
     path: string,
-    page : any
+    component? : any
+    routes : Array<IRoute> 
 }
 
-export const Pages : {[page : string] : Page} = 
+export const Sitemap : ISitemap = 
 {
     home : 
     {
         name: "Domov",
         path: "/",
-        page : Home
+        component : Home,
+        routes : []
     },
     openingHours : 
     {
         name: "Otváracie hodiny",
         path: "/otvaracie-hodiny",
-        page : OpeningHours
+        component : OpeningHours,
+        routes : []
     },
     priceList : 
     {
         name: "Cenník",
         path: "/cennik",
-        page : PriceList
+        component : PriceList,
+        routes : []
     },
     rules : 
     {
         name: "Vnútorný poriadok",
         path: "/vnutorny-poriadok",
-        page : Rules
+        component : Rules,
+        routes : []
     },
     reservationSystem : 
     {
         name: "Rezervačný systém",
         path: "/rezervacny-system",
-        page : ReservationSystem
+        component : ReservationSystem,
+        routes : 
+        [
+            // {
+            //     name: "Formulár",
+            //     path: "/rezervacny-system/formular",
+            //     component : ReservationSystem,
+            //     routes : []
+            // }
+        ]
     },
     gallery : 
     {
         name: "Galéria",
         path: "/galeria",
-        page : Gallery
+        component : Gallery,
+        routes : []
     },
     contact : 
     {
         name: "Kontakt",
         path: "/kontakt",
-        page : Contact
-    },
+        component : Contact,
+        routes : []
+    }
 }
 
 class Routes extends Component<IRoutesProps, IRoutesState>
@@ -85,18 +106,22 @@ class Routes extends Component<IRoutesProps, IRoutesState>
 
     render() : JSX.Element
     {
-        const routes : Array<JSX.Element> = [];
+        const routeComponents : Array<JSX.Element> = [];
     
-        for(const key in Pages)
+        for(const key in Sitemap)
         {
-            const page = Pages[key];
+            const route = Sitemap[key];
+            if(route.component) routeComponents.push(<Route path={route.path} render={ (props) => <route.component routeProps={props} />} exact key={route.path}/>);
             
-            routes.push(<Route path={page.path} render={ (props) => <page.page routeProps={props} />} exact key={page.path}/>)
+            for(const subroute of route.routes)
+            {
+                if(subroute.component) routeComponents.push(<Route path={subroute.path} render={ (props) => <subroute.component routeProps={props} />} exact key={subroute.path}/>);
+            }
         }
         
         return (
             <>
-                {routes}
+                {routeComponents}
             </>
         );
     }

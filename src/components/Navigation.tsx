@@ -3,21 +3,21 @@ import styled, { keyframes  } from 'styled-components';
 
 import { ReactComponent as Instagram } from '../img/instagram-logo.svg';
 
-import { Page } from '../components/Routes';
+import { ISitemap } from '../components/Routes';
 import MaterialIcon from "./MaterialIcon";
-import NavButton from "./NavButton";
+import NavButtons from "./NavButtons";
 
 interface INavigationProps
 {
     isVisible : boolean
-    closeNav : (event : any) => void
-    pages : {[page : string] : Page}
+    closeNav : () => void
+    sitemap : ISitemap
     className? : string
 }
 
 interface INavigationState
 {
-    selectedPage : string
+    
 }
 
 class Navigation extends Component<INavigationProps, INavigationState>
@@ -25,24 +25,15 @@ class Navigation extends Component<INavigationProps, INavigationState>
     constructor(props : INavigationProps)
     {
         super(props);
-        let pathname = window.location.pathname
         this.state = 
         {
-            selectedPage : pathname
+            
         }
     }
     
     render() : JSX.Element
     {
-        const { isVisible, closeNav, pages, className } = this.props;
-        const buttons : Array<JSX.Element> = [];
-        
-        for(const key in pages)
-        {
-            let page = pages[key];
-            const button = <NavButton page={page} key={key} closeNav={closeNav}/>;
-            buttons.push(button);
-        }
+        const { isVisible, closeNav, sitemap, className } = this.props;
             
         return (
             <div>
@@ -52,9 +43,7 @@ class Navigation extends Component<INavigationProps, INavigationState>
                         <CloseButton onClick={closeNav}><MaterialIcon icon="close" color="ligth"/></CloseButton>
                     </Header>
                     
-                    <Buttons>
-                        {buttons}
-                    </Buttons>
+                    <NavButtons sitemap={sitemap} closeNav={closeNav}/>
                     
                     <Footer>
                         <IconLink href="https://www.facebook.com/groups/207982942629720" target="_blank" rel="noreferrer"><MaterialIcon icon="facebook"/></IconLink>
@@ -67,12 +56,11 @@ class Navigation extends Component<INavigationProps, INavigationState>
         );
     }
 }
-const navMaxWidth = "360px";
 
 const Nav = styled.nav<{isVisible : boolean}>`
     position: fixed;
     top: 0;
-    left: ${props => (props.isVisible ? 0 : `-${navMaxWidth}`)};
+    left: 0;
     z-index: 999;
     
     display: flex;
@@ -80,11 +68,12 @@ const Nav = styled.nav<{isVisible : boolean}>`
     
     height: 100vh;
     width: 100vw;
-    max-width: ${navMaxWidth};
+    max-width: 360px;
     
     background-color: #292929;
     
-    transition: left 0.5s;
+    transform: translateX(${props => props.isVisible ? "0" : "-100%"});
+    transition: transform 0.5s;
 `;
 
 const Header = styled.div`
@@ -117,17 +106,7 @@ const CloseButton = styled.button`
     }
 `;
 
-const Buttons = styled.div`
-    display: flex;
-    flex-direction: column;
-    
-    overflow-y: auto;
-`;
-
 const Footer = styled.footer`
-    /* position: absolute; */
-    /* bottom: 0; */
-    
     margin:  20px 20px 50px 20px;
 `;
 
@@ -140,7 +119,6 @@ const IconLink = styled.a`
 
 const InstagramIcon = styled(Instagram)`
     color: ${props => props.theme.color.primary.normal};
-    /* margin: 5px; */
 `;
 
 const opacityAnimation = keyframes`

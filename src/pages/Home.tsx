@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Heading from '../components/Heading';
 import MaterialIcon from '../components/MaterialIcon';
 import Announcement from '../components/Announcement';
-import { Pages } from '../components/Routes';
+import { Sitemap } from '../components/Routes';
 
 interface IHomeProps
 {
@@ -37,7 +37,7 @@ class Home extends Component<IHomeProps, IHomeState>
                 <Announcement 
                 title="Zmena otváracích hodín od 01.07.2021 do 31.08.2021" 
                 date="18.05.2021">
-                    Sobota - zatvorené <Link to={Pages.openingHours.path}> → Aktuálne otváracie hodiny ←</Link>
+                    Sobota - zatvorené <Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link>
                 </Announcement>
                 
                 <HorizontalRule/>
