@@ -22,10 +22,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && mv build/index.html build/200.html && copy .\\CNAME .\\build && copy .\\.surgeignore .\\build",
+    "build": "react-scripts build ",
+    "postbuild": "mv build/index.html build/200.html && copy .\\CNAME .\\build && copy .\\.surgeignore .\\build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && cd build && surge"
+    "predeploy": "npm run build",
+    "deploy": "cd build && surge"
   },
   "eslintConfig": {
     "extends": [
