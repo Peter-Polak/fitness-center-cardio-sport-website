@@ -45,7 +45,7 @@ class Home extends Component<IHomeProps, IHomeState>
                 <Announcement 
                 title="Zmena otváracích hodín od 01.07.2021 do 31.08.2021" 
                 date="18.05.2021">
-                    Sobota - zatvorené <Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link>
+                    Sobota: <del>16:00 - 18:00</del> → zatvorené <Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link>
                 </Announcement>
                 
                 <HorizontalRule/>
