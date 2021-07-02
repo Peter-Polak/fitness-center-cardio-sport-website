@@ -35,17 +35,17 @@ class Home extends Component<IHomeProps, IHomeState>
                 <Heading heading="H1"><MaterialIcon icon="home" color="dark"/> Domov</Heading>
                 
                 <Announcement 
-                title="Otváracie hodiny počas štátneho sviatku" 
-                date="29.06.2021">
-                    V pondelok 05.07.2021 (štátny sviatok) máme otvorené od 15:00 do 22:00. Tešíme sa na vás.
+                title="Zmena otváracích hodín od 01.07.2021 do 31.08.2021 (Úprava)" 
+                date="02.07.2021">
+                    Sobota: <del>16:00 - 21:00</del> → 17:00 - 20:00 <Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link>
                 </Announcement>
                 
                 <HorizontalRule/>
                 
                 <Announcement 
-                title="Zmena otváracích hodín od 01.07.2021 do 31.08.2021" 
-                date="18.05.2021">
-                    Sobota: <del>16:00 - 18:00</del> → zatvorené <Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link>
+                title="Otváracie hodiny počas štátneho sviatku" 
+                date="29.06.2021">
+                    V pondelok 05.07.2021 (štátny sviatok) máme otvorené od 15:00 do 22:00. Tešíme sa na vás!
                 </Announcement>
                 
                 <HorizontalRule/>

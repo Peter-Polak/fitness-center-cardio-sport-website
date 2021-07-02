@@ -41,7 +41,7 @@ class OpeningHours extends Component<IOpeningHoursProps, IOpeningHoursState>
                         <p>Streda: 15:00 - 22:00</p>
                         <p>Štvrtok: 15:00 - 22:00</p>
                         <p>Piatok : 15:00 - 22:00</p>
-                        <p>Sobota: <Warning>ZATVORENÉ</Warning></p>
+                        <p>Sobota: 17:00 - 20:00</p>
                         <p>Nedeľa: 16:00 - 21:00</p>
                     </Hours>
                     
