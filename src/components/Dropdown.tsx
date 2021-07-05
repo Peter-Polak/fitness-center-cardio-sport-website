@@ -62,6 +62,7 @@ const Container = styled.div`
 
 const Title = styled.div<{ type : DropdownType }>`
     display: flex;
+    align-items: center;
     ${
         props =>
         {
@@ -70,12 +71,12 @@ const Title = styled.div<{ type : DropdownType }>`
                 return css`
                     
                     flex-direction: column;
-                    align-items: center;
                 `;
             } 
             else if(props.type === DropdownType.SECONDARY)
             {
                 return css`
+                
                 `;
             }
         }
@@ -95,7 +96,7 @@ const Title = styled.div<{ type : DropdownType }>`
 const Content = styled.div<{ isExpanded : boolean }>`
     display: ${(props) => props.isExpanded ? "block" : "none"};
     
-    padding: 20px;
+    padding: 5px 20px;
 `;
 
 export default Dropdown;
