@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import styled from 'styled-components';
+import Card from "../components/Card";
 
 import Heading from '../components/Heading';
 import MaterialIcon from '../components/MaterialIcon';
@@ -35,22 +36,50 @@ class PriceList extends Component<IPriceListProps, IPriceListState>
                 <Content>
                     <p>Platné od 01.01.2021</p>
                     
-                    <div>
+                    <Subsection>
                         <Heading heading="H2"><BebasIcon>1X</BebasIcon> Jednorazový vstup</Heading>
-                        <div>
-                            <p>Časovo neobmedzený: 2€</p>
-                        </div>
-                    </div>
+                        <Prices>
+                            <Card 
+                            title="1x"
+                            subtitle=""
+                            text="2,00 €"
+                            subtext="Časovo neobmedzený"
+                            />
+                        </Prices>
+                    </Subsection>
                     
-                    <div>
+                    <Subsection>
                         <Heading heading="H2"><MaterialIcon icon="calendar_today"/> Permanentky</Heading>
-                        <div>
-                            <p>1 mesiac: 20,00€</p>
-                            <p>3 mesiace: 55,00€</p>
-                            <p>6 mesiacov: 95,00€</p>
-                            <p>12 mesiacov: 175,00€</p>
-                        </div>
-                    </div>
+                        <Prices>
+                            <Card 
+                            title="1"
+                            subtitle="mesiac"
+                            text="20,00 €"
+                            subtext="20,00 €/mesiac"
+                            />
+                            
+                            <Card 
+                            title="3"
+                            subtitle="mesiace"
+                            text="55,00 €"
+                            subtext="18,33 €/mesiac"
+                            />
+                            
+                            <Card 
+                            title="6"
+                            subtitle="mesiacov"
+                            text="95,00 €"
+                            subtext="15,83 €/mesiac"
+                            />
+                            
+                            <Card 
+                            title="12"
+                            subtitle="mesiacov"
+                            text="175,00 €"
+                            subtext="14,58 €/mesiac"
+                            />
+                        </Prices>
+                    </Subsection>
                 </Content>
             </div>
         );
@@ -61,6 +90,18 @@ const Content = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+`;
+
+const Subsection = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const Prices = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 `;
 
 const BebasIcon = styled.span`
