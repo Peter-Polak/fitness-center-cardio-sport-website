@@ -32,7 +32,7 @@ class Contact extends Component<IContactProps, IContactState>
             <Container>
                 <Heading heading="H1"><MaterialIcon icon="contacts" color="dark"/> Kontakt</Heading>
                 
-                <Address>
+                <Subsection>
                     <Heading heading="H2"><MaterialIcon icon="location_on"/> Adresa</Heading>
                     
                     <Content>
@@ -47,7 +47,17 @@ class Contact extends Component<IContactProps, IContactState>
                         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1107.2138824996775!2d21.23425611908099!3d48.697581749903705!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf7614e658617eda5!2sCardio%20Sport!5e0!3m2!1sen!2ssk!4v1621204739105!5m2!1sen!2ssk" 
                         loading="lazy"></Map>
                     </Content>
-                </Address>
+                </Subsection>
+                
+                <Subsection>
+                    <Heading heading="H2"><MaterialIcon icon="phone"/> Telefonický kontakt</Heading>
+                    <div>+421 905 389 468</div>
+                </Subsection>
+                
+                <Subsection>
+                    <Heading heading="H2"><MaterialIcon icon="phone"/> Správca stránky</Heading>
+                    <div>peter.polak.mail@gmail.com</div>
+                </Subsection>
             </Container>
         );
     }
@@ -63,10 +73,12 @@ const Content = styled.div`
     justify-content: center;
 `;
 
-const Address = styled.div`
+const Subsection = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+    margin-bottom: 25px;
 `;
 
 const Map = styled.iframe`
