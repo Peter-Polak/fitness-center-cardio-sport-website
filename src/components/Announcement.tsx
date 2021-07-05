@@ -45,7 +45,22 @@ class Announcement extends Component<IAnnouncementProps, IAnnouncementState>
 }
 
 const Container = styled.div`
-    margin-bottom: 25px;
+    position: relative;
+    margin-bottom: 50px;
+    
+    &:not(:last-of-type):after
+    {
+        content: "";
+        
+        position: absolute;
+        left: 0;
+        bottom: -30px;
+        
+        height: 2px;
+        width: 100%;
+        
+        background: ${props => props.theme.color.primary.normal};
+    }
 `;
 
 const Date = styled.div`
