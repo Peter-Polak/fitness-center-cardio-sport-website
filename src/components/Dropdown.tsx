@@ -1,10 +1,16 @@
 import { Component } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import MaterialIcon from "./MaterialIcon";
+
+export enum DropdownType
+{
+    PRIMARY, SECONDARY
+}
 
 interface IDropdownProps
 {
     title : string
+    type : DropdownType
 }
 
 interface IDropdownState
@@ -32,12 +38,12 @@ class Dropdown extends Component<IDropdownProps, IDropdownState>
     
     render() : JSX.Element
     {
-        const { title, children } = this.props;
+        const { title, type, children } = this.props;
         const { isExpanded } = this.state;
         
         return (
             <Container>
-                <Title onClick={this.toggle}>
+                <Title onClick={this.toggle} type={type}>
                     <span>{title}</span>
                     <span>{isExpanded ? <MaterialIcon icon="expand_less"/> : <MaterialIcon icon="expand_more"/>}</span>
                 </Title>
@@ -54,10 +60,26 @@ const Container = styled.div`
     flex-direction: column;
 `;
 
-const Title = styled.div`
+const Title = styled.div<{ type : DropdownType }>`
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    ${
+        props =>
+        {
+            if(props.type === DropdownType.PRIMARY)
+            {
+                return css`
+                    
+                    flex-direction: column;
+                    align-items: center;
+                `;
+            } 
+            else if(props.type === DropdownType.SECONDARY)
+            {
+                return css`
+                `;
+            }
+        }
+    }
     
     padding: 10px;
     
@@ -72,6 +94,8 @@ const Title = styled.div`
 
 const Content = styled.div<{ isExpanded : boolean }>`
     display: ${(props) => props.isExpanded ? "block" : "none"};
+    
+    padding: 20px;
 `;
 
 export default Dropdown;

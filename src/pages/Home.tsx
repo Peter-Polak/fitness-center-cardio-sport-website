@@ -6,7 +6,7 @@ import Heading from '../components/Heading';
 import MaterialIcon from '../components/MaterialIcon';
 import Announcement from '../components/Announcement';
 import { Sitemap } from '../components/Routes';
-import Dropdown from '../components/Dropdown';
+import Dropdown, { DropdownType } from '../components/Dropdown';
 
 interface IHomeProps
 {
@@ -49,18 +49,20 @@ class Home extends Component<IHomeProps, IHomeState>
                     </Announcement>
                 </div>
                 
-                <Dropdown title="Staré oznamy">
-                    <Announcement 
-                        title="Zmena otváracích hodín od 01.07.2021 do 31.08.2021" 
-                        date="18.05.2021">
-                            Sobota: <del>16:00 - 21:00</del> → zatvorené <Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link>
-                    </Announcement>
-                    
-                    <Announcement 
-                    title="Zrušenie potreby sa vopred rezervovať" 
-                    date="13.05.2021">
-                        Vážení návštevníci, oznamujeme Vám, že od pondelka 17.05.2021 rušíme rezervačný systém a opätovne začne platiť režim otváracích hodín. Tešíme sa na vás!
-                    </Announcement>
+                <Dropdown title="Staré oznamy" type={DropdownType.PRIMARY}>
+                    <Dropdown title="Máj, 2021" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                            title="Zmena otváracích hodín od 01.07.2021 do 31.08.2021" 
+                            date="18.05.2021">
+                                Sobota: <del>16:00 - 21:00</del> → zatvorené <Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link>
+                        </Announcement>
+                        
+                        <Announcement 
+                        title="Zrušenie potreby sa vopred rezervovať" 
+                        date="13.05.2021">
+                            Vážení návštevníci, oznamujeme Vám, že od pondelka 17.05.2021 rušíme rezervačný systém a opätovne začne platiť režim otváracích hodín. Tešíme sa na vás!
+                        </Announcement>
+                    </Dropdown>
                 </Dropdown>
             </div>
         );
