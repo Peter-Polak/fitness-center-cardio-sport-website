@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import styled from 'styled-components';
 
 import Heading from '../components/Heading';
 import MaterialIcon from '../components/MaterialIcon';
