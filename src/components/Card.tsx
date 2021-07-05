@@ -1,6 +1,5 @@
 import { Component } from "react";
 import styled from "styled-components";
-import MaterialIcon from "./MaterialIcon";
 
 interface ICardProps
 {
