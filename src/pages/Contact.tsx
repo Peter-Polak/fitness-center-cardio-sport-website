@@ -55,7 +55,7 @@ class Contact extends Component<IContactProps, IContactState>
                 </Subsection>
                 
                 <Subsection>
-                    <Heading heading="H2"><MaterialIcon icon="phone"/> Správca stránky</Heading>
+                    <Heading heading="H2"><MaterialIcon icon="public"/> Správca stránky</Heading>
                     <div>peter.polak.mail@gmail.com</div>
                 </Subsection>
             </Container>
