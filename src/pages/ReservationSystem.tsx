@@ -13,7 +13,7 @@ import LoadingSceen from "../components/LoadingSceen";
 import Checkbox from "../components/Checkbox";
 import Button, { ButtonType } from "../components/Button";
 import { getReservationResponseComponent } from "../Reservation";
-import { IReservationForm, OrganizedSessions, Reason, ReservationFormValidity, SessionsError } from "../utilities/types";
+import { IReservationForm, OrganizedSessions, ReservationFormValidity } from "../utilities/types";
 import { NotificationType } from "../components/Notification";
 import NotificationManager from "../NotificationManager";
 import React from "react";
@@ -37,7 +37,7 @@ interface IReservationSystemState
 
 class ReservationSystem extends Component<IReservationSystemProps, IReservationSystemState>
 {
-    reservationResponse : ReservationFormValidity | Reason<OrganizedSessions, SessionsError> | undefined = undefined;
+    reservationResponse : ReservationFormValidity | undefined = undefined;
     test : React.RefObject<HTMLDivElement>;
     
     constructor(props : IReservationSystemProps)
@@ -145,14 +145,6 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         getSessions().then(
             (response) =>
             {
-                if("error" in response)
-                {
-                    let error = response as Reason<OrganizedSessions, SessionsError>;
-                    this.showStatusScreen(error);
-                    this.setState({ showLoadingScreen : false });
-                    return;
-                }
-                
                 let checkboxStates : {[date : string] : Array<boolean>} = {};
         
                 for(const date in response)
@@ -221,7 +213,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
         return checkboxGroups;
     }
     
-    showStatusScreen(content : ReservationFormValidity | Reason<OrganizedSessions, SessionsError> | undefined)
+    showStatusScreen(content : ReservationFormValidity | undefined)
     {
         this.reservationResponse = content;
         this.setState({ showStatusScreen : true });

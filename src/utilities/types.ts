@@ -8,14 +8,14 @@ export enum TextFieldError
 
 export enum ReservationError
 {
-    
     RESERVATION_EXISTS = "RESERVATION_EXISTS"
 }
 
 export enum SessionError
 {
-    DOES_NOT_EXIST = "DOESNT_EXIST",
-    IS_FULL = "FULL"
+    NOT_FOUND = "NOT_FOUND",
+    FULL = "FULL",
+    ENDED = "ENDED"
 }
 
 export enum SessionsError
@@ -26,31 +26,35 @@ export enum SessionsError
 
 //#endregion
 
+
 //#region Validity
 
-export interface Validity<Object, Reason>
+export interface Validity<Object, InvalidityReason>
 {
     object : Object
     isValid : boolean
-    reasons : Array<Reason>
+    invalidityReasons : Array<InvalidityReason>
 }
 export interface ReservationFormValidity extends Validity<IReservationForm, TextFieldValidity | ReservationValidity>{}
-export interface TextFieldValidity extends Validity<{ name : string, value : string }, TextFieldReason>{}
-export interface ReservationValidity extends Validity<ReservationJson, ReservationReason>{}
+export interface ReservationValidity extends Validity<ReservationJson, ReservationInvalidityReason | SessionInvalidityReason>{}
+export interface TextFieldValidity extends Validity<{ name : string, value : string }, TextFieldIvalidityReason>{}
 
 //#endregion
 
-//#region Reason
 
-export interface Reason<Value, Error>
+//#region Invalidity Reason
+
+export interface InvalidityReason<Value, Error>
 {
     value : Value
     error : Error
 }
-export interface TextFieldReason extends Reason<string, TextFieldError>{}
-export interface ReservationReason extends Reason<SessionJson, ReservationError | SessionError>{}
+export interface TextFieldIvalidityReason extends InvalidityReason<string, TextFieldError>{}
+export interface ReservationInvalidityReason extends InvalidityReason<ReservationJson, ReservationError>{}
+export interface SessionInvalidityReason extends InvalidityReason<SessionJson, SessionError>{}
 
 //#endregion
+
 
 export interface IReservationForm
 { 
@@ -60,7 +64,6 @@ export interface IReservationForm
     emailAddress: string;
     sessionsString : string;
 }
-
 
 export interface IReservation
 { 
@@ -82,8 +85,7 @@ export interface ISession
     reserved : number;
 }
 
-
-interface ReservationJson
+export interface ReservationJson
 { 
     timestamp : string;
     name : string;
@@ -95,7 +97,7 @@ interface ReservationJson
     wasntPresent : boolean | undefined;
 }
 
-interface SessionJson
+export interface SessionJson
 { 
     start : 
     {

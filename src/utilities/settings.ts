@@ -7,6 +7,7 @@ interface ApplicationSettings
 const development : ApplicationSettings = 
 {
     backendUrl : "https://script.google.com/macros/s/AKfycbxpAWLK9K4q22SEUAa3Ei45AsEE3zAtnH_b8B2W-dDDbP5kbPOwO_oTeoyHqt9YaWVzpw/exec",
+    // backendUrl : "https://script.google.com/macros/s/AKfycbzjQSp2EQ3RGc8J7aAU5-Jaa04VsOXOXz84LN2yieAm/dev",
     sessionOverviewTableUrl : "https://docs.google.com/spreadsheets/d/e/2PACX-1vT2agEjJFrLSOqaRY0Sklzidr_-HeqHtcAQSLdziIGuSl152OBlls2uNZ9o9NCOlYRJJaAXX_f5fPHj/pubhtml?gid=513466788&amp;single=true&amp;widget=true&amp;headers=false",
 };
 

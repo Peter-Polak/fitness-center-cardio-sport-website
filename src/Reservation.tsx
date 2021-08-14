@@ -2,9 +2,9 @@ import styled from "styled-components";
 import Button, { ButtonType } from "./components/Button";
 import MaterialIcon from "./components/MaterialIcon";
 import StatusScreen, { StatusType } from "./components/StatusScreen";
-import { OrganizedSessions, Reason, ReservationError, ReservationFormValidity, SessionError, SessionsError } from "./utilities/types";
+import { ReservationError, ReservationFormValidity, SessionError } from "./utilities/types";
 
-export function getReservationResponseComponent(reservationFormValidity : ReservationFormValidity | Reason<OrganizedSessions, SessionsError> | undefined, close : () => void)
+export function getReservationResponseComponent(reservationFormValidity : ReservationFormValidity | undefined, close : () => void)
 {
     console.log(reservationFormValidity);
     
@@ -50,7 +50,7 @@ export function getReservationResponseComponent(reservationFormValidity : Reserv
     else
     {
         const reservationForm = reservationFormValidity.object;
-        const reasons = reservationFormValidity.reasons;
+        const reasons = reservationFormValidity.invalidityReasons;
         
         if(reasons.length > 0)
         {
@@ -60,21 +60,24 @@ export function getReservationResponseComponent(reservationFormValidity : Reserv
             {
                 let reasonText = "";
                 
-                for (const reason of validity.reasons)
+                for (const reason of validity.invalidityReasons)
                 {
                     switch(reason.error)
                     {
-                        case SessionError.DOES_NOT_EXIST:
-                            reasonText = `Termín ${reason.value.date} ${reason.value.time} už skončil/neexistuje.`;
+                        case SessionError.NOT_FOUND:
+                            reasonText = `Termín ${reason.value.date} ${reason.value.time} neexistuje.`;
                             break;
-                        case SessionError.IS_FULL:
+                        case SessionError.FULL:
                             reasonText = `Termín ${reason.value.date} ${reason.value.time} je už plný.`;
                             break;
+                        case SessionError.ENDED:
+                            reasonText = `Termín ${reason.value.date} ${reason.value.time} už skončil.`;
+                            break;
                         case ReservationError.RESERVATION_EXISTS:
-                            reasonText = `Rezervácia na termín ${reason.value.date} ${reason.value.time} na meno '${reservationForm.name} ${reservationForm.surname}' už existuje.`;
+                            reasonText = `Rezervácia na termín ${reason.value.session.date} ${reason.value.session.time} na meno '${reservationForm.name} ${reservationForm.surname}' už existuje.`;
                             break;
                         default:
-                            reasonText = `Nastala neočakávaná chyba pri spracovavaní formulára.`;
+                            reasonText = `Nastala neočakávaná chyba pri spracovávaní formulára.`;
                             break;
                     }
                     
