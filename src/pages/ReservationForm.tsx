@@ -23,7 +23,7 @@ interface IReservationSystemProps
     routeProps : RouteComponentProps<{}>
 }
 
-interface IReservationSystemState
+interface IReservationFormState
 {
     sessions : OrganizedSessions
     name : string
@@ -35,7 +35,7 @@ interface IReservationSystemState
     showStatusScreen : boolean
 }
 
-class ReservationSystem extends Component<IReservationSystemProps, IReservationSystemState>
+class ReservationForm extends Component<IReservationSystemProps, IReservationFormState>
 {
     reservationResponse : ReservationFormValidity | undefined = undefined;
     test : React.RefObject<HTMLDivElement>;
@@ -256,7 +256,7 @@ class ReservationSystem extends Component<IReservationSystemProps, IReservationS
     }
 }
 
-export default ReservationSystem;
+export default ReservationForm;
 
 //#region Styles
 

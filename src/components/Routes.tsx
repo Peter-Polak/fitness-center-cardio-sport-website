@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import OpeningHours from '../pages/OpeningHours';
 import PriceList from '../pages/PriceList';
-import ReservationSystem from '../pages/ReservationSystem';
+import ReservationForm from '../pages/ReservationForm';
 import Gallery from '../pages/Gallery';
 import Contact from '../pages/Contact';
 import Rules from '../pages/Rules';
@@ -66,7 +66,7 @@ export const Sitemap : ISitemap =
     {
         name: "Rezervačný systém",
         path: "/rezervacny-system",
-        component : ReservationSystem,
+        component : ReservationForm,
         routes : 
         [
             // {
