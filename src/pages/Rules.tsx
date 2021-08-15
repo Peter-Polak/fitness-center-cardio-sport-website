@@ -35,10 +35,10 @@ class Rules extends Component<IRulesProps, IRulesState>
                 <div>
                     <Heading heading="H2"><MaterialIcon icon="priority_high"/> Návštevníci fitnescentra sú povinní</Heading>
                     <ul>
-                        <li>pri vstupe do fitnescentra uhradiť vstupné v stanovenej hodnote alebo preukázať sa platnou permanentkou ( nevzťahuje sa na zamestnancov TUKE počas pracovného týždňa v čase od 15:00 hod. do 17:00 hod., ktorí sa preukážu zamestnaneckým preukazom)</li>
-                        <li>vykonávať športové aktivity vo vhodnej športovej obuvi a odeve ( pozostávajúcom zo športových nohavíc a trička )</li>
-                        <li>udržiavať čistotu ( pri cvičení na posilňovacích lavičkách používať uterák na prikrytie plochy s ktorou cvičiaci prichádza do priameho kontaktu)</li>
-                        <li>po cvičení uviesť stroje a náradie do pôvodného stavu ( odložiť posilňovacie kotúče na stojany k tomu určené, zložiť závažia z posilňovacích strojov)</li>
+                        <li>pri vstupe do fitnescentra uhradiť vstupné v stanovenej hodnote alebo preukázať sa platnou permanentkou (nevzťahuje sa na zamestnancov TUKE počas pracovného týždňa v čase od 15:00 hod. do 17:00 hod., ktorí sa preukážu zamestnaneckým preukazom)</li>
+                        <li>vykonávať športové aktivity vo vhodnej športovej obuvi a odeve (pozostávajúcom zo športových nohavíc a trička)</li>
+                        <li>udržiavať čistotu (pri cvičení na posilňovacích lavičkách používať uterák na prikrytie plochy s ktorou cvičiaci prichádza do priameho kontaktu)</li>
+                        <li>po cvičení uviesť stroje a náradie do pôvodného stavu (odložiť posilňovacie kotúče na stojany k tomu určené, zložiť závažia z posilňovacích strojov)</li>
                         <li>pri odchode odovzdať kľúče od šatne a skrinky</li>
                         <li>nechávať poháre s nápojmi na barovom pulte</li>
                         <li>rešpektovať pokyny zamestnancov fitnescentra</li>
@@ -59,12 +59,12 @@ class Rules extends Component<IRulesProps, IRulesState>
                                 <li>v znečistenom oblečení alebo zjavne nevhodnom oblečení</li>
                             </ul>
                         </li>
-                        <li>akýmkoľvek spôsobom poškodzovať majetok fitnescentra ( hádzanie posilňovacích kotúčov a jednoručných činiek )</li>
-                        <li>obsluhovať a manipulovať s elektronickým zariadením fitnescentra s výnimkou športového náradia ( bežecké pásy, eliptory )</li>
+                        <li>akýmkoľvek spôsobom poškodzovať majetok fitnescentra (hádzanie posilňovacích kotúčov a jednoručných činiek)</li>
+                        <li>obsluhovať a manipulovať s elektronickým zariadením fitnescentra s výnimkou športového náradia (bežecké pásy, eliptory)</li>
                     </ul>
                 </div>
             </div>
-        );
+       );
     }
 }
 
