@@ -91,6 +91,11 @@ const Title = styled.div<{ type : DropdownType }>`
     /* background-color: #1b1b1b; */
     
     cursor: pointer;
+
+    &:hover
+    {
+        background-color: #1f1f1f;
+    }
 `;
 
 const Content = styled.div<{ isExpanded : boolean }>`
