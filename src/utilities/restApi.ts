@@ -1,9 +1,28 @@
 import { settings } from "./settings";
-import { ReservationFormValidity, OrganizedSessions, IReservationForm, InvalidityReason, SessionsError } from "./types";
+import { ReservationFormValidity, OrganizedSessions, IReservationForm, InvalidityReason, SessionsError, IReservation } from "./types";
 
 export async function getSessions() : Promise<OrganizedSessions | InvalidityReason<OrganizedSessions, SessionsError>>
 {
     const query = `?request=sessions`;
+    const url = settings.backendUrl + query;
+
+    const response = await fetch(
+        url,
+        {
+            method: 'GET'
+        }
+    );
+    
+    const sessions = response.json();
+    
+    console.log("getSessions: ", sessions);
+    
+    return sessions;
+}
+
+export async function getReservations(token : string) : Promise<Array<IReservation>>
+{
+    const query = `?request=reservations&token=${token}`;
     const url = settings.backendUrl + query;
 
     const response = await fetch(
