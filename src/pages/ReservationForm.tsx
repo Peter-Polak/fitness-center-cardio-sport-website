@@ -56,7 +56,7 @@ class ReservationForm extends Component<IReservationSystemProps, IReservationFor
         this.test = React.createRef();
         
         this.submit = this.submit.bind(this);
-        this.rememberUserhandler = this.rememberUserhandler.bind(this);
+        this.rememberUserHandler = this.rememberUserHandler.bind(this);
         this.resetForm = this.resetForm.bind(this);
     }
     
@@ -184,7 +184,7 @@ class ReservationForm extends Component<IReservationSystemProps, IReservationFor
         );
     }
     
-    rememberUserhandler(event : any)
+    rememberUserHandler(event : any)
     {
         const { name, surname, emailAddress } = this.state;
         
@@ -256,7 +256,7 @@ class ReservationForm extends Component<IReservationSystemProps, IReservationFor
                     
                     <Field name="E-mailová adresa" type="email" value={emailAddress} handleChange={(event) => this.handleFieldChange("emailAddress", event.target.value)}/>
                     
-                    <RemmeberUserCheckbox name="Zapamätať si údaje" checked={rememberUser} handleChange={this.rememberUserhandler}/>
+                    <RemmeberUserCheckbox name="Zapamätať si údaje" checked={rememberUser} handleChange={this.rememberUserHandler}/>
                     <div ref={ this.test }></div>
                     <Heading heading="H2"><MaterialIcon icon="date_range"/> Voľné termíny</Heading>
                     <Details><MaterialIcon icon="info"/>Tip: Viete si spraviť rezerváciu na viacero termínov naraz vyplnením jedného formulára. Stačí zaškrtnúť všetky políčka/termíny, o ktoré máte záujem.</Details>
