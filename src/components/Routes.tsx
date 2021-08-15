@@ -9,7 +9,7 @@ import Gallery from '../pages/Gallery';
 import Contact from '../pages/Contact';
 import Rules from '../pages/Rules';
 import SessionOverview from "../pages/SessionOverview";
-import Reservations from "../pages/Reservations";
+import ReservationsOverview from "../pages/ReservationsOverview";
 
 interface IRoutesProps
 {
@@ -86,7 +86,7 @@ export const Sitemap : ISitemap =
             {
                 name: "Prehľad rezervacií",
                 path: "/rezervacny-system/prehlad-rezervacii",
-                component : Reservations,
+                component : ReservationsOverview,
                 routes : []
             }
         ]

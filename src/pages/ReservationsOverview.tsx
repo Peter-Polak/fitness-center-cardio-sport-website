@@ -20,7 +20,7 @@ interface IReservationsState
     rememberToken : boolean
 }
 
-class Reservations extends Component<IReservationsProps, IReservationsState>
+class ReservationsOverview extends Component<IReservationsProps, IReservationsState>
 {
     constructor(props : IReservationsProps)
     {
@@ -80,7 +80,7 @@ class Reservations extends Component<IReservationsProps, IReservationsState>
     }
 }
 
-export default Reservations;
+export default ReservationsOverview;
 
 const Content = styled.div`
     display: flex;
