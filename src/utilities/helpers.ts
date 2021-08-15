@@ -43,7 +43,7 @@ export function getUserInfo()
     {
         name : getLocalStorageItem("name"),
         surname : getLocalStorageItem("surname"),
-        emailAddress : getLocalStorageItem("emailAddres"),
+        emailAddress : getLocalStorageItem("emailAddress"),
         rememberUser : false
     }
     
@@ -62,7 +62,7 @@ export function deleteUserInfo()
 {
     window.localStorage.removeItem("name");
     window.localStorage.removeItem("surname");
-    window.localStorage.removeItem("emailAddres");
+    window.localStorage.removeItem("emailAddress");
     window.localStorage.removeItem("remeberUser");
 }
 
@@ -70,7 +70,7 @@ export function setUserInfo(name : string, surname : string, emailAddress : stri
 {
     window.localStorage.setItem("name", name);
     window.localStorage.setItem("surname", surname);
-    window.localStorage.setItem("emailAddres", emailAddress);
+    window.localStorage.setItem("emailAddress", emailAddress);
     window.localStorage.setItem("remeberUser", "true");
 }
 
