@@ -37,18 +37,20 @@ class ReservationsOverview extends Component<IReservationsProps, IReservationsSt
 
     handleTokenChange(event : any)
     {
-        let newValue = event.target.value;
-        this.setState({ token : (newValue as string).toUpperCase().substring(0, tokenLength) })
+        let newToken = event.target.value;
+        let newTokenFormatted = (newToken as string).toUpperCase().substring(0, tokenLength); // Convert token string to upper case and limit it to set length.
+
+        this.setState({ token :  newTokenFormatted});
     }
 
     handleRememberTokenChange(event : any)
     {
         const { token } = this.state;
         
-        const newValue = event.target.checked;
-        this.setState({ rememberToken : newValue });
+        const newRememberToken = event.target.checked;
+        this.setState({ rememberToken : newRememberToken });
         
-        if(newValue && token.length === tokenLength)
+        if(newRememberToken && token.length === tokenLength)
         {
             setTokenInfo(token);
         }
