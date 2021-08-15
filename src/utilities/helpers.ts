@@ -137,7 +137,11 @@ export function deleteUserInfo()
 
 //#region Token info
 
-export function getTokenInfo()
+/**
+ * Get token info from local storage.
+ * @returns Token info as object.
+ */
+export function getTokenInfo() : { rememberToken: boolean; token: string }
 {
     let tokenInfo = 
     {
@@ -148,12 +152,19 @@ export function getTokenInfo()
     return tokenInfo;
 }
 
+/**
+ * Save token info into local storage.
+ * @param token Token.
+ */
 export function setTokenInfo(token : string)
 {
     window.localStorage.setItem("rememberToken", "true");
     window.localStorage.setItem("token", token);
 }
 
+/**
+ * Delete token info from local storage.
+ */
 export function deleteTokenInfo()
 {
     window.localStorage.removeItem("rememberToken");
