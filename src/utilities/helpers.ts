@@ -1,6 +1,9 @@
+//#region General
+
 /**
  * Get a string representation of a number.
  * @param number Number to convert.
+ * @returns {string} String representation of a number.
 */
 export function getNumberString(number : number) : string
 {
@@ -8,10 +11,46 @@ export function getNumberString(number : number) : string
 }
 
 /**
- * Get a string representation of a date in the format "dd.mm.yyyy".
- * @param date Date to convert.
+ * Get local storage item as string based on key.
+ * @param key Key of the item.
+ * @returns {string} Local storage item as string.
  */
- export function getDateString(date : Date)
+export function getLocalStorageItem(key : string) : string
+{
+    let item = window.localStorage.getItem(key);
+    return item === null ? "" : item;
+}
+
+/**
+ * Generate ID of varied length and characters.
+ * @param length Length of the generated ID. Default is `6`.
+ * @param validCharacters Valid characters used in generation of the ID. Default is `ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`.
+ * @returns {string} ID as a string.
+ */
+export function getUniqueIdentifier(length : number = 6, validCharacters : string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") : string
+{
+    let uniqueIdentifier = "";
+    
+    for (let index = 0; index < length; index++)
+    {
+        let randomNumber = Math.random();
+        let charPos = Math.floor(randomNumber * validCharacters.length);
+        uniqueIdentifier += validCharacters.charAt(charPos);
+    }
+    
+    return uniqueIdentifier;
+}
+
+//#endregion
+
+//#region Date and time
+
+/**
+ * Get a string representation of a date in the format `dd.mm.yyyy`.
+ * @param date Date to convert.
+ * @returns {string} Formated date string.
+ */
+ export function getDateString(date : Date) : string
 {
     const day = `${getNumberString(date.getDate())}`;
     const month = `${getNumberString(date.getMonth() + 1)}`;
@@ -20,7 +59,12 @@ export function getNumberString(number : number) : string
     return `${day}.${month}.${year}`;
 }
 
-export function getTimeString(date : Date)
+/**
+ * Get a string representation of a time in the format `hh:mm:ss`.
+ * @param date 
+ * @returns {string} Formated time string.
+ */
+export function getTimeString(date : Date) : string
 {
     const hours = `${getNumberString(date.getHours())}`;
     const minutes = `${getNumberString(date.getMinutes())}`;
@@ -29,7 +73,11 @@ export function getTimeString(date : Date)
     return `${hours}:${minutes}:${seconds}`;
 }
 
-export function getTimestamp()
+/**
+ * Get current timestamp in format `dd.mm.yyyy hh:mm:ss`.
+ * @returns {string} 
+ */
+export function getTimestamp() : string
 {
     const now = new Date();
     const timestamp =`${getDateString(now)} ${getTimeString(now)}`;
@@ -37,7 +85,15 @@ export function getTimestamp()
     return timestamp;
 }
 
-export function getUserInfo()
+//#endregion
+
+//#region User info
+
+/**
+ * Get user info fro mlocal storage
+ * @returns User info as an object.
+ */
+export function getUserInfo() : { name : string, surname : string, emailAddress : string, rememberUser : boolean }
 {
     let user = 
     {
@@ -52,38 +108,56 @@ export function getUserInfo()
     return user;
 }
 
-export function getLocalStorageItem(key : string)
-{
-    let item = window.localStorage.getItem(key);
-    return item === null ? "" : item;
-}
-
-export function deleteUserInfo()
-{
-    window.localStorage.removeItem("name");
-    window.localStorage.removeItem("surname");
-    window.localStorage.removeItem("emailAddress");
-    window.localStorage.removeItem("remeberUser");
-}
-
+/**
+ * Save user info into local storage.
+ * @param name Users name.
+ * @param surname Users surname.
+ * @param emailAddress Users e-mail address.
+ */
 export function setUserInfo(name : string, surname : string, emailAddress : string)
 {
     window.localStorage.setItem("name", name);
     window.localStorage.setItem("surname", surname);
     window.localStorage.setItem("emailAddress", emailAddress);
-    window.localStorage.setItem("remeberUser", "true");
+    window.localStorage.setItem("rememberUser", "true");
 }
 
-export function getUniqueIdentifier(length : number = 6, validCharacters : string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+/**
+ * Deletes user info from local storage.
+ */
+export function deleteUserInfo()
 {
-    let uniqueIdentifier = "";
-    
-    for (let index = 0; index < length; index++)
-    {
-        let randomNumber = Math.random();
-        let charPos = Math.floor(randomNumber * validCharacters.length);
-        uniqueIdentifier += validCharacters.charAt(charPos);
-    }
-    
-    return uniqueIdentifier;
+    window.localStorage.removeItem("name");
+    window.localStorage.removeItem("surname");
+    window.localStorage.removeItem("emailAddress");
+    window.localStorage.removeItem("rememberUser");
 }
+
+//#endregion
+
+//#region Token info
+
+export function getTokenInfo()
+{
+    let tokenInfo = 
+    {
+        rememberToken : getLocalStorageItem("rememberToken") === "true" ? true : false,
+        token : getLocalStorageItem("token")
+    }
+
+    return tokenInfo;
+}
+
+export function setTokenInfo(token : string)
+{
+    window.localStorage.setItem("rememberToken", "true");
+    window.localStorage.setItem("token", token);
+}
+
+export function deleteTokenInfo()
+{
+    window.localStorage.removeItem("rememberToken");
+    window.localStorage.removeItem("token");
+}
+
+//#endregion
