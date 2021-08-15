@@ -56,7 +56,7 @@ class CheckboxGroup extends Component<ICheckboxGroupProps, ICheckboxGroupState>
     {
         const { name, options: values, checkboxStates } = this.props;
         
-        const checkboxes = values.map((value, index) => <Checkbox name={value} checked={checkboxStates[index]} handleChange={() => this.handleChange(index)} key={name + index}/>)
+        const checkboxes = values.map((value, index) => <Checkbox name={value} checked={checkboxStates[index]} onChange={() => this.handleChange(index)} key={name + index}/>)
         
         return (
             <div className={this.props.className}>

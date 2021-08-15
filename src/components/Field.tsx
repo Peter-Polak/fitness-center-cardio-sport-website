@@ -8,7 +8,7 @@ interface IFieldProps
     name : string
     type : string
     value : string
-    handleChange : (event : any) => void
+    onChange : (event : any) => void
     icon? : string
     required? : boolean
     className? : string
@@ -32,7 +32,7 @@ class Field extends Component<IFieldProps, IFieldState>
 
     render() : JSX.Element
     {
-        const { name, type, value, handleChange, icon, required, className } = this.props;
+        const { name, type, value, onChange: handleChange, icon, required, className } = this.props;
         
         return (
             <Label className={className}>

@@ -73,8 +73,8 @@ class ReservationsOverview extends Component<IReservationsProps, IReservationsSt
             <div>
                 <Heading heading="H1"><MaterialIcon icon="book_online" color="dark"/> Prehľad rezervacií</Heading>
                 <Content>
-                    <Field icon="fingerprint" name="Identifikačný kľúč" type="text" value={token} handleChange={this.handleTokenChange} required={true}/>
-                    <Checkbox name="Zapamätať si identifikačný kľúč" checked={rememberToken} handleChange={this.handleRememberTokenChange}/>
+                    <Field icon="fingerprint" name="Identifikačný kľúč" type="text" value={token} onChange={this.handleTokenChange} required={true}/>
+                    <Checkbox name="Zapamätať si identifikačný kľúč" checked={rememberToken} onChange={this.handleRememberTokenChange}/>
                     <SubmitButton type={ButtonType.CONFIRM} onClick={this.handleTokenSubmit} disabled={token.length < tokenLength}>Odoslať</SubmitButton>
                 </Content>
             </div>

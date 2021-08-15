@@ -250,13 +250,13 @@ class ReservationForm extends Component<IReservationSystemProps, IReservationFor
                     
                     <Heading heading="H2"><MaterialIcon icon="person"/> Osobné údaje</Heading>
                     <Identity>
-                        <IdentityField name="Meno" type="text" value={name} handleChange={(event) => this.handleFieldChange("name", event.target.value)} required={true}/>
-                        <IdentityField name="Priezvisko" type="text" value={surname} handleChange={(event) => this.handleFieldChange("surname", event.target.value)} required={true}/>
+                        <IdentityField name="Meno" type="text" value={name} onChange={(event) => this.handleFieldChange("name", event.target.value)} required={true}/>
+                        <IdentityField name="Priezvisko" type="text" value={surname} onChange={(event) => this.handleFieldChange("surname", event.target.value)} required={true}/>
                     </Identity>
                     
-                    <Field name="E-mailová adresa" type="email" value={emailAddress} handleChange={(event) => this.handleFieldChange("emailAddress", event.target.value)}/>
+                    <Field name="E-mailová adresa" type="email" value={emailAddress} onChange={(event) => this.handleFieldChange("emailAddress", event.target.value)}/>
                     
-                    <RemmeberUserCheckbox name="Zapamätať si údaje" checked={rememberUser} handleChange={this.rememberUserHandler}/>
+                    <RemmeberUserCheckbox name="Zapamätať si údaje" checked={rememberUser} onChange={this.rememberUserHandler}/>
                     <div ref={ this.test }></div>
                     <Heading heading="H2"><MaterialIcon icon="date_range"/> Voľné termíny</Heading>
                     <Details><MaterialIcon icon="info"/>Tip: Viete si spraviť rezerváciu na viacero termínov naraz vyplnením jedného formulára. Stačí zaškrtnúť všetky políčka/termíny, o ktoré máte záujem.</Details>

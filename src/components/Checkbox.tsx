@@ -6,7 +6,7 @@ interface ICheckboxProps
 {
     name : string
     checked : boolean
-    handleChange : (event : any) => void
+    onChange : (event : any) => void
     className? : string
 }
 
@@ -30,7 +30,7 @@ class Checkbox extends Component<ICheckboxProps, ICheckboxState>
     {
         return (
             <Label className={this.props.className}>
-                <Input type="checkbox" onChange={this.props.handleChange} checked={this.props.checked}></Input>
+                <Input type="checkbox" onChange={this.props.onChange} checked={this.props.checked}></Input>
                 <Text>{this.props.name}</Text>
             </Label>
         );
