@@ -17,4 +17,4 @@ const production : ApplicationSettings =
     sessionOverviewTableUrl : "https://docs.google.com/spreadsheets/d/e/2PACX-1vQLQhQqciBIdTlzJuguYshxnj2F4TgufIa5_xDAVIncSh7GLWSKqAh-FHaLv5wbvc1-JUW1--niaKWj/pubhtml?gid=984167338&amp;single=true&amp;widget=true&amp;headers=false",
 };
 
-export const settings = process.env.NODE_ENV === 'development' ? development : production;
+export const tokenLength = 6;
