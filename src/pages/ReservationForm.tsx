@@ -13,7 +13,7 @@ import LoadingSceen from "../components/LoadingSceen";
 import Checkbox from "../components/Checkbox";
 import Button, { ButtonType } from "../components/Button";
 import { getReservationResponseComponent } from "../Reservation";
-import { IReservationForm, OrganizedSessions, ReservationFormValidity, SessionsError } from "../utilities/types";
+import { IReservationForm, OrganizedSessions, ReservationFormValidity, SessionsError } from "../utilities/backendTypes";
 import { NotificationType } from "../components/Notification";
 import NotificationManager from "../NotificationManager";
 import React from "react";

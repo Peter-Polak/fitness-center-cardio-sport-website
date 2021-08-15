@@ -1,5 +1,5 @@
 import { settings } from "./settings";
-import { ReservationFormValidity, OrganizedSessions, IReservationForm, InvalidityReason, SessionsError, IReservation } from "./types";
+import { ReservationFormValidity, OrganizedSessions, IReservationForm, InvalidityReason, SessionsError, IReservation } from "./backendTypes";
 
 export async function getSessions() : Promise<OrganizedSessions | InvalidityReason<OrganizedSessions, SessionsError>>
 {
