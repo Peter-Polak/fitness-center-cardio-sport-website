@@ -15,8 +15,6 @@ export async function getSessions() : Promise<OrganizedSessions | InvalidityReas
     
     const sessions = response.json();
     
-    console.log("getSessions: ", sessions);
-    
     return sessions;
 }
 
@@ -34,8 +32,6 @@ export async function getReservations(token : string) : Promise<Array<IReservati
     
     const sessions = response.json();
     
-    console.log("getSessions: ", sessions);
-    
     return sessions;
 }
 
@@ -52,8 +48,6 @@ export async function postReservation(reservation : IReservationForm) : Promise<
     );
     
     const result = response.json();
-    
-    console.log("postReservation: ", result);
     
     return result;
 }
