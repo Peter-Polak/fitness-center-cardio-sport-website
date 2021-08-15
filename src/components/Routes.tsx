@@ -8,6 +8,7 @@ import ReservationForm from '../pages/ReservationForm';
 import Gallery from '../pages/Gallery';
 import Contact from '../pages/Contact';
 import Rules from '../pages/Rules';
+import SessionOverview from "../pages/SessionOverview";
 
 interface IRoutesProps
 {
@@ -69,12 +70,18 @@ export const Sitemap : ISitemap =
         component : ReservationForm,
         routes : 
         [
-            // {
-            //     name: "Formulár",
-            //     path: "/rezervacny-system/formular",
-            //     component : ReservationSystem,
-            //     routes : []
-            // }
+            {
+                name: "Termíny",
+                path: "/rezervacny-system/terminy",
+                component : SessionOverview,
+                routes : []
+            },
+            {
+                name: "Formulár",
+                path: "/rezervacny-system/formular",
+                component : ReservationForm,
+                routes : []
+            }
         ]
     },
     gallery : 
