@@ -1,10 +1,13 @@
 import { Component } from "react";
 import styled from "styled-components";
 import Button, { ButtonType } from "../components/Button";
+import Checkbox from "../components/Checkbox";
 import Field from "../components/Field";
 import Heading from "../components/Heading";
 import MaterialIcon from "../components/MaterialIcon";
+import { deleteTokenInfo, getTokenInfo, setTokenInfo } from "../utilities/helpers";
 import { getReservations } from "../utilities/restApi";
+import { tokenLength } from "../utilities/settings";
 
 interface IReservationsProps
 {
@@ -14,6 +17,7 @@ interface IReservationsProps
 interface IReservationsState
 {
     token : string
+    rememberToken : boolean
 }
 
 class Reservations extends Component<IReservationsProps, IReservationsState>
@@ -23,11 +27,12 @@ class Reservations extends Component<IReservationsProps, IReservationsState>
         super(props);
         this.state = 
         {
-            token : ""
+            ...getTokenInfo()
         }
 
         this.submit = this.submit.bind(this);
         this.onTokenChange = this.onTokenChange.bind(this);
+        this.rememberToken = this.rememberToken.bind(this);
     }
 
     submit()
@@ -38,19 +43,37 @@ class Reservations extends Component<IReservationsProps, IReservationsState>
     onTokenChange(event : any)
     {
         let newValue = event.target.value;
-        this.setState({ token : (newValue as string).toUpperCase().substring(0, 6) })
+        this.setState({ token : (newValue as string).toUpperCase().substring(0, tokenLength) })
+    }
+
+    rememberToken(event : any)
+    {
+        const { token } = this.state;
+        
+        const newValue = event.target.checked;
+        this.setState({ rememberToken : newValue });
+        
+        if(newValue && token.length === tokenLength)
+        {
+            setTokenInfo(token);
+        }
+        else
+        {
+            deleteTokenInfo();
+        }
     }
 
     render() : JSX.Element
     {
-        const { token } = this.state;
+        const { token, rememberToken } = this.state;
 
         return (
             <div>
                 <Heading heading="H1"><MaterialIcon icon="book_online" color="dark"/> Prehľad rezervacií</Heading>
                 <Content>
-                    <TokenField icon="fingerprint" name="Identifikačný kľúč" type="text" value={token} handleChange={this.onTokenChange} required={true}/>
-                    <Button type={ButtonType.CONFIRM} onClick={this.submit} disabled={token.length < 6}>Odoslať</Button>
+                    <Field icon="fingerprint" name="Identifikačný kľúč" type="text" value={token} handleChange={this.onTokenChange} required={true}/>
+                    <Checkbox name="Zapamätať si identifikačný kľúč" checked={rememberToken} handleChange={this.rememberToken}/>
+                    <SubmitButton type={ButtonType.CONFIRM} onClick={this.submit} disabled={token.length < tokenLength}>Odoslať</SubmitButton>
                 </Content>
             </div>
         );
@@ -66,6 +89,6 @@ const Content = styled.div`
     align-items: center;
 `;
 
-const TokenField = styled(Field)`
-    margin-bottom: 20px;
+const SubmitButton = styled(Button)`
+    margin-top: 20px;
 `;
