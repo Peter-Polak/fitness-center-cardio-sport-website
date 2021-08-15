@@ -30,23 +30,18 @@ class ReservationsOverview extends Component<IReservationsProps, IReservationsSt
             ...getTokenInfo()
         }
 
-        this.submit = this.submit.bind(this);
-        this.onTokenChange = this.onTokenChange.bind(this);
-        this.rememberToken = this.rememberToken.bind(this);
+        this.handleTokenSubmit = this.handleTokenSubmit.bind(this);
+        this.handleTokenChange = this.handleTokenChange.bind(this);
+        this.handleRememberTokenChange = this.handleRememberTokenChange.bind(this);
     }
 
-    submit()
-    {
-        console.log(getReservations(this.state.token));
-    }
-
-    onTokenChange(event : any)
+    handleTokenChange(event : any)
     {
         let newValue = event.target.value;
         this.setState({ token : (newValue as string).toUpperCase().substring(0, tokenLength) })
     }
 
-    rememberToken(event : any)
+    handleRememberTokenChange(event : any)
     {
         const { token } = this.state;
         
@@ -63,6 +58,11 @@ class ReservationsOverview extends Component<IReservationsProps, IReservationsSt
         }
     }
 
+    handleTokenSubmit()
+    {
+        console.log(getReservations(this.state.token));
+    }
+
     render() : JSX.Element
     {
         const { token, rememberToken } = this.state;
@@ -71,9 +71,9 @@ class ReservationsOverview extends Component<IReservationsProps, IReservationsSt
             <div>
                 <Heading heading="H1"><MaterialIcon icon="book_online" color="dark"/> Prehľad rezervacií</Heading>
                 <Content>
-                    <Field icon="fingerprint" name="Identifikačný kľúč" type="text" value={token} handleChange={this.onTokenChange} required={true}/>
-                    <Checkbox name="Zapamätať si identifikačný kľúč" checked={rememberToken} handleChange={this.rememberToken}/>
-                    <SubmitButton type={ButtonType.CONFIRM} onClick={this.submit} disabled={token.length < tokenLength}>Odoslať</SubmitButton>
+                    <Field icon="fingerprint" name="Identifikačný kľúč" type="text" value={token} handleChange={this.handleTokenChange} required={true}/>
+                    <Checkbox name="Zapamätať si identifikačný kľúč" checked={rememberToken} handleChange={this.handleRememberTokenChange}/>
+                    <SubmitButton type={ButtonType.CONFIRM} onClick={this.handleTokenSubmit} disabled={token.length < tokenLength}>Odoslať</SubmitButton>
                 </Content>
             </div>
         );
