@@ -13,7 +13,7 @@ import LoadingSceen from "../components/LoadingSceen";
 import Checkbox from "../components/Checkbox";
 import Button, { ButtonType } from "../components/Button";
 import { getReservationResponseComponent } from "../Reservation";
-import { IReservationForm, OrganizedSessions, ReservationFormValidity } from "../utilities/types";
+import { IReservationForm, OrganizedSessions, ReservationFormValidity, SessionsError } from "../utilities/types";
 import { NotificationType } from "../components/Notification";
 import NotificationManager from "../NotificationManager";
 import React from "react";
@@ -145,6 +145,21 @@ class ReservationForm extends Component<IReservationSystemProps, IReservationFor
         getSessions().then(
             (response) =>
             {
+                if("error" in response)
+                {
+                    if(response.error === SessionsError.NO_SESSIONS)
+                    {
+                        this.setState(
+                            {
+                                sessions : {}, 
+                                checkboxStates : {}, 
+                                showLoadingScreen : false
+                            }
+                        );
+                    }
+                    return;
+                }
+
                 let checkboxStates : {[date : string] : Array<boolean>} = {};
         
                 for(const date in response)
@@ -227,7 +242,7 @@ class ReservationForm extends Component<IReservationSystemProps, IReservationFor
         
         return (
             <Container>
-                <Heading heading="H1"><MaterialIcon icon="book_online" color="dark"/> Rezervačný systém</Heading>
+                <Heading heading="H1"><MaterialIcon icon="book_online" color="dark"/> Rezervačný formulár</Heading>
                 
                 <Content>
                     {showLoadingScreen && <StyledLoadingSceen fullscreen={false}/>}

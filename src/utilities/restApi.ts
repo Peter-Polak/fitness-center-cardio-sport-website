@@ -1,7 +1,7 @@
 import { settings } from "./settings";
-import { ReservationFormValidity, OrganizedSessions, IReservationForm } from "./types";
+import { ReservationFormValidity, OrganizedSessions, IReservationForm, InvalidityReason, SessionsError } from "./types";
 
-export async function getSessions() : Promise<OrganizedSessions>
+export async function getSessions() : Promise<OrganizedSessions | InvalidityReason<OrganizedSessions, SessionsError>>
 {
     const query = `?request=sessions`;
     const url = settings.backendUrl + query;
