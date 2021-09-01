@@ -6,6 +6,7 @@ import MaterialIcon from '../components/MaterialIcon';
 import Announcement from '../components/Announcement';
 import { Sitemap } from '../components/Routes';
 import Dropdown, { DropdownType } from '../components/Dropdown';
+import styled from 'styled-components';
 
 interface IHomeProps
 {
@@ -36,13 +37,30 @@ class Home extends Component<IHomeProps, IHomeState>
                 
                 <div>
                     <Announcement 
-                    title="Zmena otváracích hodín od 01.07.2021 do 31.08.2021 (Úprava)" 
-                    date="02.07.2021">
-                        Sobota: <del>16:00 - 21:00</del> → 17:00 - 20:00 <Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link>
+                        title="Otváracie hodiny počas štátnych sviatkov v septembri" 
+                        date="01.09.2021">
+                        <Paragraph>01.09.2021 (Streda): 15:00 - 22:00</Paragraph>
+                        <Paragraph>15.09.2021 (Streda): 15:00 - 22:00</Paragraph>
+                        <Paragraph>Tešíme sa na vás!</Paragraph>
+                    </Announcement>
+
+                    <Announcement 
+                        title="Zmena otváracích hodín od 01.09.2021" 
+                        date="30.08.2021">
+                        Sobota: <del>17:00 - 20:00</del> → 16:00 - 21:00
+                        <Paragraph><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></Paragraph>
                     </Announcement>
                 </div>
-                
+
                 <Dropdown title="Staré oznamy" type={DropdownType.PRIMARY}>
+                    <Dropdown title="Júl, 2021" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                        title="Zmena otváracích hodín od 01.07.2021 do 31.08.2021 (Úprava)" 
+                        date="02.07.2021">
+                            Sobota: <del>16:00 - 21:00</del> → 17:00 - 20:00 <Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link>
+                        </Announcement>
+                    </Dropdown>
+
                     <Dropdown title="Jún, 2021" type={DropdownType.SECONDARY}>
                         <Announcement 
                         title="Otváracie hodiny počas štátneho sviatku" 
@@ -69,5 +87,9 @@ class Home extends Component<IHomeProps, IHomeState>
         );
     }
 }
+
+const Paragraph = styled.p`
+    margin: 5px 0;
+`;
 
 export default Home;
