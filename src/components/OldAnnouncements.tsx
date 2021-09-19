@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Sitemap } from '../components/Routes';
 import Announcement from '../components/Announcement';
 import Dropdown, { DropdownType } from '../components/Dropdown';
+import styled from "styled-components";
 
 interface IOldAnnouncementsProps
 {
@@ -31,6 +32,15 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
         return (
             <section>
                 <Dropdown title="Staré oznamy" type={DropdownType.PRIMARY}>
+                    <Dropdown title="Júl, 2021" type={DropdownType.SECONDARY}>
+                    <Announcement 
+                        title="Otváracie hodiny počas štátnych sviatkov v septembri" 
+                        date="01.09.2021">
+                        <Paragraph>01.09.2021 (Streda): 15:00 - 22:00</Paragraph>
+                        <Paragraph>15.09.2021 (Streda): 15:00 - 22:00</Paragraph>
+                        <Paragraph>Tešíme sa na vás!</Paragraph>
+                    </Announcement>
+                    </Dropdown>
                     <Dropdown title="Júl, 2021" type={DropdownType.SECONDARY}>
                         <Announcement 
                         title="Zmena otváracích hodín od 01.07.2021 do 31.08.2021 (Úprava)" 
@@ -65,5 +75,9 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
         );
     }
 }
+
+const Paragraph = styled.p`
+    margin: 5px 0;
+`;
 
 export default OldAnnouncements;
