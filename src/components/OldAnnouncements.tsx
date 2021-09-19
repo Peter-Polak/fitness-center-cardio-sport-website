@@ -32,7 +32,7 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
         return (
             <section>
                 <Dropdown title="Staré oznamy" type={DropdownType.PRIMARY}>
-                    <Dropdown title="Júl, 2021" type={DropdownType.SECONDARY}>
+                    <Dropdown title="September, 2021" type={DropdownType.SECONDARY}>
                     <Announcement 
                         title="Otváracie hodiny počas štátnych sviatkov v septembri" 
                         date="01.09.2021">
