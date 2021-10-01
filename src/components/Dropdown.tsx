@@ -86,7 +86,7 @@ const Title = styled.div<{ type : DropdownType }>`
     padding: 10px;
     
     font-family: "Bebas Neue";
-    font-size: 24px;
+    font-size: 22px;
     color: ${props => props.theme.color.primary.normal};
     
     /* background-color: #1b1b1b; */
