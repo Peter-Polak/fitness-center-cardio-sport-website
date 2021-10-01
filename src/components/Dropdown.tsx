@@ -1,5 +1,6 @@
 import { Component } from "react";
 import styled, { css } from "styled-components";
+import { BobUpAndDownAnimation } from "../styles/animations";
 import MaterialIcon from "./MaterialIcon";
 
 export enum DropdownType
@@ -45,7 +46,7 @@ class Dropdown extends Component<IDropdownProps, IDropdownState>
             <Container>
                 <Title onClick={this.toggle} type={type}>
                     <span>{title}</span>
-                    <span>{isExpanded ? <MaterialIcon icon="expand_less"/> : <MaterialIcon icon="expand_more"/>}</span>
+                    <ExpandIcon type={type}>{isExpanded ? <MaterialIcon icon="expand_less"/> : <MaterialIcon icon="expand_more"/>}</ExpandIcon>
                 </Title>
                 <Content isExpanded={isExpanded}>
                     {children}
@@ -95,6 +96,23 @@ const Title = styled.div<{ type : DropdownType }>`
     &:hover
     {
         background-color: #1f1f1f;
+    }
+`;
+
+const ExpandIcon = styled.span<{ type : DropdownType }>`
+    position: relative;
+    
+    ${
+        props =>
+        {
+            if(props.type === DropdownType.PRIMARY)
+            {
+                return css`
+                    
+                    animation: ${BobUpAndDownAnimation} 1s ease-in-out infinite alternate;
+                `;
+            } 
+        }
     }
 `;
 
