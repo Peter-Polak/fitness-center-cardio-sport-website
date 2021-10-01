@@ -1,9 +1,11 @@
 import { Component } from "react";
 import styled from 'styled-components';
+import Heading from "./Heading";
 import MaterialIcon from "./MaterialIcon";
 
 interface IAnnouncementProps
 {
+    icon? : string
     title : string
     date : string
     className? : string
@@ -27,15 +29,11 @@ class Announcement extends Component<IAnnouncementProps, IAnnouncementState>
 
     render() : JSX.Element
     {
-        const {title, date, children, className} = this.props;
+        const { icon, title, date, children, className } = this.props;
         
         return (
             <Container className={className}>
-                <h2>
-                    <MaterialIcon icon="campaign"/>
-                    {title}
-                </h2>
-                
+                <Heading heading="H2"><MaterialIcon icon={icon === undefined ? "campaign" : icon}/> {title}</Heading>
                 <Date>{date}</Date>
                 
                 <Content>{children}</Content>
