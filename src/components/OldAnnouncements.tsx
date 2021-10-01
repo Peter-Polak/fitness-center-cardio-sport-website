@@ -33,14 +33,24 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
             <section>
                 <Dropdown title="Staré oznamy" type={DropdownType.PRIMARY}>
                     <Dropdown title="September, 2021" type={DropdownType.SECONDARY}>
-                    <Announcement 
-                        title="Otváracie hodiny počas štátnych sviatkov v septembri" 
-                        date="01.09.2021">
-                        <Paragraph>01.09.2021 (Streda): 15:00 - 22:00</Paragraph>
-                        <Paragraph>15.09.2021 (Streda): 15:00 - 22:00</Paragraph>
-                        <Paragraph>Tešíme sa na vás!</Paragraph>
+                        <Announcement 
+                            title="Otváracie hodiny počas štátnych sviatkov v septembri" 
+                            date="01.09.2021">
+                            <Paragraph>01.09.2021 (Streda): 15:00 - 22:00</Paragraph>
+                            <Paragraph>15.09.2021 (Streda): 15:00 - 22:00</Paragraph>
+                            <Paragraph>Tešíme sa na vás!</Paragraph>
+                        </Announcement>
+                    </Dropdown>
+
+                    <Dropdown title="August, 2021" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                        title="Zmena otváracích hodín od 01.09.2021" 
+                        date="30.08.2021">
+                            Sobota: <del>17:00 - 20:00</del> → 16:00 - 21:00
+                            <Paragraph><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></Paragraph>
                     </Announcement>
                     </Dropdown>
+
                     <Dropdown title="Júl, 2021" type={DropdownType.SECONDARY}>
                         <Announcement 
                         title="Zmena otváracích hodín od 01.07.2021 do 31.08.2021 (Úprava)" 

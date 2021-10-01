@@ -31,9 +31,9 @@ class CurrentAnnouncements extends Component<ICurrentAnnouncementsProps, ICurren
         return (
             <section>
                 <Announcement 
-                    title="Zmena otváracích hodín od 01.09.2021" 
-                    date="30.08.2021">
-                    Sobota: <del>17:00 - 20:00</del> → 16:00 - 21:00
+                    title="Zmena otváracích hodín od 27.09.2021" 
+                    date="26.09.2021">
+                    Utorok: <del>15:00 - 22:00</del> → 15:00 - 16:00, 17:00 - 22:00
                     <Paragraph><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></Paragraph>
                 </Announcement>
             </section>

@@ -33,11 +33,11 @@ class OpeningHours extends Component<IOpeningHoursProps, IOpeningHoursState>
                 <Heading heading="H1"><MaterialIcon icon="schedule" color="dark"/> Otváracie hodiny</Heading>
                 
                 <Content>
-                    <p>Platné od 01.09.2021</p>
+                    <p>Platné od 27.09.2021</p>
                     
                     <Hours>
                         <p>Pondelok: 15:00 - 22:00</p>
-                        <p>Utorok: 15:00 - 22:00</p>
+                        <p>Utorok: 15:00 - 16:00, 17:00 - 22:00</p>
                         <p>Streda: 15:00 - 22:00</p>
                         <p>Štvrtok: 15:00 - 22:00</p>
                         <p>Piatok : 15:00 - 22:00</p>
