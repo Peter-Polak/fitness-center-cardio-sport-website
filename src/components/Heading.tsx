@@ -51,7 +51,7 @@ const H2 = styled.h2`
     align-items: center;
     
     font-family: "Bebas Neue";
-    letter-spacing: 1.3px;
+    letter-spacing: 2px;
     font-size: 20px;
 `;
 
