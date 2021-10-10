@@ -4,12 +4,12 @@ import { Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import OpeningHours from '../pages/OpeningHours';
 import PriceList from '../pages/PriceList';
-import ReservationForm from '../pages/ReservationForm';
 import Gallery from '../pages/Gallery';
 import Contact from '../pages/Contact';
 import Rules from '../pages/Rules';
-import SessionOverview from "../pages/SessionOverview";
-import ReservationsOverview from "../pages/ReservationsOverview";
+// import ReservationForm from '../pages/ReservationForm';
+// import SessionOverview from "../pages/SessionOverview";
+// import ReservationsOverview from "../pages/ReservationsOverview";
 
 interface IRoutesProps
 {
@@ -64,33 +64,33 @@ export const Sitemap : ISitemap =
         component : Rules,
         routes : []
     },
-    reservationSystem : 
-    {
-        name: "Rezervačný systém",
-        path: "/rezervacny-system",
-        component : ReservationForm,
-        routes : 
-        [
-            {
-                name: "Termíny",
-                path: "/rezervacny-system/terminy",
-                component : SessionOverview,
-                routes : []
-            },
-            {
-                name: "Formulár",
-                path: "/rezervacny-system/formular",
-                component : ReservationForm,
-                routes : []
-            },
-            {
-                name: "Prehľad rezervacií",
-                path: "/rezervacny-system/prehlad-rezervacii",
-                component : ReservationsOverview,
-                routes : []
-            }
-        ]
-    },
+    // reservationSystem : 
+    // {
+    //     name: "Rezervačný systém",
+    //     path: "/rezervacny-system",
+    //     component : ReservationForm,
+    //     routes : 
+    //     [
+    //         {
+    //             name: "Termíny",
+    //             path: "/rezervacny-system/terminy",
+    //             component : SessionOverview,
+    //             routes : []
+    //         },
+    //         {
+    //             name: "Formulár",
+    //             path: "/rezervacny-system/formular",
+    //             component : ReservationForm,
+    //             routes : []
+    //         },
+    //         {
+    //             name: "Prehľad rezervacií",
+    //             path: "/rezervacny-system/prehlad-rezervacii",
+    //             component : ReservationsOverview,
+    //             routes : []
+    //         }
+    //     ]
+    // },
     gallery : 
     {
         name: "Galéria",
