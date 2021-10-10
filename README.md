@@ -1,4 +1,6 @@
 # Fitness center Cardio Sport website
+
+## What is this project
 Small website for fitness center Cardio Sport.
 
 ## Built with
