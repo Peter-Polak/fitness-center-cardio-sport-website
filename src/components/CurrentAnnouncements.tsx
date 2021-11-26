@@ -31,11 +31,10 @@ class CurrentAnnouncements extends Component<ICurrentAnnouncementsProps, ICurren
         return (
             <section>
                 <Announcement 
-                    icon="schedule"
-                    title="Zmena otváracích hodín od 27.09.2021" 
-                    date="26.09.2021">
-                        Utorok: <del>15:00 - 22:00</del> → 15:00 - 16:00, 17:00 - 22:00
-                        <Paragraph><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></Paragraph>
+                    icon="block"
+                    title="Zmena otváracích hodín od 15.11.2021" 
+                    date="15.11.2021">
+                        Je nám ľúto Vám oznámiť, že podľa nariadení <a href="https://automat.gov.sk/kosice">covid automatu</a> pre fitness centrá v Košiciach bude fitness centrum Cardio Sport od 15.11.2021 až do odvolania ZATVORENÉ!
                 </Announcement>
             </section>
         );
