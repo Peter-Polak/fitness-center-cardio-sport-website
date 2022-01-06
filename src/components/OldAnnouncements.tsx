@@ -103,7 +103,7 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
                             title="Zmena otváracích hodín od 27.09.2021" 
                             date="26.09.2021">
                                 Utorok: <del>15:00 - 22:00</del> → 15:00 - 16:00, 17:00 - 22:00
-                                <Paragraph><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></Paragraph>
+                                <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
                         </Announcement>
 
                         <Announcement 
