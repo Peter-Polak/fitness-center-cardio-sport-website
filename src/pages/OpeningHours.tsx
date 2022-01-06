@@ -46,13 +46,13 @@ class OpeningHours extends Component<IOpeningHoursProps, IOpeningHoursState>
 
                     <p>Platné od 10.01.2022</p>
                     <Hours>
-                        <p>Pondelok: 15:00 - 22:00</p>
-                        <p>Utorok: 15:00 - 16:00, 17:00 - 22:00</p>
-                        <p>Streda: 15:00 - 22:00</p>
-                        <p>Štvrtok: 15:00 - 22:00</p>
-                        <p>Piatok : 15:00 - 22:00</p>
-                        <p>Sobota: 16:00 - 21:00</p>
-                        <p>Nedeľa: 16:00 - 21:00</p>
+                        <p>Pondelok: <Warning>ZATVORENÉ</Warning></p>
+                        <p>Utorok: <Warning>ZATVORENÉ</Warning></p>
+                        <p>Streda: <Warning>ZATVORENÉ</Warning></p>
+                        <p>Štvrtok: <Warning>ZATVORENÉ</Warning></p>
+                        <p>Piatok : <Warning>ZATVORENÉ</Warning></p>
+                        <p>Sobota: <Warning>ZATVORENÉ</Warning></p>
+                        <p>Nedeľa: <Warning>ZATVORENÉ</Warning></p>
                     </Hours>
                     
                     <Warning>!!! UPOZORNENIE !!!</Warning>
