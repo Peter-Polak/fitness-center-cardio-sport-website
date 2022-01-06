@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Switch } from 'react-router-dom';
 import styled, { ThemeProvider } from "styled-components";
 import MediaQuery from 'react-responsive'
@@ -14,6 +14,9 @@ import MaterialIcon from './components/MaterialIcon';
 import Navigation from './components/Navigation';
 import Routes, { Sitemap } from './components/Routes';
 import Notifications from './components/Notifications';
+import { javaScriptClientDetection, useUserTraffic } from './utilities/analytics';
+
+
 
 function App()
 {
@@ -28,7 +31,17 @@ function App()
     {
         changeVisibility(false);
     }
-    
+
+    useEffect(
+        () => 
+        {
+            javaScriptClientDetection();
+        },
+        []
+    );
+
+    useUserTraffic();
+
     return (
         <ThemeProvider theme={darkTheme}>
             <GlobalStyle/>
