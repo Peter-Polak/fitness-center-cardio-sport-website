@@ -5,6 +5,7 @@ import { Sitemap } from '../components/Routes';
 import Announcement from '../components/Announcement';
 import Dropdown, { DropdownType } from '../components/Dropdown';
 import styled from "styled-components";
+import WarningText from "./WarningText";
 
 interface IOldAnnouncementsProps
 {
@@ -51,11 +52,11 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
                             icon="ac_unit"
                             title="Otváracie hodiny počas sviatkov" 
                             date="15.12.2021 (Upravené 30.12.2021)">
-                                <p>24.12.2021 (Piatok) - <Warning>ZATVORENÉ</Warning></p>
-                                <p>25.12.2021 (Sobota) - <Warning>ZATVORENÉ</Warning></p>
-                                <p>26.12.2021 (Nedeľa) - <Warning>ZATVORENÉ</Warning></p>
-                                <p>31.12.2021 (Piatok) - <Warning>ZATVORENÉ</Warning></p>
-                                <p>01.01.2022 (Sobota) - <Warning>ZATVORENÉ</Warning></p>
+                                <p>24.12.2021 (Piatok) - <WarningText>ZATVORENÉ</WarningText></p>
+                                <p>25.12.2021 (Sobota) - <WarningText>ZATVORENÉ</WarningText></p>
+                                <p>26.12.2021 (Nedeľa) - <WarningText>ZATVORENÉ</WarningText></p>
+                                <p>31.12.2021 (Piatok) - <WarningText>ZATVORENÉ</WarningText></p>
+                                <p>01.01.2022 (Sobota) - <WarningText>ZATVORENÉ</WarningText></p>
                                 <p>06.01.2022 (Štvrtok) - 15:00 - 20:00</p>
                         </Announcement>
                         <Announcement 
@@ -89,7 +90,7 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
                             title="Znovuotvorenie fitness centra od 10.12.2021" 
                             date="08.12.2021">
                                 <p>S radosťou Vám oznamujeme, že od 10.12.2021 (piatok) bude fitness centrum znovu otvorené! </p>
-                                <p><Warning>!!! ZMENY !!! :</Warning></p>
+                                <p><WarningText>!!! ZMENY !!! :</WarningText></p>
                                 <ul>
                                     <li>fitness centrum bude fungovať podľa nových nariadení v režime OP (očkovaní/po prekonaní)</li>
                                     <li>otváracie hodiny budú dočasne skrátené iba do 20:00 a cez víkend bude otvorené od 15:00, otváracie hodiny si môžete pozrieť <Link to={Sitemap.openingHours.path}>→ tu ← </Link></li>
@@ -192,10 +193,6 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
 
 const NewLine = styled.p`
     margin: 5px 0;
-`;
-
-const Warning = styled.span`
-    color: ${props => props.theme.color.warning.normal};
 `;
 
 export default OldAnnouncements;
