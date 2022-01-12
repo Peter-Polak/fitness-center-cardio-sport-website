@@ -1,5 +1,4 @@
 import { Component } from "react";
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { Sitemap } from '../components/Routes';
@@ -70,9 +69,5 @@ class CurrentAnnouncements extends Component<ICurrentAnnouncementsProps, ICurren
         );
     }
 }
-
-const Warning = styled.span`
-    color: ${props => props.theme.color.warning.normal};
-`;
 
 export default CurrentAnnouncements;
