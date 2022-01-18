@@ -36,16 +36,14 @@ class OpeningHours extends Component<IOpeningHoursProps, IOpeningHoursState>
                 
                 <Content>
                     <Schedule>
-                        <p>Platné od 10.01.2022</p>
-                        <Days>
-                            <DayOpeningHours day={Day.MONDAY} times={["15:00 - 22:00"]}></DayOpeningHours>
-                            <DayOpeningHours day={Day.TUESDAY} times={["15:00 - 16:00, 17:00 - 22:00"]}></DayOpeningHours>
-                            <DayOpeningHours day={Day.WEDNESDAY} times={["15:00 - 22:00"]}></DayOpeningHours>
-                            <DayOpeningHours day={Day.THURSDAY} times={["15:00 - 16:00, 17:00 - 22:00"]}></DayOpeningHours>
-                            <DayOpeningHours day={Day.FRIDAY} times={["15:00 - 22:00"]}></DayOpeningHours>
-                            <DayOpeningHours day={Day.SATURDAY} times={["16:00 - 21:00"]}></DayOpeningHours>
-                            <DayOpeningHours day={Day.SUNDAY} times={["16:00 - 21:00"]}></DayOpeningHours>
-                        </Days>
+                        <Valid>Platné od 10.01.2022</Valid>
+                        <DayOpeningHours day={Day.MONDAY} times={["15:00 - 22:00"]}></DayOpeningHours>
+                        <DayOpeningHours day={Day.TUESDAY} times={["15:00 - 16:00, 17:00 - 22:00"]}></DayOpeningHours>
+                        <DayOpeningHours day={Day.WEDNESDAY} times={["15:00 - 22:00"]}></DayOpeningHours>
+                        <DayOpeningHours day={Day.THURSDAY} times={["15:00 - 16:00, 17:00 - 22:00"]}></DayOpeningHours>
+                        <DayOpeningHours day={Day.FRIDAY} times={["15:00 - 22:00"]}></DayOpeningHours>
+                        <DayOpeningHours day={Day.SATURDAY} times={["16:00 - 21:00"]}></DayOpeningHours>
+                        <DayOpeningHours day={Day.SUNDAY} times={["16:00 - 21:00"]}></DayOpeningHours>
                     </Schedule>
                     
                     <Warning>
@@ -67,21 +65,21 @@ const Content = styled.div`
     align-items: center;
 `;
 
-const Days = styled.div`
-    margin: 10px 0 30px 0;
-`;
-
 const Schedule = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
 
     margin-bottom: 30px;
-    padding: 30px;
+    padding: 20px 30px;
 
-    border: 3px solid ${props => props.theme.color.primary.normal};
+    border: 2px solid ${props => props.theme.color.primary.normal};
     border-radius: 10px;
 `;
+
+const Valid = styled.p`
+    font-size: 0.8em;
+`
 
 const Warning = styled.div`
     display: flex;
