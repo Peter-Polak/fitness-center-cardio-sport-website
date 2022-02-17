@@ -3,7 +3,6 @@ import { Switch } from 'react-router-dom';
 import styled, { ThemeProvider } from "styled-components";
 import MediaQuery from 'react-responsive'
 
-import "./styles/App.scss";
 import { darkTheme } from "./styles/themes";
 import GlobalStyle from "./styles/GlobalStyle";
 

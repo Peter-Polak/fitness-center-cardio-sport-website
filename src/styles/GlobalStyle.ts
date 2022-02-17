@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
  
 const GlobalStyle = createGlobalStyle`
+    @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+    @import url(https://fonts.googleapis.com/css?family=Bebas+Neue|Roboto);
+
     body
     {
         display: block;
