@@ -23,6 +23,7 @@ interface IAnnouncementProps
     day : Day
     // times : Array<{ from : Time, to : Time }>
     times : Array<string>
+    oldTime? : Array<string>
 }
 
 interface IState
@@ -37,6 +38,7 @@ class DayOpeningHours extends Component<IAnnouncementProps, IState>
     render()
     {
         let timeString : string = "";
+        let oldTimeString : string = "";
         
         // for(const time of this.props.times)
         // {
@@ -51,20 +53,34 @@ class DayOpeningHours extends Component<IAnnouncementProps, IState>
             }
         );
 
+        if(this.props.oldTime)
+        {
+            this.props.oldTime.forEach(
+                (time, index, array) =>
+                {
+                    oldTimeString += time;
+                    if(index < array.length - 1) oldTimeString += ", ";
+                }
+            );
+        }
+
         return (
             <Container>
-                <DayText>{this.props.day.toString()}</DayText><TimeText>{timeString}</TimeText>
+                <DayText>{this.props.day.toString()}</DayText>
+                <TimeText>{this.props.oldTime ? <><del>{oldTimeString}</del> → </> : ""}{timeString}</TimeText>
             </Container>
         )
     }
 }
 
-const Container = styled.div`
+const Container = styled.span`
     display: flex;
     align-items: center;
 
     position: relative;
     padding: 15px 0;
+    
+    width: 100%;
 
     &:not(:last-of-type):after
     {
@@ -83,7 +99,7 @@ const Container = styled.div`
 
 const DayText = styled.span`
     display: inline-block;
-    width: 100px;
+    width: 80px;
 
     font-size: 15px;
     font-weight: bold;
