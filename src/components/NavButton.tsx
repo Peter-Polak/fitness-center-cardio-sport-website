@@ -1,12 +1,14 @@
 import { Component } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import MaterialIcon from "./MaterialIcon";
 import { IRoute } from "./Routes";
 
 interface INavButtonProps
 {
     route : IRoute
     closeNav : () => void
+    icon? : string
     className? : string
 }
 
@@ -61,6 +63,7 @@ class NavButton extends Component<INavButtonProps, INavButtonState>
             );
             return <>
                 <Link as="button" className={className} onClick={this.toggleSubMenu}>
+                    {this.props.icon ? <MaterialIcon icon={this.props.icon}/> : ""}
                     {route.name}
                 </Link>
                 
