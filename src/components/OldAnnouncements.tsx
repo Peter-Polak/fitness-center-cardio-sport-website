@@ -6,6 +6,7 @@ import Announcement from '../components/Announcement';
 import Dropdown, { DropdownType } from '../components/Dropdown';
 import styled from "styled-components";
 import WarningText from "./WarningText";
+import DayOpeningHours, { Day } from "./DayOpeningHours";
 
 interface IOldAnnouncementsProps
 {
@@ -33,6 +34,59 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
         return (
             <section>
                 <Dropdown title="Staré oznamy" type={DropdownType.PRIMARY}>
+                    <Dropdown title="Január, 2022" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                            icon="door_sliding"
+                            title="Zmena vchodu do fitness centra od 17.01.2022" 
+                            date="16.01.2022">
+                                <p>Od 17.01.2022 bude uzavretý zadný vchod a vstup do fitness centra bude možný opäť len cez hlavný vchod do budovy Kultúrno-spoločenské centrum Jedlíkova 7.</p>
+                                <iframe 
+                                src="https://www.google.com/maps/embed?pb=!4v1642348960339!6m8!1m7!1svg6E2ME9Yzy1BwxIVOwQXg!2m2!1d48.69832137665433!2d21.23330823118454!3f122.7910055697831!4f1.1432705465267503!5f1.94634212307073" 
+                                width="800" 
+                                height="600" 
+                                style={{border:0, height: "500px", width: "100%", maxWidth:"800px"}} 
+                                allowFullScreen={true} 
+                                loading="lazy"
+                                title="Google Street View"></iframe>
+                        </Announcement>
+
+                        <Announcement 
+                            icon="schedule"
+                            title="Zmena otváracích hodín od 13.01.2022" 
+                            date="11.01.2022">
+                                <DayOpeningHours day={Day.THURSDAY} oldTime={["15:00 - 22:00"]} times={["15:00 - 16:00", "17:00 - 22:00"]} ></DayOpeningHours>
+                                <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+
+                        <Announcement 
+                            icon="door_sliding"
+                            title="Predĺženie zmeny vchodu do fitness centra od 10.01.2022 do odvolania" 
+                            date="07.01.2022">
+                                <p>Hlavný vchod do budovy zostavá nadalej až do odvolania uzavretý a vstup do fitness centra bude možný len cez zadný vchod.</p>
+                                <iframe 
+                                src="https://www.google.com/maps/embed?pb=!4v1640032361644!6m8!1m7!1syHGE6IpTcdJLnaXgepbTGg!2m2!1d48.69742168289121!2d21.23516653674668!3f344.8596644956723!4f-15.327564707157393!5f0.4000000000000002" 
+                                width="800" 
+                                height="600" 
+                                style={{border:0, height: "500px", width: "100%", maxWidth:"800px"}} 
+                                allowFullScreen={true} 
+                                loading="lazy"
+                                title="Google Street View"></iframe>
+                        </Announcement>
+                        <Announcement 
+                            icon="schedule"
+                            title="Zmena otváracích hodín od 10.01.2022" 
+                            date="05.01.2022">
+                                <p>
+                                <DayOpeningHours day={Day.MONDAY} oldTime={["15:00 - 20:00"]} times={["15:00 - 22:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.TUESDAY} oldTime={["15:00 - 20:00"]} times={["15:00 - 16:00", "17:00 - 22:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.WEDNESDAY} oldTime={["15:00 - 20:00"]} times={["15:00 - 22:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.THURSDAY} oldTime={["15:00 - 20:00"]} times={["15:00 - 22:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.FRIDAY} oldTime={["15:00 - 20:00"]} times={["15:00 - 22:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.SATURDAY} oldTime={["15:00 - 20:00"]} times={["16:00 - 21:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.SUNDAY} oldTime={["15:00 - 20:00"]} times={["16:00 - 21:00"]} ></DayOpeningHours>
+                                </p><p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+                    </Dropdown>
                     <Dropdown title="December, 2021" type={DropdownType.SECONDARY}>
                         <Announcement 
                             icon="door_sliding"
