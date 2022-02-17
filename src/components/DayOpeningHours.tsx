@@ -1,12 +1,6 @@
 import { Component } from 'react'
 import styled from 'styled-components';
 
-interface Time
-{ 
-    hours : number
-    minutes : number
-}
-
 export enum Day
 { 
     MONDAY = "Pondelok",

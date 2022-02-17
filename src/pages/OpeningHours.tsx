@@ -37,13 +37,13 @@ class OpeningHours extends Component<IOpeningHoursProps, IOpeningHoursState>
                 <Content>
                     <Schedule>
                         <Valid>Platné od 14.02.2022</Valid>
-                        <DayOpeningHours day={Day.MONDAY} times={["15:00 - 22:00"]}></DayOpeningHours>
-                        <DayOpeningHours day={Day.TUESDAY} times={["15:00 - 16:00, 17:00 - 22:00"]}></DayOpeningHours>
-                        <DayOpeningHours day={Day.WEDNESDAY} times={["15:00 - 22:00"]}></DayOpeningHours>
-                        <DayOpeningHours day={Day.THURSDAY} times={["15:00 - 22:00"]}></DayOpeningHours>
-                        <DayOpeningHours day={Day.FRIDAY} times={["15:00 - 22:00"]}></DayOpeningHours>
-                        <DayOpeningHours day={Day.SATURDAY} times={["16:00 - 21:00"]}></DayOpeningHours>
-                        <DayOpeningHours day={Day.SUNDAY} times={["16:00 - 21:00"]}></DayOpeningHours>
+                        <DayOpeningHours day={Day.MONDAY} times={["15:00 - 22:00"]}/>
+                        <DayOpeningHours day={Day.TUESDAY} times={["15:00 - 16:00", "17:00 - 22:00"]}/>
+                        <DayOpeningHours day={Day.WEDNESDAY} times={["15:00 - 22:00"]}/>
+                        <DayOpeningHours day={Day.THURSDAY} times={["15:00 - 22:00"]}/>
+                        <DayOpeningHours day={Day.FRIDAY} times={["15:00 - 22:00"]}/>
+                        <DayOpeningHours day={Day.SATURDAY} times={["16:00 - 21:00"]}/>
+                        <DayOpeningHours day={Day.SUNDAY} times={["16:00 - 21:00"]}/>
                     </Schedule>
                     
                     <Warning>
