@@ -7,7 +7,7 @@ import DayOpeningHours from '../components/DayOpeningHours';
 import MaterialIcon from '../components/MaterialIcon';
 import WarningText from "../components/WarningText";
 import { Day } from "../utilities/enums";
-import { texts } from "../Texts";
+import { openingHours, texts } from "../Texts";
 
 interface IOpeningHoursProps
 {
@@ -33,6 +33,7 @@ class OpeningHours extends Component<IOpeningHoursProps, IOpeningHoursState>
     render() : JSX.Element
     {
         const pageTexts = texts.pages.openingHours;
+        const currentOpeningHours = openingHours[0];
 
         return (
             <div>
@@ -40,14 +41,14 @@ class OpeningHours extends Component<IOpeningHoursProps, IOpeningHoursState>
                 
                 <Content>
                     <Schedule>
-                        <Valid>{pageTexts.validity} 14.02.2022</Valid>
-                        <DayOpeningHours day={Day.Monday} times={["15:00 - 22:00"]}/>
-                        <DayOpeningHours day={Day.Tuesday} times={["15:00 - 16:00", "17:00 - 22:00"]}/>
-                        <DayOpeningHours day={Day.Wednesday} times={["15:00 - 22:00"]}/>
-                        <DayOpeningHours day={Day.Thursday} times={["15:00 - 22:00"]}/>
-                        <DayOpeningHours day={Day.Friday} times={["15:00 - 22:00"]}/>
-                        <DayOpeningHours day={Day.Saturday} times={["16:00 - 21:00"]}/>
-                        <DayOpeningHours day={Day.Sunday} times={["16:00 - 21:00"]}/>
+                        <Valid>{pageTexts.validity} {currentOpeningHours.validity.from}</Valid>
+                        <DayOpeningHours day={Day.Monday} times={currentOpeningHours.monday}/>
+                        <DayOpeningHours day={Day.Tuesday} times={currentOpeningHours.tuesday}/>
+                        <DayOpeningHours day={Day.Wednesday} times={currentOpeningHours.wednesday}/>
+                        <DayOpeningHours day={Day.Thursday} times={currentOpeningHours.thursday}/>
+                        <DayOpeningHours day={Day.Friday} times={currentOpeningHours.friday}/>
+                        <DayOpeningHours day={Day.Saturday} times={currentOpeningHours.saturday}/>
+                        <DayOpeningHours day={Day.Sunday} times={currentOpeningHours.sunday}/>
                     </Schedule>
                     
                     <Warning>
