@@ -3,10 +3,11 @@ import { Route } from 'react-router-dom';
 
 import Home from '../pages/Home';
 import OpeningHours from '../pages/OpeningHours';
-import PriceList from '../pages/PriceList';
+import Pricing from '../pages/Pricing';
 import Gallery from '../pages/Gallery';
 import Contact from '../pages/Contact';
 import Rules from '../pages/Rules';
+import { texts } from "../Texts";
 // import ReservationForm from '../pages/ReservationForm';
 // import SessionOverview from "../pages/SessionOverview";
 // import ReservationsOverview from "../pages/ReservationsOverview";
@@ -28,8 +29,9 @@ export interface ISitemap
 
 export interface IRoute
 {
-    name: string,
-    path: string,
+    icon : string,
+    name : string,
+    path : string,
     component? : any
     routes : Array<IRoute> 
 }
@@ -38,28 +40,32 @@ export const Sitemap : ISitemap =
 {
     home : 
     {
-        name: "Domov",
+        icon : "home", 
+        name: texts.pages.home.title,
         path: "/",
         component : Home,
         routes : []
     },
     openingHours : 
     {
-        name: "Otváracie hodiny",
+        icon : "schedule",
+        name: texts.pages.openingHours.title,
         path: "/otvaracie-hodiny",
         component : OpeningHours,
         routes : []
     },
-    priceList : 
+    pricing : 
     {
-        name: "Cenník",
+        icon : "euro",
+        name: texts.pages.pricing.title,
         path: "/cennik",
-        component : PriceList,
+        component : Pricing,
         routes : []
     },
     rules : 
     {
-        name: "Vnútorný poriadok",
+        icon : "gavel",
+        name: texts.pages.rules.title,
         path: "/vnutorny-poriadok",
         component : Rules,
         routes : []
@@ -93,14 +99,16 @@ export const Sitemap : ISitemap =
     // },
     gallery : 
     {
-        name: "Galéria",
+        icon : "image",
+        name: texts.pages.gallery.title,
         path: "/galeria",
         component : Gallery,
         routes : []
     },
     contact : 
     {
-        name: "Kontakt",
+        icon : "contacts",
+        name: texts.pages.contact.title,
         path: "/kontakt",
         component : Contact,
         routes : []

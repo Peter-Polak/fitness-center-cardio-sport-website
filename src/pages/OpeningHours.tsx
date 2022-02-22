@@ -3,9 +3,11 @@ import { RouteComponentProps } from "react-router-dom";
 import styled from 'styled-components';
 
 import Heading from '../components/Heading';
-import DayOpeningHours, { Day } from '../components/DayOpeningHours';
+import DayOpeningHours from '../components/DayOpeningHours';
 import MaterialIcon from '../components/MaterialIcon';
 import WarningText from "../components/WarningText";
+import { Day } from "../utilities/enums";
+import { texts } from "../Texts";
 
 interface IOpeningHoursProps
 {
@@ -30,28 +32,27 @@ class OpeningHours extends Component<IOpeningHoursProps, IOpeningHoursState>
 
     render() : JSX.Element
     {
+        const pageTexts = texts.pages.openingHours;
+
         return (
             <div>
-                <Heading heading="H1"><MaterialIcon icon="schedule" color="dark"/> Otváracie hodiny</Heading>
+                <Heading heading="H1"><MaterialIcon icon="schedule" color="dark"/>{pageTexts.title}</Heading>
                 
                 <Content>
                     <Schedule>
-                        <Valid>Platné od 14.02.2022</Valid>
-                        <DayOpeningHours day={Day.MONDAY} times={["15:00 - 22:00"]}/>
-                        <DayOpeningHours day={Day.TUESDAY} times={["15:00 - 16:00", "17:00 - 22:00"]}/>
-                        <DayOpeningHours day={Day.WEDNESDAY} times={["15:00 - 22:00"]}/>
-                        <DayOpeningHours day={Day.THURSDAY} times={["15:00 - 22:00"]}/>
-                        <DayOpeningHours day={Day.FRIDAY} times={["15:00 - 22:00"]}/>
-                        <DayOpeningHours day={Day.SATURDAY} times={["16:00 - 21:00"]}/>
-                        <DayOpeningHours day={Day.SUNDAY} times={["16:00 - 21:00"]}/>
+                        <Valid>{pageTexts.validity} 14.02.2022</Valid>
+                        <DayOpeningHours day={Day.Monday} times={["15:00 - 22:00"]}/>
+                        <DayOpeningHours day={Day.Tuesday} times={["15:00 - 16:00", "17:00 - 22:00"]}/>
+                        <DayOpeningHours day={Day.Wednesday} times={["15:00 - 22:00"]}/>
+                        <DayOpeningHours day={Day.Thursday} times={["15:00 - 22:00"]}/>
+                        <DayOpeningHours day={Day.Friday} times={["15:00 - 22:00"]}/>
+                        <DayOpeningHours day={Day.Saturday} times={["16:00 - 21:00"]}/>
+                        <DayOpeningHours day={Day.Sunday} times={["16:00 - 21:00"]}/>
                     </Schedule>
                     
                     <Warning>
-                        <WarningText>!!! UPOZORNENIE !!!</WarningText>
-                        <p>
-                            V Utorok a Štvrtok o 17:30 - 18:30 sa v zadnej časti posilňovne (kde sú vzpieračské pódia, stojan, klietka, leg press a rotopédy) konajú hodiny spinningu. 
-                            Počas tejto doby je zadná časť vyhradená iba pre spinning a iným návštevníkom nedostupná a uzavretá!
-                        </p>
+                        <WarningText>!!! {texts.warning} !!!</WarningText>
+                        <p>{pageTexts.spinningWarning}</p>
                     </Warning>
                 </Content>
             </div>

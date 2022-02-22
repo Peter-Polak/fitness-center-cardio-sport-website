@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import Heading from '../components/Heading';
 import MaterialIcon from '../components/MaterialIcon';
+import { texts } from "../Texts";
 
 interface IContactProps
 {
@@ -28,12 +29,14 @@ class Contact extends Component<IContactProps, IContactState>
 
     render() : JSX.Element
     {
+        const pageTexts = texts.pages.contact;
+
         return (
             <Container>
-                <Heading heading="H1"><MaterialIcon icon="contacts" color="dark"/> Kontakt</Heading>
+                <Heading heading="H1"><MaterialIcon icon="contacts" color="dark"/>{pageTexts.title}</Heading>
                 
                 <Subsection>
-                    <Heading heading="H2"><MaterialIcon icon="location_on"/> Adresa</Heading>
+                    <Heading heading="H2"><MaterialIcon icon="location_on"/>{pageTexts.adress.title}</Heading>
                     
                     <Content>
                         <div>
@@ -50,12 +53,12 @@ class Contact extends Component<IContactProps, IContactState>
                 </Subsection>
                 
                 <Subsection>
-                    <Heading heading="H2"><MaterialIcon icon="phone"/> Telefonický kontakt</Heading>
+                    <Heading heading="H2"><MaterialIcon icon="phone"/>{pageTexts.phone.title}</Heading>
                     <div>+421 905 389 468</div>
                 </Subsection>
                 
                 <Subsection>
-                    <Heading heading="H2"><MaterialIcon icon="public"/> Správca stránky</Heading>
+                    <Heading heading="H2"><MaterialIcon icon="public"/>{pageTexts.webmaster.title}</Heading>
                     <div>peter.polak.mail@gmail.com</div>
                 </Subsection>
             </Container>

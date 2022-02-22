@@ -6,19 +6,19 @@ import Card from "../components/Card";
 import Heading from '../components/Heading';
 import MaterialIcon from '../components/MaterialIcon';
 
-interface IPriceListProps
+interface IPricingProps
 {
     routeProps : RouteComponentProps<{}>
 }
 
-interface IPriceListState
+interface IPricingState
 {
     
 }
 
-class PriceList extends Component<IPriceListProps, IPriceListState>
+class Pricing extends Component<IPricingProps, IPricingState>
 {
-    constructor(props : IPriceListProps)
+    constructor(props : IPricingProps)
     {
         super(props);
         this.state = 
@@ -112,4 +112,4 @@ const BebasIcon = styled.span`
     color: ${props => props.theme.color.primary.normal};
 `;
 
-export default PriceList;
+export default Pricing;

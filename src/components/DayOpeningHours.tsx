@@ -1,16 +1,7 @@
 import { Component } from 'react'
 import styled from 'styled-components';
-
-export enum Day
-{ 
-    MONDAY = "Pondelok",
-    TUESDAY = "Utorok",
-    WEDNESDAY = "Streda",
-    THURSDAY = "Štvrtok",
-    FRIDAY = "Piatok",
-    SATURDAY = "Sobota",
-    SUNDAY = "Nedeľa"
-}
+import { getTranslatedDay } from '../Texts';
+import { Day } from '../utilities/enums';
 
 interface IAnnouncementProps
 {
@@ -60,7 +51,7 @@ class DayOpeningHours extends Component<IAnnouncementProps, IState>
 
         return (
             <Container>
-                <DayText>{this.props.day.toString()}</DayText>
+                <DayText>{getTranslatedDay(this.props.day)}</DayText>
                 <TimeText>{this.props.oldTime ? <><del>{oldTimeString}</del> → </> : ""}{timeString}</TimeText>
             </Container>
         )
