@@ -35,6 +35,12 @@ function App()
         () => 
         {
             javaScriptClientDetection();
+
+            const language = localStorage.getItem("language");
+            if(language === null)
+            {
+                localStorage.setItem("language", "sk");
+            }
         },
         []
     );
