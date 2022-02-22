@@ -6,7 +6,8 @@ import Announcement from '../components/Announcement';
 import Dropdown, { DropdownType } from '../components/Dropdown';
 import styled from "styled-components";
 import WarningText from "./WarningText";
-import DayOpeningHours, { Day } from "./DayOpeningHours";
+import DayOpeningHours from "./DayOpeningHours";
+import { Day } from "../utilities/enums";
 
 interface IOldAnnouncementsProps
 {
@@ -54,7 +55,7 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
                             icon="schedule"
                             title="Zmena otváracích hodín od 13.01.2022" 
                             date="11.01.2022">
-                                <DayOpeningHours day={Day.THURSDAY} oldTime={["15:00 - 22:00"]} times={["15:00 - 16:00", "17:00 - 22:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.Thursday} oldTime={["15:00 - 22:00"]} times={["15:00 - 16:00", "17:00 - 22:00"]} ></DayOpeningHours>
                                 <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
                         </Announcement>
 
@@ -77,13 +78,13 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
                             title="Zmena otváracích hodín od 10.01.2022" 
                             date="05.01.2022">
                                 <p>
-                                <DayOpeningHours day={Day.MONDAY} oldTime={["15:00 - 20:00"]} times={["15:00 - 22:00"]} ></DayOpeningHours>
-                                <DayOpeningHours day={Day.TUESDAY} oldTime={["15:00 - 20:00"]} times={["15:00 - 16:00", "17:00 - 22:00"]} ></DayOpeningHours>
-                                <DayOpeningHours day={Day.WEDNESDAY} oldTime={["15:00 - 20:00"]} times={["15:00 - 22:00"]} ></DayOpeningHours>
-                                <DayOpeningHours day={Day.THURSDAY} oldTime={["15:00 - 20:00"]} times={["15:00 - 22:00"]} ></DayOpeningHours>
-                                <DayOpeningHours day={Day.FRIDAY} oldTime={["15:00 - 20:00"]} times={["15:00 - 22:00"]} ></DayOpeningHours>
-                                <DayOpeningHours day={Day.SATURDAY} oldTime={["15:00 - 20:00"]} times={["16:00 - 21:00"]} ></DayOpeningHours>
-                                <DayOpeningHours day={Day.SUNDAY} oldTime={["15:00 - 20:00"]} times={["16:00 - 21:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.Monday} oldTime={["15:00 - 20:00"]} times={["15:00 - 22:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.Tuesday} oldTime={["15:00 - 20:00"]} times={["15:00 - 16:00", "17:00 - 22:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.Wednesday} oldTime={["15:00 - 20:00"]} times={["15:00 - 22:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.Thursday} oldTime={["15:00 - 20:00"]} times={["15:00 - 22:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.Friday} oldTime={["15:00 - 20:00"]} times={["15:00 - 22:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.Saturday} oldTime={["15:00 - 20:00"]} times={["16:00 - 21:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.Sunday} oldTime={["15:00 - 20:00"]} times={["16:00 - 21:00"]} ></DayOpeningHours>
                                 </p><p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
                         </Announcement>
                     </Dropdown>
