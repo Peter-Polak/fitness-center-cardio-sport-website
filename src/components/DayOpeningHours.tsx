@@ -9,6 +9,7 @@ interface IAnnouncementProps
     // times : Array<{ from : Time, to : Time }>
     times : Array<string>
     oldTime? : Array<string>
+    date? : string
 }
 
 interface IState
@@ -22,6 +23,7 @@ class DayOpeningHours extends Component<IAnnouncementProps, IState>
 
     render()
     {
+        const { times, oldTime, day, date } = this.props;
         let timeString : string = "";
         let oldTimeString : string = "";
         
@@ -30,7 +32,7 @@ class DayOpeningHours extends Component<IAnnouncementProps, IState>
         //     timeString += `${time.from.hours}:${time.from.minutes} - ${time.to.hours}:${time.to.minutes}`;
         // }
 
-        this.props.times.forEach(
+        times.forEach(
             (time, index, array) =>
             {
                 timeString += time;
@@ -38,9 +40,9 @@ class DayOpeningHours extends Component<IAnnouncementProps, IState>
             }
         );
 
-        if(this.props.oldTime)
+        if(oldTime)
         {
-            this.props.oldTime.forEach(
+            oldTime.forEach(
                 (time, index, array) =>
                 {
                     oldTimeString += time;
@@ -51,8 +53,9 @@ class DayOpeningHours extends Component<IAnnouncementProps, IState>
 
         return (
             <Container>
-                <DayText>{getTranslatedDay(this.props.day)}</DayText>
-                <TimeText>{this.props.oldTime ? <><del>{oldTimeString}</del> → </> : ""}{timeString}</TimeText>
+                {date ? <Date>{date}:</Date> : null}
+                <DayText>{getTranslatedDay(day)}</DayText>
+                <TimeText>{oldTime ? <><del>{oldTimeString}</del> → </> : ""}{timeString}</TimeText>
             </Container>
         )
     }
@@ -84,13 +87,18 @@ const Container = styled.span`
 
 const DayText = styled.span`
     display: inline-block;
-    width: 80px;
+    width: 120px;
 
     font-size: 15px;
     font-weight: bold;
 `;
 
 const TimeText = styled.span`
+`;
+
+const Date = styled.span`
+    /* font-size: 11px; */
+    margin-right: 10px;
 `;
 
 export default DayOpeningHours;
