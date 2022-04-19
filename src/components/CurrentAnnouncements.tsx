@@ -32,23 +32,15 @@ class CurrentAnnouncements extends Component<ICurrentAnnouncementsProps, ICurren
     {
         return (
             <section>
-                {/* <NoAnnoucements>Žiadne nové oznamy.</NoAnnoucements> */}
-                <Announcement 
-                    icon="egg"
-                    title="Otváracie hodiny počas veľkonočných sviatkov" 
-                    date="12.04.2022">
-                        <DayOpeningHours day={Day.Friday} date="15.04.2022" times={["15:00 - 22:00"]} ></DayOpeningHours>
-                        <DayOpeningHours day={Day.Saturday} date="16.04.2022" times={["16:00 - 21:00"]} ></DayOpeningHours>
-                        <DayOpeningHours day={Day.Sunday} date="17.04.2022" times={["16:00 - 21:00"]} ></DayOpeningHours>
-                        <DayOpeningHours day={Day.Monday} date="18.04.2022" times={["15:00 - 22:00"]} ></DayOpeningHours>
-                        <p><Link to={Sitemap.openingHours.path}>→ Aktuálne otváracie hodiny ←</Link></p>
-                </Announcement>
+                <NoAnnoucements>Žiadne nové oznamy</NoAnnoucements>
+                
             </section>
         );
     }
 }
 
-const NoAnnoucements = styled.div`
+const NoAnnoucements = styled.h2`
+    text-align: center;
     margin: 50px;
 `;
 
