@@ -37,6 +37,14 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
                 <Dropdown title="Staré oznamy" type={DropdownType.PRIMARY}>
                     <Dropdown title="Apríl, 2022" type={DropdownType.SECONDARY}>
                         <Announcement 
+                            icon="event_available"
+                            title="Otváracie hodiny počas sviatkov" 
+                            date="26.04.2022">
+                                <DayOpeningHours day={Day.Sunday} date="01.05.2022" times={["16:00 - 21:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.Sunday} date="08.05.2022" times={["16:00 - 21:00"]} ></DayOpeningHours>
+                                <p><Link to={Sitemap.openingHours.path}>→ Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+                        <Announcement 
                             icon="egg"
                             title="Otváracie hodiny počas veľkonočných sviatkov" 
                             date="12.04.2022">

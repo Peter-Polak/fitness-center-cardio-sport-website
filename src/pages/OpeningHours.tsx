@@ -50,6 +50,11 @@ class OpeningHours extends Component<IOpeningHoursProps, IOpeningHoursState>
                         <DayOpeningHours day={Day.Saturday} times={currentOpeningHours.saturday}/>
                         <DayOpeningHours day={Day.Sunday} times={currentOpeningHours.sunday}/>
                     </Schedule>
+
+                    {/* <Schedule>
+                    <Heading heading="H2"><MaterialIcon icon="event_available" color="theme"/>Otváracie hodiny počas sviatkov</Heading>
+                        
+                    </Schedule> */}
                     
                     <Warning>
                         <WarningText>!!! {texts.warning} !!!</WarningText>

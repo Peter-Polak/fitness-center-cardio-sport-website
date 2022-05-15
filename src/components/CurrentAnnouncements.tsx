@@ -33,7 +33,6 @@ class CurrentAnnouncements extends Component<ICurrentAnnouncementsProps, ICurren
         return (
             <section>
                 <NoAnnoucements>Žiadne nové oznamy</NoAnnoucements>
-                
             </section>
         );
     }
