@@ -1,7 +1,8 @@
 import { Component } from 'react'
 import styled from 'styled-components';
-import { getTranslatedDay } from '../Texts';
+import { getTranslatedDay, texts } from '../Texts';
 import { Day } from '../utilities/enums';
+import WarningText from './WarningText';
 
 interface IAnnouncementProps
 {
@@ -32,30 +33,49 @@ class DayOpeningHours extends Component<IAnnouncementProps, IState>
         //     timeString += `${time.from.hours}:${time.from.minutes} - ${time.to.hours}:${time.to.minutes}`;
         // }
 
-        times.forEach(
-            (time, index, array) =>
-            {
-                timeString += time;
-                if(index < array.length - 1) timeString += ", ";
-            }
-        );
+        if(times.length > 0)
+        {
+            times.forEach(
+                (time, index, array) =>
+                {
+                    timeString += time;
+                    if(index < array.length - 1) timeString += ", ";
+                }
+            );
+        }
+        // else
+        // {
+        //     timeString = texts.pages.openingHours.closed;
+        // }
+        
 
         if(oldTime)
         {
-            oldTime.forEach(
-                (time, index, array) =>
-                {
-                    oldTimeString += time;
-                    if(index < array.length - 1) oldTimeString += ", ";
-                }
-            );
+            if(oldTime.length > 0)
+            {
+                oldTime.forEach(
+                    (time, index, array) =>
+                    {
+                        oldTimeString += time;
+                        if(index < array.length - 1) oldTimeString += ", ";
+                    }
+                );
+            }
+            else
+            {
+                oldTimeString = texts.pages.openingHours.closed;
+            }
+            
         }
 
         return (
             <Container>
                 {date ? <Date>{date}:</Date> : null}
                 <DayText>{getTranslatedDay(day)}</DayText>
-                <TimeText>{oldTime ? <><del>{oldTimeString}</del> → </> : ""}{timeString}</TimeText>
+                <TimeText>
+                    {oldTime ? <><del>{oldTimeString}</del> → </> : ""}
+                    {timeString != "" ? timeString : <WarningText>{texts.pages.openingHours.closed.toUpperCase()}</WarningText>}
+                </TimeText>
             </Container>
         )
     }

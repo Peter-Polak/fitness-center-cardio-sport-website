@@ -40,21 +40,27 @@ class OpeningHours extends Component<IOpeningHoursProps, IOpeningHoursState>
                 <Heading heading="H1"><MaterialIcon icon="schedule" color="dark"/>{pageTexts.title}</Heading>
                 
                 <Content>
-                    <Schedule>
-                        <Valid>{pageTexts.validity} {currentOpeningHours.validity.from}</Valid>
-                        <DayOpeningHours day={Day.Monday} times={currentOpeningHours.monday}/>
-                        <DayOpeningHours day={Day.Tuesday} times={currentOpeningHours.tuesday}/>
-                        <DayOpeningHours day={Day.Wednesday} times={currentOpeningHours.wednesday}/>
-                        <DayOpeningHours day={Day.Thursday} times={currentOpeningHours.thursday}/>
-                        <DayOpeningHours day={Day.Friday} times={currentOpeningHours.friday}/>
-                        <DayOpeningHours day={Day.Saturday} times={currentOpeningHours.saturday}/>
-                        <DayOpeningHours day={Day.Sunday} times={currentOpeningHours.sunday}/>
-                    </Schedule>
+                    <HoursContainer>
+                        {
+                            openingHours.map(element => {
+                                return <Schedule>
+                                    <Valid>{pageTexts.validity.from} {element.validity.from}{element.validity.to !== "" ? ` ${pageTexts.validity.to} ${element.validity.to}` : null}</Valid>
+                                    <DayOpeningHours day={Day.Monday} times={element.monday}/>
+                                    <DayOpeningHours day={Day.Tuesday} times={element.tuesday}/>
+                                    <DayOpeningHours day={Day.Wednesday} times={element.wednesday}/>
+                                    <DayOpeningHours day={Day.Thursday} times={element.thursday}/>
+                                    <DayOpeningHours day={Day.Friday} times={element.friday}/>
+                                    <DayOpeningHours day={Day.Saturday} times={element.saturday}/>
+                                    <DayOpeningHours day={Day.Sunday} times={element.sunday}/>
+                                </Schedule>
+                            })
+                        }
 
-                    {/* <Schedule>
-                    <Heading heading="H2"><MaterialIcon icon="event_available" color="theme"/>Otváracie hodiny počas sviatkov</Heading>
-                        
-                    </Schedule> */}
+                        {/* <Schedule>
+                        <Heading heading="H2"><MaterialIcon icon="event_available" color="theme"/>Otváracie hodiny počas sviatkov</Heading>
+                            
+                        </Schedule> */}
+                    </HoursContainer>
                     
                     <Warning>
                         <WarningText>!!! {texts.warning} !!!</WarningText>
@@ -72,12 +78,20 @@ const Content = styled.div`
     align-items: center;
 `;
 
+const HoursContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+`;
+
 const Schedule = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    margin-bottom: 30px;
+    margin: 0 0 30px 30px;
     padding: 20px 30px;
 
     border: 2px solid ${props => props.theme.color.primary.normal};
