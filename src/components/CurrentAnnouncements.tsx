@@ -32,7 +32,14 @@ class CurrentAnnouncements extends Component<ICurrentAnnouncementsProps, ICurren
     {
         return (
             <section>
-                <NoAnnoucements>Žiadne nové oznamy</NoAnnoucements>
+                {/* <NoAnnoucements>Žiadne nové oznamy</NoAnnoucements> */}
+                <Announcement 
+                    icon="schedule"
+                    title="Zmena otváracích hodín od 01.07.2022 do 31.08.2022" 
+                    date="06.06.2022">
+                        <DayOpeningHours day={Day.Saturday} oldTime={["16:00 - 21:00"]} times={[]} ></DayOpeningHours>
+                        <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                </Announcement>
             </section>
         );
     }
