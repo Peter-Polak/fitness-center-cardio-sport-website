@@ -47,7 +47,7 @@ class Card extends Component<ICardProps, ICardState>
 }
 
 const Container = styled.div`
-    margin: 20px;
+    margin: 15px;
     
     border-radius: 10px;
     overflow: hidden;
