@@ -5,8 +5,8 @@ export const openingHours =
     {
         validity : 
         {
-            from : "14.02.2022",
-            to: "30.06.2022"
+            from : "01.09.2022",
+            to: ""
         },
         monday : ["15:00 - 22:00"],
         tuesday : ["15:00 - 16:00", "17:00 - 22:00"],
@@ -15,20 +15,48 @@ export const openingHours =
         friday : ["15:00 - 22:00"],
         saturday : ["16:00 - 21:00"],
         sunday : ["16:00 - 21:00"]
-    },
+    }
+];
+
+interface IPricing
+{
+    validity : 
     {
-        validity : 
+        from : string,
+        to: string
+    },
+    entrance:
+    Array<
         {
-            from : "01.07.2022",
-            to: "31.08.2022"
+            quantity : number,
+            price : number
+        }
+    >,
+    memebership:
+    Array<
+        {
+            monthValidity: number,
+            price: number
+        }
+    >
+}
+
+export const pricing : Array<IPricing> = 
+[
+    {
+        validity:
+        {
+            from: "01.01.2021",
+            to: "30.06.2022"
         },
-        monday : ["15:00 - 22:00"],
-        tuesday : ["15:00 - 16:00", "17:00 - 22:00"],
-        wednesday : ["15:00 - 22:00"],
-        thursday : ["15:00 - 22:00"],
-        friday : ["15:00 - 22:00"],
-        saturday : [],
-        sunday : ["16:00 - 21:00"]
+        entrance:
+        [
+
+        ],
+        memebership:
+        [
+
+        ],
     }
 ];
 
