@@ -35,9 +35,16 @@ class CurrentAnnouncements extends Component<ICurrentAnnouncementsProps, ICurren
             <section>
                 {/* <NoAnnoucements>Žiadne nové oznamy</NoAnnoucements> */}
                 <Announcement 
+                    icon="schedule"
+                    title="Zmena otváracích hodín od 01.09.2022" 
+                    date="29.08.2022">
+                        <DayOpeningHours day={Day.Saturday} oldTime={[]} times={["16:00 - 21:00"]} ></DayOpeningHours>
+                        <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                </Announcement>
+                <Announcement 
                     icon="euro"
-                    title="Zmena cenníka od 01.07.2022" 
-                    date="16.06.2022">
+                    title="Zmena cenníka od 01.08.2022" 
+                    date="16.06.2022 (Upravené 28.06.2022)">
                         <p>Jednorazový vstup: <Change oldString="2,00 €" newString="2,50 €"/></p>
                         <p>Permanentka - 1 Mesiac: <Change oldString="20,00 €" newString="25,00 €"/></p>
                         <p>Permanentka - 3 Mesiace: <Change oldString="55,00 €" newString="65,00 €"/></p>
@@ -45,13 +52,7 @@ class CurrentAnnouncements extends Component<ICurrentAnnouncementsProps, ICurren
                         <p>Permanentka - 12 Mesiacov: <Change oldString="175,00 €" newString="199,00 €"/></p>
                         <p><Link to={Sitemap.pricing.path}> → Aktuálny cenník ←</Link></p>
                 </Announcement>
-                <Announcement 
-                    icon="schedule"
-                    title="Zmena otváracích hodín od 01.07.2022 do 31.08.2022" 
-                    date="06.06.2022">
-                        <DayOpeningHours day={Day.Saturday} oldTime={["16:00 - 21:00"]} times={[]} ></DayOpeningHours>
-                        <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
-                </Announcement>
+                
             </section>
         );
     }
