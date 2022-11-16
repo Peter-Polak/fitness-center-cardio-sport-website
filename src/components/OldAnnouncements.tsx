@@ -8,6 +8,7 @@ import styled from "styled-components";
 import WarningText from "./WarningText";
 import DayOpeningHours from "./DayOpeningHours";
 import { Day } from "../utilities/enums";
+import Change from "./Change";
 
 interface IOldAnnouncementsProps
 {
@@ -35,7 +36,39 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
         return (
             <section>
                 <Dropdown title="Staré oznamy" type={DropdownType.PRIMARY}>
+                    <Dropdown title="Október, 2022" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                            icon="schedule"
+                            title="Otváracie hodiny počas sviatkov" 
+                            date="27.10.2022">
+                                <DayOpeningHours day={Day.Tuesday} date="01.11.2022" times={["15:00 - 22:00"]} ></DayOpeningHours>
+                                <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+                        <Announcement 
+                            icon="schedule"
+                            title="Zmena otváracích hodín od 04.10.2022" 
+                            date="04.10.2022">
+                                <DayOpeningHours day={Day.Tuesday} oldTime={["15:00 - 16:00", "17:00 - 22:00"]} times={["15:00 - 16:30", "17:30 - 22:00"]} ></DayOpeningHours>
+                                <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+                    </Dropdown>
+                    <Dropdown title="September, 2022" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                            icon="schedule"
+                            title="Otváracie hodiny počas sviatkov" 
+                            date="14.09.2022">
+                                <DayOpeningHours day={Day.Thursday} date="15.09.2022" times={["15:00 - 22:00"]} ></DayOpeningHours>
+                                <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+                    </Dropdown>
                     <Dropdown title="August, 2022" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                            icon="schedule"
+                            title="Zmena otváracích hodín od 01.09.2022" 
+                            date="29.08.2022">
+                                <DayOpeningHours day={Day.Saturday} oldTime={[]} times={["16:00 - 21:00"]} ></DayOpeningHours>
+                                <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
                         <Announcement 
                         icon="schedule"
                         title="Otváracie hodiny počas sviatkov" 
@@ -46,6 +79,17 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
                         </Announcement>
                     </Dropdown>
                     <Dropdown title="Jún, 2022" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                            icon="euro"
+                            title="Zmena cenníka od 01.08.2022" 
+                            date="16.06.2022 (Upravené 28.06.2022)">
+                                <p>Jednorazový vstup: <Change oldString="2,00 €" newString="2,50 €"/></p>
+                                <p>Permanentka - 1 Mesiac: <Change oldString="20,00 €" newString="25,00 €"/></p>
+                                <p>Permanentka - 3 Mesiace: <Change oldString="55,00 €" newString="65,00 €"/></p>
+                                <p>Permanentka - 6 Mesiacov: <Change oldString="95,00 €" newString="115,00 €"/></p>
+                                <p>Permanentka - 12 Mesiacov: <Change oldString="175,00 €" newString="199,00 €"/></p>
+                                <p><Link to={Sitemap.pricing.path}> → Aktuálny cenník ←</Link></p>
+                        </Announcement>
                         <Announcement 
                         icon="schedule"
                         title="Zmena otváracích hodín od 01.07.2022 do 31.08.2022" 
