@@ -43,7 +43,8 @@ class OpeningHours extends Component<IOpeningHoursProps, IOpeningHoursState>
                     <HoursContainer>
                         {
                             openingHours.map(element => {
-                                return <Schedule>
+                                return (
+                                <Schedule>
                                     <Valid>{pageTexts.validity.from} {element.validity.from}{element.validity.to !== "" ? ` ${pageTexts.validity.to} ${element.validity.to}` : null}</Valid>
                                     <DayOpeningHours day={Day.Monday} times={element.monday}/>
                                     <DayOpeningHours day={Day.Tuesday} times={element.tuesday}/>
@@ -53,12 +54,15 @@ class OpeningHours extends Component<IOpeningHoursProps, IOpeningHoursState>
                                     <DayOpeningHours day={Day.Saturday} times={element.saturday}/>
                                     <DayOpeningHours day={Day.Sunday} times={element.sunday}/>
                                 </Schedule>
-                            })
+                            )})
                         }
 
                         <Schedule>
-                            <Heading heading="H2"><MaterialIcon icon="event_available" color="theme"/>Otváracie hodiny počas sviatkov</Heading>
-                            <DayOpeningHours day={Day.Thursday} date="17.11.2022" times={["15:00 - 22:00"]} ></DayOpeningHours>
+                            <Heading heading="H2"><MaterialIcon icon="ac_unit" color="theme"/>Otváracie hodiny počas sviatkov</Heading>
+                            <DayOpeningHours day={Day.Saturday} date="24.12.2022" times={[]} ></DayOpeningHours>
+                            <DayOpeningHours day={Day.Sunday} date="25.12.2022" times={[]} ></DayOpeningHours>
+                            <DayOpeningHours day={Day.Monday} date="26.12.2022" times={[]} ></DayOpeningHours>
+                            <DayOpeningHours day={Day.Tuesday} date="27.12.2022" times={["15:00 - 22:00"]} ></DayOpeningHours>
                         </Schedule>
                     </HoursContainer>
                     
