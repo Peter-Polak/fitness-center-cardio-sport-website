@@ -35,13 +35,10 @@ class CurrentAnnouncements extends Component<ICurrentAnnouncementsProps, ICurren
             <section>
                 {/* <NoAnnoucements>Žiadne nové oznamy</NoAnnoucements> */}
                 <Announcement 
-                    icon="ac_unit"
-                    title="Otváracie hodiny počas sviatkov" 
-                    date="10.12.2022">
-                        <DayOpeningHours day={Day.Saturday} date="24.12.2022" times={[]} ></DayOpeningHours>
-                        <DayOpeningHours day={Day.Sunday} date="25.12.2022" times={[]} ></DayOpeningHours>
-                        <DayOpeningHours day={Day.Monday} date="26.12.2022" times={[]} ></DayOpeningHours>
-                        <DayOpeningHours day={Day.Tuesday} date="27.12.2022" times={["15:00 - 22:00"]} ></DayOpeningHours>
+                    icon="schedule"
+                    title="Zmena otváracích hodín od 18.01.2023 do 22.02.2023" 
+                    date="03.01.2023">
+                        <DayOpeningHours day={Day.Wednesday} oldTime={["15:00 - 22:00"]} times={["15:00 - 18:00", "19:00 - 22:00"]} ></DayOpeningHours>
                         <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
                 </Announcement>
             </section>
