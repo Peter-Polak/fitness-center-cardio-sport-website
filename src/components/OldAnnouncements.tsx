@@ -36,6 +36,34 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
         return (
             <section>
                 <Dropdown title="Staré oznamy" type={DropdownType.PRIMARY}>
+                    <Dropdown title="Apríl, 2023" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                            icon="egg"
+                            title="Otváracie hodiny počas sviatkov" 
+                            date="05.04.2023">
+                                <DayOpeningHours day={Day.Friday} date="07.04.2023" times={["15:00 - 22:00"]} ></DayOpeningHours>
+                                <DayOpeningHours day={Day.Monday} date="10.04.2023" times={["15:00 - 22:00"]} ></DayOpeningHours>
+                                <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+                    </Dropdown>
+                    <Dropdown title="Február, 2023" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                            icon="schedule"
+                            title="Zmena otváracích hodín od 23.02.2023" 
+                            date="23.02.2023">
+                                <DayOpeningHours day={Day.Wednesday} oldTime={["15:00 - 18:00", "19:00 - 22:00"]} times={["15:00 - 22:00"]} ></DayOpeningHours>
+                                <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+                    </Dropdown>
+                    <Dropdown title="Január, 2023" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                            icon="schedule"
+                            title="Zmena otváracích hodín od 18.01.2023 do 22.02.2023" 
+                            date="03.01.2023">
+                                <DayOpeningHours day={Day.Wednesday} oldTime={["15:00 - 22:00"]} times={["15:00 - 18:00", "19:00 - 22:00"]} ></DayOpeningHours>
+                                <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+                    </Dropdown>
                     <Dropdown title="December, 2022" type={DropdownType.SECONDARY}>
                         <Announcement 
                             icon="ac_unit"

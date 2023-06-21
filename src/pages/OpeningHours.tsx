@@ -58,8 +58,8 @@ class OpeningHours extends Component<IOpeningHoursProps, IOpeningHoursState>
                         }
 
                         {/* <Schedule>
-                            <Heading heading="H2"><MaterialIcon icon="ac_unit" color="theme"/>Otváracie hodiny počas sviatkov</Heading>
-                            <DayOpeningHours day={Day.Saturday} date="24.12.2022" times={[]} ></DayOpeningHours>
+                            <Heading heading="H2"><MaterialIcon icon="egg" color="theme"/>Otváracie hodiny počas sviatkov</Heading>
+                            <DayOpeningHours day={Day.Friday} date="07.04.2023" times={["15:00 - 22:00"]} ></DayOpeningHours>
                         </Schedule> */}
                     </HoursContainer>
                     
