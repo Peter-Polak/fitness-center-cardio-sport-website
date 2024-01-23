@@ -107,8 +107,9 @@ const Container = styled.span`
 
 const DayText = styled.span`
     display: inline-block;
-    width: 120px;
-
+    width: 100px;
+    padding: 0 20px 0 0;
+    
     font-size: 15px;
     font-weight: bold;
 `;
