@@ -75,6 +75,8 @@ export async function sendVisitInfo(sheets : Array<string>)
 {
     const visitInfo : IVisitInfo = getVisitInfo();
 
+    if(visitInfo.page.includes("notrack")) return;
+
     let query : string = `?sheet=${sheets.toString()}`;
 
     const url = settings.userTrafficUrl + query;

@@ -29,12 +29,15 @@ class NavButtons extends Component<INavButtonsProps, INavButtonsState>
     render() : JSX.Element
     {
         const { sitemap, closeNav } = this.props;
-        
+        const pathname = window.location.pathname
         const buttons : Array<JSX.Element> = [];
-        
+
         for(const key in sitemap)
         {
-            const button = <NavButton route={sitemap[key]} key={key} closeNav={closeNav}/>;
+            var route = sitemap[key];
+            
+            if(pathname.includes("notrack") && !route.path.includes("notrack")) route.path = "/notrack" + route.path;
+            const button = <NavButton route={route} key={key} closeNav={closeNav}/>;
             buttons.push(button);
         }
         

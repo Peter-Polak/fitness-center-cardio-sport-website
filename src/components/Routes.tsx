@@ -133,7 +133,12 @@ class Routes extends Component<IRoutesProps, IRoutesState>
         for(const key in Sitemap)
         {
             const route = Sitemap[key];
-            if(route.component) routeComponents.push(<Route path={route.path} render={ (props) => <route.component routeProps={props} />} exact key={route.path}/>);
+            
+            if(route.component)
+            {
+                routeComponents.push(<Route path={route.path} render={ (props) => <route.component routeProps={props} />} exact key={route.path}/>);
+                routeComponents.push(<Route path={"/notrack" + route.path} render={ (props) => <route.component routeProps={props} />} exact key={"/notrack" + route.path}/>);
+            }
             
             for(const subroute of route.routes)
             {
