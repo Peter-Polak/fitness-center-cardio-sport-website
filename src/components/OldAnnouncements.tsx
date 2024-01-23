@@ -9,6 +9,7 @@ import WarningText from "./WarningText";
 import DayOpeningHours from "./DayOpeningHours";
 import { Day } from "../utilities/enums";
 import Change from "./Change";
+import { texts } from "../Texts";
 
 interface IOldAnnouncementsProps
 {
@@ -36,6 +37,89 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
         return (
             <section>
                 <Dropdown title="Staré oznamy" type={DropdownType.PRIMARY}>
+                    <Dropdown title="November, 2023" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                            icon="weekend"
+                            title="Otváracie hodiny počas dní pracovného pokoja a sviatkov" 
+                            date="27.11.2023 (Upravené 25.12.2023)">
+                            <DayOpeningHours day={Day.Sunday} date="24.12.2023" times={[]} ></DayOpeningHours>
+                            <DayOpeningHours day={Day.Monday} date="25.12.2023" times={[]} ></DayOpeningHours>
+                            <DayOpeningHours day={Day.Tuesday} date="26.12.2023" times={["15:00 - 19:00 (možné zostať aj dlhšie ak budete potrebovať)"]} ></DayOpeningHours>
+                            <DayOpeningHours day={Day.Sunday} date="31.12.2023" times={["15:00 - 19:00 (možné zostať aj dlhšie ak budete potrebovať)"]} ></DayOpeningHours>
+                            <DayOpeningHours day={Day.Monday} date="01.01.2024" times={["15:00 - 19:00 (možné zostať aj dlhšie ak budete potrebovať)"]} ></DayOpeningHours>
+                            <DayOpeningHours day={Day.Saturday} date="06.01.2024" times={["16:00 - 21:00"]} ></DayOpeningHours>
+                            <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+                    </Dropdown>
+                    <Dropdown title="Október, 2023" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                            icon="weekend"
+                            title="Otváracie hodiny počas dní pracovného pokoja" 
+                            date="30.10.2023">
+                            <DayOpeningHours day={Day.Wednesday} date="01.11.2023" times={["15:00 - 22:00"]} ></DayOpeningHours>
+                            <DayOpeningHours day={Day.Friday} date="17.11.2023" times={["15:00 - 22:00"]} ></DayOpeningHours>
+                            <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+                    </Dropdown>
+                    <Dropdown title="August, 2023" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                            icon="warning"
+                            title="Zrušenie rezervácie fitness centra pre FC Košice" 
+                            date="28.08.2023">
+                                Od 28.08.2023 sa ruší v Utorky rezervácia fitness centra pre FC Košice.
+                                <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+                        <Announcement 
+                            icon="weekend"
+                            title="Otváracie hodiny počas dní pracovného pokoja" 
+                            date="28.08.2023">
+                            <DayOpeningHours day={Day.Tuesday} date="29.08.2023" times={["15:00 - 22:00"]} ></DayOpeningHours>
+                            <DayOpeningHours day={Day.Friday} date="01.09.2023" times={["15:00 - 22:00"]} ></DayOpeningHours>
+                            <DayOpeningHours day={Day.Friday} date="15.09.2023" times={["15:00 - 22:00"]} ></DayOpeningHours>
+                            <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+                        <Announcement 
+                            icon="schedule"
+                            title="Zmena otváracích hodín od 01.09.2023" 
+                            date="23.08.2023">
+                                <DayOpeningHours day={Day.Saturday} oldTime={[]} times={["16:00 - 21:00"]} ></DayOpeningHours>
+                                <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+                        <Announcement 
+                            icon="euro"
+                            title="Zmena cenníka od 01.09.2023" 
+                            date="23.08.2023">
+                                <p>Jednorazový vstup: <Change oldString="2,50 €" newString="3,00 €"/></p>
+                                <p>Jednorazový vstup - futbalisti FC Košice: <Change oldString="1,00 €" newString="ZRUŠENÉ"/></p>
+                                <p>Permanentka - 1 Mesiac: <Change oldString="25,00 €" newString="30,00 €"/></p>
+                                <p>Permanentka - 3 Mesiace: <Change oldString="65,00 €" newString="78,00 €"/></p>
+                                <p>Permanentka - 6 Mesiacov: <Change oldString="115,00 €" newString="138,00 €"/></p>
+                                <p>Permanentka - 12 Mesiacov: <Change oldString="199,00 €" newString="249,00 €"/></p>
+                                <p><Link to={Sitemap.pricing.path}> → Aktuálny cenník ←</Link></p>
+                        </Announcement>
+                    </Dropdown>
+                    <Dropdown title="Júl, 2023" type={DropdownType.SECONDARY}>
+                        <Announcement 
+                            icon="schedule"
+                            title="Zmena otváracích hodín od 12.07.2023 do 31.08.2023" 
+                            date="21.07.2023">
+                                <DayOpeningHours day={Day.Tuesday} oldTime={["15:00 - 16:30", "17:30 - 22:00"]} times={["15:00 - 22:00"]} ></DayOpeningHours>
+                                <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                                <Warning>
+                                    <WarningText>!!! {texts.warning} !!!</WarningText>
+                                    <p>Od 12.07.2023 do 31.08.2023 je každý Utorok v čase 15:00 - 17:00 fitness centrum rezervované pre FC Košice. Je možné si prísť v tom čase zacvičiť, ale nesmiete obmedziť/prekážať futbalistov. Ďakujeme za pochopenie.</p>
+                                </Warning>
+                        </Announcement>
+                    </Dropdown>
+                    <Dropdown title="Jún, 2023" type={DropdownType.SECONDARY}>
+                    <   Announcement 
+                        icon="schedule"
+                        title="Zmena otváracích hodín od 01.07.2023 do 31.08.2023" 
+                        date="21.06.2023">
+                            <DayOpeningHours day={Day.Saturday} oldTime={["16:00 - 21:00"]} times={[]} ></DayOpeningHours>
+                            <p><Link to={Sitemap.openingHours.path}> → Aktuálne otváracie hodiny ←</Link></p>
+                        </Announcement>
+                    </Dropdown>
                     <Dropdown title="Apríl, 2023" type={DropdownType.SECONDARY}>
                         <Announcement 
                             icon="egg"
@@ -397,6 +481,18 @@ class OldAnnouncements extends Component<IOldAnnouncementsProps, IOldAnnouncemen
 
 const NewLine = styled.p`
     margin: 5px 0;
+`;
+
+const Warning = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    max-width: 800px;
+    padding: 30px;
+
+    border: 3px solid ${props => props.theme.color.warning.normal};
+    border-radius: 10px;
 `;
 
 export default OldAnnouncements;
