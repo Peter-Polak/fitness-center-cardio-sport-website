@@ -34,7 +34,7 @@ class Pricing extends Component<IPricingProps, IPricingState>
                 <Heading heading="H1"><MaterialIcon icon="euro" color="dark"/> Cenník</Heading>
 
                 <Content>
-                    <p>Platné od 01.08.2022</p>
+                    <p>Platné od 01.09.2023</p>
                     
                     <Subsection>
                         <Heading heading="H2"><BebasIcon>1X</BebasIcon> Jednorazový vstup</Heading>
@@ -42,7 +42,7 @@ class Pricing extends Component<IPricingProps, IPricingState>
                             <Card 
                             title="1x"
                             subtitle=""
-                            text="2,50 €"
+                            text="3,00 €"
                             subtext="Časovo neobmedzený"
                             />
                         </Prices>
@@ -54,29 +54,29 @@ class Pricing extends Component<IPricingProps, IPricingState>
                             <Card 
                             title="1"
                             subtitle="mesiac"
-                            text="25,00 €"
-                            subtext="25,00 €/mesiac"
+                            text="30,00 €"
+                            subtext="30,00 €/mesiac"
                             />
                             
                             <Card 
                             title="3"
                             subtitle="mesiace"
-                            text="65,00 €"
-                            subtext="21,67 €/mesiac"
+                            text="78,00 €"
+                            subtext="26,00 €/mesiac"
                             />
                             
                             <Card 
                             title="6"
                             subtitle="mesiacov"
-                            text="115,00 €"
-                            subtext="19,17 €/mesiac"
+                            text="138,00 €"
+                            subtext="23,00 €/mesiac"
                             />
                             
                             <Card 
                             title="12"
                             subtitle="mesiacov"
-                            text="199,00 €"
-                            subtext="16,58 €/mesiac"
+                            text="249,00 €"
+                            subtext="20,75 €/mesiac"
                             />
                         </Prices>
                     </Subsection>
