@@ -37,6 +37,13 @@ const GlobalStyle = createGlobalStyle`
     {
         color: ${props => props.theme.color.primary.normal};
     }
+
+    hr
+    {
+        background-color: ${props => props.theme.color.primary.normal};
+        border-color: ${props => props.theme.color.primary.normal};
+        margin: 20px 0px;
+    }
     
     /* width */
     ::-webkit-scrollbar
