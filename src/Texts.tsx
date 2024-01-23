@@ -5,11 +5,11 @@ export const openingHours =
     {
         validity : 
         {
-            from : "23.02.2023",
-            to: "30.06.2023"
+            from : "08.01.2024",
+            to: "28.02.2024"
         },
         monday : ["15:00 - 22:00"],
-        tuesday : ["15:00 - 16:30", "17:30 - 22:00"],
+        tuesday : ["15:00 - 17:30", "18:30 - 22:00"],
         wednesday : ["15:00 - 22:00"],
         thursday : ["15:00 - 22:00"],
         friday : ["15:00 - 22:00"],
@@ -19,15 +19,15 @@ export const openingHours =
     {
         validity : 
         {
-            from : "01.07.2023",
-            to: "31.08.2023"
+            from : "29.02.2024",
+            to: ""
         },
         monday : ["15:00 - 22:00"],
-        tuesday : ["15:00 - 16:30", "17:30 - 22:00"],
+        tuesday : ["15:00 - 22:00"],
         wednesday : ["15:00 - 22:00"],
         thursday : ["15:00 - 22:00"],
         friday : ["15:00 - 22:00"],
-        saturday : [],
+        saturday : ["16:00 - 21:00"],
         sunday : ["16:00 - 21:00"]
     }
 ];
