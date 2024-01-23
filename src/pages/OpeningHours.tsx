@@ -104,7 +104,7 @@ const Valid = styled.p`
     font-size: 0.8em;
 `
 
-const Warning = styled.div`
+const Warning = styled.p`
     display: flex;
     flex-direction: column;
     align-items: center;
